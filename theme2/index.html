@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth" style="color-scheme: light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DAO Humanitarian Hub — منظمة الأثر العميق</title>
+  <meta name="description" content="Depth Action Organization (DAO) — shelter, child protection, civilian protection, education in emergencies and environmental preservation for conflict-affected communities." />
+
+  <link rel="preconnect" href="https://images.unsplash.com" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&family=IBM+Plex+Sans+Arabic:wght@500;600;700&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              dark: '#F4F6FB',
+              ink: '#0B1220',
+              bento: { DEFAULT: '#FFFFFF', hover: '#EEF3FA' },
+              blue: '#0284C7',
+              magenta: { DEFAULT: '#E11D48', deep: '#9E1B5A' },
+              purple: '#7C3AED',
+              cyan: '#06B6D4',
+              border: 'rgba(15, 23, 42, 0.09)',
+              'text-primary': '#0B1220',
+              'text-secondary': '#5B6475',
+            },
+          },
+          fontFamily: {
+            display: ['"DejaVu Sans"', 'Verdana', 'system-ui', 'sans-serif'],
+            sans: ['"DejaVu Sans"', 'Verdana', 'system-ui', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
+            arabic: ['"IBM Plex Sans Arabic"', 'Tahoma', 'sans-serif'],
+          },
+          maxWidth: { hub: '1440px' },
+          keyframes: {
+            drift1: { '0%,100%': { transform: 'translate(0,0) scale(1)' }, '50%': { transform: 'translate(12vw,8vh) scale(1.15)' } },
+            drift2: { '0%,100%': { transform: 'translate(0,0) scale(1.1)' }, '50%': { transform: 'translate(-10vw,12vh) scale(0.9)' } },
+            drift3: { '0%,100%': { transform: 'translate(0,0) scale(1)' }, '50%': { transform: 'translate(8vw,-10vh) scale(1.2)' } },
+            aura: { '0%,100%': { opacity: '0.55', transform: 'scale(1)' }, '50%': { opacity: '1', transform: 'scale(1.12)' } },
+            blink: { '0%,49%': { opacity: '1' }, '50%,100%': { opacity: '0' } },
+            scan: { '0%': { transform: 'translateY(-100%)' }, '100%': { transform: 'translateY(400%)' } },
+          },
+          animation: {
+            drift1: 'drift1 22s ease-in-out infinite',
+            drift2: 'drift2 26s ease-in-out infinite',
+            drift3: 'drift3 30s ease-in-out infinite',
+            aura: 'aura 2.4s ease-in-out infinite',
+            blink: 'blink 1s steps(1) infinite',
+            scan: 'scan 4s linear infinite',
+          },
+        },
+      },
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js"></script>
+  <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
+
+  <style>
+    /* DejaVu Sans (local install first, CDN fallback) */
+    @font-face { font-family: 'DejaVu Sans'; src: local('DejaVu Sans'), local('DejaVuSans'), url('https://cdn.jsdelivr.net/npm/dejavu-fonts-ttf@2.37.3/ttf/DejaVuSans.ttf') format('truetype'); font-weight: 100 500; font-style: normal; font-display: swap; }
+    @font-face { font-family: 'DejaVu Sans'; src: local('DejaVu Sans Bold'), local('DejaVuSans-Bold'), url('https://cdn.jsdelivr.net/npm/dejavu-fonts-ttf@2.37.3/ttf/DejaVuSans-Bold.ttf') format('truetype'); font-weight: 600 900; font-style: normal; font-display: swap; }
+    @font-face { font-family: 'DejaVu Sans'; src: local('DejaVu Sans Oblique'), local('DejaVuSans-Oblique'), url('https://cdn.jsdelivr.net/npm/dejavu-fonts-ttf@2.37.3/ttf/DejaVuSans-Oblique.ttf') format('truetype'); font-weight: 100 500; font-style: italic; font-display: swap; }
+    @font-face { font-family: 'DejaVu Sans'; src: local('DejaVu Sans Bold Oblique'), local('DejaVuSans-BoldOblique'), url('https://cdn.jsdelivr.net/npm/dejavu-fonts-ttf@2.37.3/ttf/DejaVuSans-BoldOblique.ttf') format('truetype'); font-weight: 600 900; font-style: italic; font-display: swap; }
+    [x-cloak] { display: none !important; }
+    html { -webkit-font-smoothing: antialiased; background: #F4F6FB; }
+    body { background: #F4F6FB; color: #0B1220; }
+    ::selection { background: #E11D48; color: #fff; }
+    :focus-visible { outline: 2px solid #06B6D4; outline-offset: 3px; border-radius: 6px; }
+
+    /* Dotted spatial grid */
+    .dot-grid { background-image: radial-gradient(rgba(15,23,42,0.08) 1px, transparent 1px); background-size: 28px 28px; }
+
+    /* Bento surface + radial spotlight */
+    .bento {
+      position: relative; isolation: isolate; overflow: hidden;
+      background: linear-gradient(180deg, rgba(255,255,255,0.92), rgba(255,255,255,0.74));
+      border: 1px solid rgba(15,23,42,0.08); box-shadow: 0 1px 2px rgba(15,23,42,.04), 0 12px 32px -18px rgba(15,23,42,.18); border-radius: 1.5rem;
+      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      transition: border-color .3s, background-color .3s, transform .4s cubic-bezier(.16,1,.3,1);
+    }
+    .spot::before {
+      content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none; opacity: 0; transition: opacity .35s;
+      background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), var(--spot, rgba(6,182,212,0.16)), transparent 60%);
+    }
+    .spot::after {
+      content: ''; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0; transition: opacity .35s;
+      padding: 1px; -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude;
+      background: radial-gradient(260px circle at var(--mx, 50%) var(--my, 50%), rgba(2,132,199,0.45), transparent 70%);
+    }
+    .spot:hover::before, .spot:hover::after { opacity: 1; }
+    .spot:hover { border-color: rgba(2,132,199,0.25); }
+
+    /* Spatial deck */
+    .deck { perspective: 1400px; perspective-origin: 50% 0%; }
+    .deck-card {
+      position: absolute; inset: 0; transform-style: preserve-3d; will-change: transform;
+      transform: var(--t); transition: transform .75s cubic-bezier(.16,1,.3,1), opacity .5s ease, filter .5s ease;
+    }
+    .deck-card.fly-out { animation: flyOut .8s cubic-bezier(.65,0,.35,1) both; }
+    .deck-card.fly-in  { animation: flyIn  .8s cubic-bezier(.65,0,.35,1) both; }
+    @keyframes flyOut {
+      0%   { transform: translate3d(0,0,0) scale(1); z-index: 30; opacity: 1; }
+      45%  { transform: translate3d(0,-62%,60px) rotateX(22deg) rotateZ(-7deg) scale(.96); z-index: 30; opacity: 1; }
+      55%  { transform: translate3d(0,-60%,-60px) rotateX(18deg) rotateZ(-6deg) scale(.92); z-index: 0; opacity: .6; }
+      100% { transform: var(--t); z-index: 0; }
+    }
+    @keyframes flyIn {
+      0%   { transform: translate3d(0,-54px,-270px) scale(.85); z-index: 0; opacity: .35; }
+      45%  { transform: translate3d(0,-60%,-60px) rotateX(18deg) rotateZ(6deg) scale(.92); z-index: 0; opacity: .7; }
+      55%  { transform: translate3d(0,-62%,60px) rotateX(22deg) rotateZ(7deg) scale(.96); z-index: 30; opacity: 1; }
+      100% { transform: var(--t); z-index: 30; opacity: 1; }
+    }
+
+    /* Telemetry chips float */
+    .float-a { animation: floatY 6s ease-in-out infinite; }
+    .float-b { animation: floatY 7s ease-in-out infinite reverse; }
+    @keyframes floatY { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+    /* Sparkline draw */
+    .draw { stroke-dasharray: 1000; stroke-dashoffset: 1000; transition: stroke-dashoffset 2.2s cubic-bezier(.16,1,.3,1); }
+    .is-in .draw { stroke-dashoffset: 0; }
+    .meter-fill { transform-origin: left; transform: scaleX(0); transition: transform 1.8s cubic-bezier(.16,1,.3,1); }
+    .is-in .meter-fill { transform: scaleX(var(--v, 1)); }
+    .bar-fill { transform-origin: bottom; transform: scaleY(0); transition: transform 1.4s cubic-bezier(.16,1,.3,1); }
+    .is-in .bar-fill { transform: scaleY(1); }
+    .ring { stroke-dasharray: 302; stroke-dashoffset: 302; transition: stroke-dashoffset 2s cubic-bezier(.16,1,.3,1); }
+    .is-in .ring { stroke-dashoffset: var(--off, 60); }
+
+    /* Reveal */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .8s ease, transform .9s cubic-bezier(.16,1,.3,1); }
+    .reveal.is-in { opacity: 1; transform: none; }
+
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { scrollbar-width: none; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+
+<body class="font-sans antialiased overflow-x-hidden" x-data="hub()" x-init="init()" @keydown.escape.window="drawer = false" :class="drawer && 'overflow-hidden'">
+
+  <!-- Animated gradient mesh -->
+  <div class="fixed inset-0 -z-10 overflow-hidden pointer-events-none" aria-hidden="true">
+    <div class="absolute -top-40 -left-40 w-[42rem] h-[42rem] rounded-full bg-brand-blue/20 blur-3xl animate-drift1"></div>
+    <div class="absolute top-1/3 -right-48 w-[38rem] h-[38rem] rounded-full bg-brand-purple/15 blur-3xl animate-drift2"></div>
+    <div class="absolute -bottom-48 left-1/4 w-[36rem] h-[36rem] rounded-full bg-brand-magenta/12 blur-3xl animate-drift3"></div>
+    <div class="absolute top-1/4 left-1/2 w-[22rem] h-[22rem] rounded-full bg-brand-cyan/15 blur-3xl animate-drift2"></div>
+    <div class="absolute inset-0 dot-grid"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-brand-dark/30 to-brand-dark"></div>
+  </div>
+
+  <!-- Logo symbol -->
+  <svg width="0" height="0" class="absolute" aria-hidden="true">
+    <defs>
+      <linearGradient id="lg-heart" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E11D48" /><stop offset="1" stop-color="#7C3AED" /></linearGradient>
+      <symbol id="dao-mark" viewBox="0 0 48 48">
+        <rect width="48" height="48" rx="14" fill="#FFFFFF" stroke="rgba(15,23,42,.12)" />
+        <path d="M24 37c-.5 0-1-.2-1.4-.5C14.2 30 10 25.4 10 19.8 10 15.4 13.4 12 17.6 12c2.6 0 4.9 1.3 6.4 3.4 1.5-2.1 3.8-3.4 6.4-3.4 4.2 0 7.6 3.4 7.6 7.8 0 5.6-4.2 10.2-12.6 16.7-.4.3-.9.5-1.4.5Z" fill="url(#lg-heart)" />
+        <path d="M15.5 24h4.5l2-4 3 8 2-4h5.5" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+      </symbol>
+    </defs>
+  </svg>
+
+  <!-- =========================== 1. HEADER =========================== -->
+  <header class="sticky top-0 z-50 px-3 sm:px-5 pt-3">
+    <div class="max-w-hub mx-auto bento !rounded-2xl !overflow-visible flex items-center gap-3 p-2 pl-3">
+      <a href="#overview" class="flex items-center gap-3 min-w-0 shrink-0" aria-label="DAO home">
+        <svg class="w-10 h-10 shrink-0" aria-hidden="true"><use href="#dao-mark" /></svg>
+        <span class="flex flex-col leading-tight min-w-0">
+          <span class="font-mono text-[9px] sm:text-[10px] tracking-widest text-cyan-600 flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399]"></span><span class="hidden sm:inline">DAO HUMANITARIAN HUB</span><span class="sm:hidden">DAO HUB</span></span>
+          <span class="flex items-baseline gap-2 whitespace-nowrap">
+            <span class="font-arabic font-semibold text-sm" dir="rtl" lang="ar">منظمة الأثر العميق</span>
+            <span class="hidden md:inline text-[11px] text-brand-text-secondary">Depth Action Organization</span>
+          </span>
+        </span>
+      </a>
+
+      <!-- Segmented tabs -->
+      <nav class="hidden lg:flex flex-1 justify-center" aria-label="Primary">
+        <div class="flex items-center gap-1 p-1 rounded-xl bg-slate-900/[0.04] border border-brand-border">
+          <template x-for="t in tabs" :key="t.id">
+            <a :href="'#' + t.id" class="relative px-3.5 py-2 rounded-lg text-[13px] font-medium transition-all duration-300 whitespace-nowrap"
+               :class="section === t.id ? 'bg-brand-bento-hover text-brand-ink shadow-[inset_0_1px_0_rgba(255,255,255,.08)]' : 'text-brand-text-secondary hover:text-brand-ink'"
+               :aria-current="section === t.id ? 'true' : null">
+              <span class="font-mono text-[10px] mr-1" :class="section === t.id ? 'text-cyan-600' : 'text-slate-400'" x-text="t.n"></span><span x-text="t.label"></span>
+            </a>
+          </template>
+        </div>
+      </nav>
+
+      <div class="ml-auto flex items-center gap-2">
+        <div class="hidden xl:flex flex-col items-end leading-tight pr-2 border-r border-brand-border mr-1">
+          <span class="font-mono text-[10px] text-brand-text-secondary">SUPPORTERS · 7D</span>
+          <span class="font-mono text-sm font-bold text-brand-ink tabular-nums" x-text="supporters.toLocaleString()"></span>
+        </div>
+        <button type="button" @click="openDrawer('donate')" class="relative group">
+          <span class="absolute -inset-1 rounded-xl bg-gradient-to-r from-brand-magenta to-brand-purple blur-md animate-aura" aria-hidden="true"></span>
+          <span class="relative flex items-center gap-2 rounded-xl bg-gradient-to-r from-brand-magenta to-brand-purple px-4 py-2.5 text-sm font-semibold text-white">
+            <i data-lucide="zap" class="w-4 h-4"></i>
+            <span class="hidden sm:inline">Deploy Support</span><span class="sm:hidden">Deploy</span>
+          </span>
+        </button>
+        <button type="button" class="lg:hidden grid place-items-center w-10 h-10 rounded-xl border border-brand-border bg-slate-900/[0.03]" @click="menu = !menu" :aria-expanded="menu" aria-label="Toggle menu">
+          <i data-lucide="layout-grid" class="w-5 h-5"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile menu -->
+    <div x-cloak x-show="menu" x-transition.origin.top @click.outside="menu = false" class="lg:hidden max-w-hub mx-auto mt-2 bento !rounded-2xl p-2 grid grid-cols-2 gap-2">
+      <template x-for="t in tabs" :key="t.id">
+        <a :href="'#' + t.id" @click="menu = false" class="rounded-xl border border-brand-border bg-slate-900/[0.03] px-3 py-3 text-sm hover:bg-brand-bento-hover transition-all duration-300">
+          <span class="block font-mono text-[10px] text-cyan-600" x-text="t.n"></span><span x-text="t.label"></span>
+        </a>
+      </template>
+    </div>
+  </header>
+
+  <main class="px-3 sm:px-5">
+    <!-- =========================== 2. HERO: SPATIAL DECK =========================== -->
+    <section id="overview" class="max-w-hub mx-auto pt-6 lg:pt-10 scroll-mt-24" x-data="deck()" x-init="start()" aria-roledescription="carousel" aria-label="DAO programme nodes">
+      <div class="grid lg:grid-cols-12 gap-3">
+        <!-- Left: narrative -->
+        <div class="bento lg:col-span-5 p-6 sm:p-8 flex flex-col justify-between min-h-[420px]">
+          <div>
+            <div class="flex items-center justify-between font-mono text-[11px] text-brand-text-secondary">
+              <span class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-brand-magenta animate-pulse"></span>LIVE_DECK</span>
+              <span><span class="text-brand-ink" x-text="String(active + 1).padStart(2, '0')"></span> / <span x-text="String(slides.length).padStart(2, '0')"></span></span>
+            </div>
+            <div class="relative mt-8 min-h-[250px] sm:min-h-[230px]">
+              <template x-for="(s, i) in slides" :key="i">
+                <div x-show="active === i" x-transition:enter="transition ease-out duration-700 delay-200" x-transition:enter-start="opacity-0 translate-y-6 blur-sm" x-transition:enter-end="opacity-100 translate-y-0 blur-0" x-transition:leave="transition ease-in duration-200 absolute inset-0" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0 -translate-y-4">
+                  <p class="font-mono text-xs tracking-wider" :style="'color:' + s.color" x-text="s.tag"></p>
+                  <h1 class="mt-3 font-display font-extrabold text-[2.1rem] sm:text-5xl xl:text-[3.3rem] leading-[1.04] tracking-tight">
+                    <span x-text="s.stat" class="bg-clip-text text-transparent" :style="'background-image:linear-gradient(90deg,' + s.color + ',#0B1220)'"></span>
+                    <span class="block mt-1 text-brand-ink" x-text="s.title"></span>
+                  </h1>
+                  <p class="mt-4 text-brand-text-secondary leading-relaxed max-w-md" x-text="s.desc"></p>
+                </div>
+              </template>
+            </div>
+          </div>
+
+          <div class="mt-6">
+            <div class="flex flex-wrap gap-2">
+              <button type="button" @click="openDrawer('donate')" class="inline-flex items-center gap-2 rounded-xl bg-brand-ink text-white hover:bg-brand-blue font-semibold text-sm px-5 py-3 transition-all duration-300">
+                Fund this node <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+              </button>
+              <a href="#nodes" class="inline-flex items-center gap-2 rounded-xl border border-brand-border bg-slate-900/[0.03] hover:bg-brand-bento-hover text-sm px-5 py-3 transition-all duration-300">
+                Explore nodes <i data-lucide="network" class="w-4 h-4"></i>
+              </a>
+            </div>
+
+            <div class="mt-8 flex items-center gap-3">
+              <button type="button" @click="prev()" class="grid place-items-center w-11 h-11 rounded-xl border border-brand-border bg-slate-900/[0.03] hover:bg-brand-bento-hover hover:border-slate-900/20 transition-all duration-300" aria-label="Previous card"><i data-lucide="chevron-left" class="w-5 h-5"></i></button>
+              <div class="flex-1 grid grid-cols-4 gap-1.5" role="tablist" aria-label="Choose card">
+                <template x-for="(s, i) in slides" :key="i">
+                  <button type="button" @click="goTo(i)" class="group h-8 flex items-center" role="tab" :aria-selected="active === i" :aria-label="'Card ' + (i + 1) + ': ' + s.short">
+                    <span class="relative block w-full h-1 rounded-full bg-slate-900/10 overflow-hidden">
+                      <span class="absolute inset-y-0 left-0 rounded-full" :style="'background:' + s.color + ';width:' + (i < active ? 100 : i === active ? progress * 100 : 0) + '%'"></span>
+                    </span>
+                  </button>
+                </template>
+              </div>
+              <button type="button" @click="next()" class="grid place-items-center w-11 h-11 rounded-xl border border-brand-border bg-slate-900/[0.03] hover:bg-brand-bento-hover hover:border-slate-900/20 transition-all duration-300" aria-label="Next card"><i data-lucide="chevron-right" class="w-5 h-5"></i></button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: deck -->
+        <div class="bento lg:col-span-7 p-4 sm:p-6 min-h-[540px] sm:min-h-[600px] flex flex-col">
+          <div class="flex items-center justify-between font-mono text-[11px] text-brand-text-secondary">
+            <span>SPATIAL_STACK // <span class="text-brand-ink" x-text="slides[active].short"></span></span>
+            <span class="hidden sm:flex items-center gap-1.5"><i data-lucide="move" class="w-3.5 h-3.5"></i>DRAG · SWIPE · ←/→</span>
+          </div>
+
+          <div class="relative flex-1 mt-4">
+            <!-- Telemetry micro-cards -->
+            <div class="hidden md:block absolute -left-2 top-10 z-40 float-a">
+              <div class="rounded-xl border border-slate-900/10 bg-brand-dark/80 backdrop-blur-xl px-3.5 py-2.5 shadow-2xl">
+                <p class="font-mono text-[10px] text-brand-text-secondary">ACTIVE_REGIONS</p>
+                <p class="font-mono text-lg font-bold text-brand-ink flex items-center gap-2"><span x-text="regions"></span><span class="text-[10px] text-emerald-600">▲ LIVE</span></p>
+              </div>
+            </div>
+            <div class="hidden md:block absolute -right-2 top-1/3 z-40 float-b">
+              <div class="rounded-xl border border-slate-900/10 bg-brand-dark/80 backdrop-blur-xl px-3.5 py-2.5 shadow-2xl w-48">
+                <p class="font-mono text-[10px] text-brand-text-secondary flex items-center justify-between">DONOR_LEDGER <i data-lucide="shield-check" class="w-3.5 h-3.5 text-emerald-600"></i></p>
+                <p class="font-mono text-lg font-bold text-brand-ink"><span x-text="ledger.toFixed(1)"></span>%</p>
+                <div class="mt-1 h-1 rounded-full bg-slate-900/10 overflow-hidden"><div class="h-full bg-emerald-400 transition-all duration-700" :style="'width:' + ledger + '%'"></div></div>
+                <p class="mt-1 font-mono text-[9px] text-brand-text-secondary">funds traced to field</p>
+              </div>
+            </div>
+            <div class="hidden md:block absolute left-6 bottom-0 z-40 float-b">
+              <div class="rounded-xl border border-slate-900/10 bg-brand-dark/80 backdrop-blur-xl px-3.5 py-2.5 shadow-2xl flex items-center gap-3">
+                <span class="relative flex h-2.5 w-2.5"><span class="absolute inline-flex h-full w-full rounded-full bg-brand-cyan opacity-70 animate-ping"></span><span class="relative inline-flex h-2.5 w-2.5 rounded-full bg-brand-cyan"></span></span>
+                <p class="font-mono text-[11px]"><span class="text-brand-ink font-bold" x-text="teams"></span> <span class="text-brand-text-secondary">FIELD TEAMS ONLINE</span></p>
+              </div>
+            </div>
+
+            <!-- Deck stack -->
+            <div class="deck absolute inset-x-0 sm:inset-x-10 top-14 bottom-10 select-none touch-pan-y cursor-grab active:cursor-grabbing"
+                 @mouseenter="paused = true" @mouseleave="paused = false"
+                 @pointerdown="dragStart($event)" @pointerup.window="dragEnd($event)"
+                 tabindex="0" aria-label="Card deck. Use arrow keys or swipe to rotate."
+                 @keydown.arrow-right.prevent="next()" @keydown.arrow-left.prevent="prev()">
+              <template x-for="(s, i) in slides" :key="i">
+                <article class="deck-card" :class="{ 'fly-out': flying === i && dir === 1, 'fly-in': flying === i && dir === -1 }" :style="cardStyle(i)" :aria-hidden="depth(i) !== 0" aria-roledescription="slide">
+                  <div class="h-full rounded-3xl border border-slate-900/10 overflow-hidden shadow-[0_40px_80px_-30px_rgba(15,23,42,.35)] flex flex-col"
+                       :style="'background: radial-gradient(120% 80% at 100% 0%, ' + s.color + '2E, transparent 55%), linear-gradient(160deg, #FFFFFF, #F8FAFC 60%, #EEF3FA)'">
+                    <div class="flex items-center justify-between px-5 pt-4 font-mono text-[10px] tracking-wider">
+                      <span class="px-2 py-1 rounded-md bg-slate-900/[0.04] border border-slate-900/10" :style="'color:' + s.color" x-text="s.node"></span>
+                      <span class="text-brand-text-secondary flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>OPERATIONAL</span>
+                    </div>
+                    <!-- Card visual -->
+                    <div class="relative flex-1 min-h-0 mx-3 my-3 rounded-2xl overflow-hidden border border-slate-900/10">
+                      <img class="absolute inset-0 w-full h-full object-cover" :src="s.img" :alt="s.alt" :loading="i === 0 ? 'eager' : 'lazy'" decoding="async" draggable="false" />
+                      <div class="absolute inset-0 mix-blend-multiply" :style="'background: linear-gradient(160deg, ' + s.color + '66, transparent 55%)'"></div>
+                      <div class="absolute inset-0 bg-gradient-to-t from-slate-950/75 via-transparent to-transparent"></div>
+                      <div class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent"></div>
+                      <p class="absolute left-3 bottom-2.5 font-mono text-[9px] text-white/75 tracking-wide">PHOTO: <a :href="'https://unsplash.com/@' + s.user + '?utm_source=dao&amp;utm_medium=referral'" target="_blank" rel="noopener" class="underline" x-text="s.credit.toUpperCase()"></a> / <a href="https://unsplash.com/?utm_source=dao&amp;utm_medium=referral" target="_blank" rel="noopener" class="underline">UNSPLASH</a></p>
+                    </div>
+                    <div class="px-5 pb-5 grid grid-cols-3 gap-2 border-t border-slate-900/10 pt-4 bg-slate-900/[0.03]">
+                      <template x-for="m in s.metrics" :key="m[0]">
+                        <div>
+                          <p class="font-mono text-[9px] sm:text-[10px] text-brand-text-secondary uppercase" x-text="m[0]"></p>
+                          <p class="font-mono text-sm sm:text-base font-bold text-brand-ink" x-text="m[1]"></p>
+                        </div>
+                      </template>
+                    </div>
+                  </div>
+                </article>
+              </template>
+            </div>
+          </div>
+
+          <!-- Mobile telemetry row -->
+          <div class="md:hidden grid grid-cols-3 gap-2 mt-4 font-mono">
+            <div class="rounded-xl border border-brand-border bg-slate-900/[0.04] p-2.5"><p class="text-[9px] text-brand-text-secondary">REGIONS</p><p class="font-bold" x-text="regions"></p></div>
+            <div class="rounded-xl border border-brand-border bg-slate-900/[0.04] p-2.5"><p class="text-[9px] text-brand-text-secondary">LEDGER</p><p class="font-bold"><span x-text="ledger.toFixed(1)"></span>%</p></div>
+            <div class="rounded-xl border border-brand-border bg-slate-900/[0.04] p-2.5"><p class="text-[9px] text-brand-text-secondary">TEAMS</p><p class="font-bold" x-text="teams"></p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================== 3. IMPACT DASHBOARD =========================== -->
+    <section id="impact" class="max-w-hub mx-auto pt-20 lg:pt-28 scroll-mt-24" aria-labelledby="impactTitle">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6 reveal">
+        <div>
+          <p class="font-mono text-xs text-cyan-600">02 // IMPACT_STACK</p>
+          <h2 id="impactTitle" class="mt-2 font-display font-extrabold text-3xl sm:text-5xl tracking-tight">Telemetry of human impact.</h2>
+        </div>
+        <p class="max-w-sm text-sm text-brand-text-secondary">Cumulative people reached across DAO programme nodes, verified through community feedback and third-party monitoring.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-3">
+        <!-- A: Shelter -->
+        <article class="bento spot reveal md:col-span-7 md:row-span-2 p-6 sm:p-8 flex flex-col" style="--spot: rgba(2,132,199,.22)">
+          <img src="https://images.unsplash.com/photo-1724349620843-99aba60eab8d?auto=format&fit=crop&w=1400&q=80" alt="" loading="lazy" decoding="async" class="absolute inset-0 -z-10 w-full h-full object-cover opacity-[.18] grayscale" />
+          <div class="absolute inset-0 -z-10 bg-gradient-to-br from-brand-bento via-brand-bento/80 to-brand-blue/20"></div>
+          <div class="flex items-center justify-between">
+            <span class="flex items-center gap-2 font-mono text-[11px] text-brand-text-secondary"><span class="grid place-items-center w-8 h-8 rounded-lg bg-brand-blue/15 text-brand-blue"><i data-lucide="home" class="w-4 h-4"></i></span>KPI_01 · SHELTER</span>
+            <span class="font-mono text-[11px] text-emerald-600">▲ 18.4% YoY</span>
+          </div>
+          <p class="mt-8 font-mono font-bold text-6xl sm:text-7xl xl:text-8xl tracking-tighter" x-data="counter(1.2, 1)" x-init="observe($el)"><span x-text="display"></span><span class="text-brand-blue">M</span></p>
+          <p class="mt-2 text-lg font-display font-semibold">Safe &amp; Secure Shelter Solutions</p>
+          <div class="mt-auto pt-8">
+            <svg viewBox="0 0 600 160" class="w-full h-36" preserveAspectRatio="none" aria-hidden="true">
+              <defs>
+                <linearGradient id="areaA" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0284C7" stop-opacity=".45" /><stop offset="1" stop-color="#0284C7" stop-opacity="0" /></linearGradient>
+              </defs>
+              <g stroke="rgba(15,23,42,.08)"><line x1="0" y1="40" x2="600" y2="40" /><line x1="0" y1="80" x2="600" y2="80" /><line x1="0" y1="120" x2="600" y2="120" /></g>
+              <path d="M0 150 L60 138 L120 140 L180 118 L240 122 L300 96 L360 90 L420 64 L480 58 L540 34 L600 20 L600 160 L0 160 Z" fill="url(#areaA)" />
+              <path class="draw" d="M0 150 L60 138 L120 140 L180 118 L240 122 L300 96 L360 90 L420 64 L480 58 L540 34 L600 20" fill="none" stroke="#06B6D4" stroke-width="2.5" vector-effect="non-scaling-stroke" />
+              <circle cx="600" cy="20" r="5" fill="#06B6D4" />
+            </svg>
+            <div class="flex justify-between font-mono text-[10px] text-brand-text-secondary mt-1"><span>2016</span><span>2018</span><span>2020</span><span>2022</span><span>2024</span><span>NOW</span></div>
+          </div>
+        </article>
+
+        <!-- B: Food -->
+        <article class="bento spot reveal md:col-span-5 p-6 sm:p-7" style="--spot: rgba(124,58,237,.22)">
+          <div class="flex items-center justify-between">
+            <span class="flex items-center gap-2 font-mono text-[11px] text-brand-text-secondary"><span class="grid place-items-center w-8 h-8 rounded-lg bg-brand-purple/15 text-brand-purple"><i data-lucide="wheat" class="w-4 h-4"></i></span>KPI_02 · FSL</span>
+          </div>
+          <div class="mt-5 flex items-end justify-between gap-4">
+            <div>
+              <p class="font-mono font-bold text-5xl sm:text-6xl tracking-tighter" x-data="counter(1.0, 1)" x-init="observe($el)"><span x-text="display"></span><span class="text-brand-purple">M</span></p>
+              <p class="mt-1 font-display font-semibold">Food Security &amp; Sustainable Livelihoods</p>
+            </div>
+            <div class="flex items-end gap-1.5 h-20 shrink-0" aria-hidden="true">
+              <span class="w-3 h-[35%] rounded-sm bg-brand-purple/40 bar-fill"></span>
+              <span class="w-3 h-[50%] rounded-sm bg-brand-purple/50 bar-fill" style="transition-delay:.08s"></span>
+              <span class="w-3 h-[45%] rounded-sm bg-brand-purple/60 bar-fill" style="transition-delay:.16s"></span>
+              <span class="w-3 h-[70%] rounded-sm bg-brand-purple/70 bar-fill" style="transition-delay:.24s"></span>
+              <span class="w-3 h-[85%] rounded-sm bg-brand-purple/80 bar-fill" style="transition-delay:.32s"></span>
+              <span class="w-3 h-full rounded-sm bg-brand-purple bar-fill shadow-[0_0_14px_#7C3AED]" style="transition-delay:.4s"></span>
+            </div>
+          </div>
+          <div class="mt-6 space-y-2.5 font-mono text-[11px]">
+            <div><div class="flex justify-between text-brand-text-secondary"><span>FOOD ASSISTANCE</span><span class="text-brand-ink">64%</span></div><div class="mt-1 h-1.5 rounded-full bg-slate-900/5 overflow-hidden"><div class="meter-fill h-full rounded-full bg-gradient-to-r from-brand-purple to-brand-magenta" style="--v:.64"></div></div></div>
+            <div><div class="flex justify-between text-brand-text-secondary"><span>LIVELIHOOD GRANTS</span><span class="text-brand-ink">36%</span></div><div class="mt-1 h-1.5 rounded-full bg-slate-900/5 overflow-hidden"><div class="meter-fill h-full rounded-full bg-gradient-to-r from-brand-purple to-brand-cyan" style="--v:.36"></div></div></div>
+          </div>
+        </article>
+
+        <!-- C: Health -->
+        <article class="bento spot reveal md:col-span-5 p-6 sm:p-7" style="--spot: rgba(225,29,72,.2)">
+          <div class="flex items-center gap-6">
+            <svg viewBox="0 0 120 120" class="w-28 h-28 shrink-0 -rotate-90" aria-hidden="true">
+              <circle cx="60" cy="60" r="48" fill="none" stroke="rgba(15,23,42,.08)" stroke-width="10" />
+              <circle class="ring" cx="60" cy="60" r="48" fill="none" stroke="#E11D48" stroke-width="10" stroke-linecap="round" style="--off: 70; filter: drop-shadow(0 0 6px #E11D48)" />
+            </svg>
+            <div>
+              <span class="flex items-center gap-2 font-mono text-[11px] text-brand-text-secondary"><i data-lucide="heart-pulse" class="w-4 h-4 text-brand-magenta"></i>KPI_03 · WASH/HEALTH</span>
+              <p class="mt-2 font-mono font-bold text-5xl tracking-tighter" x-data="counter(800, 0)" x-init="observe($el)"><span x-text="display"></span><span class="text-brand-magenta">K</span></p>
+              <p class="mt-1 font-display font-semibold">Healthcare &amp; Hygiene Services</p>
+            </div>
+          </div>
+        </article>
+
+        <!-- D: Education -->
+        <article class="bento spot reveal md:col-span-12 p-6 sm:p-7" style="--spot: rgba(6,182,212,.18)">
+          <div class="grid md:grid-cols-12 gap-6 items-center">
+            <div class="md:col-span-4">
+              <span class="flex items-center gap-2 font-mono text-[11px] text-brand-text-secondary"><span class="grid place-items-center w-8 h-8 rounded-lg bg-brand-cyan/15 text-cyan-600"><i data-lucide="graduation-cap" class="w-4 h-4"></i></span>KPI_04 · EDUCATION</span>
+              <p class="mt-4 font-mono font-bold text-5xl sm:text-6xl tracking-tighter" x-data="counter(500, 0)" x-init="observe($el)"><span x-text="display"></span><span class="text-cyan-600">K</span></p>
+              <p class="mt-1 font-display font-semibold">Education &amp; Youth Capacity Building</p>
+            </div>
+            <div class="md:col-span-8">
+              <div class="flex gap-[3px] h-14 items-end" aria-hidden="true">
+                <template x-for="n in 48" :key="n">
+                  <span class="flex-1 rounded-sm bar-fill" :style="'height:' + (25 + Math.abs(Math.sin(n * 0.42)) * 70 + (n / 48) * 5) + '%; background:' + (n > 40 ? '#06B6D4' : 'rgba(6,182,212,' + (0.15 + n / 80) + ')') + '; transition-delay:' + (n * 0.02) + 's'"></span>
+                </template>
+              </div>
+              <div class="mt-3 grid grid-cols-3 gap-3 font-mono text-[11px]">
+                <div class="rounded-lg border border-brand-border bg-slate-900/[0.03] p-2.5"><p class="text-brand-text-secondary">LEARNERS</p><p class="text-brand-ink font-bold">312K</p></div>
+                <div class="rounded-lg border border-brand-border bg-slate-900/[0.03] p-2.5"><p class="text-brand-text-secondary">YOUTH SKILLS</p><p class="text-brand-ink font-bold">141K</p></div>
+                <div class="rounded-lg border border-brand-border bg-slate-900/[0.03] p-2.5"><p class="text-brand-text-secondary">TEACHERS</p><p class="text-brand-ink font-bold">47K</p></div>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- =========================== 5. OPERATIONAL NODES =========================== -->
+    <section id="nodes" class="max-w-hub mx-auto pt-20 lg:pt-28 scroll-mt-24" aria-labelledby="nodesTitle" x-data="{ filter: 'all' }">
+      <div class="flex flex-col xl:flex-row xl:items-end justify-between gap-6 mb-6 reveal">
+        <div>
+          <p class="font-mono text-xs text-cyan-600">03 // OPERATIONAL_NODES</p>
+          <h2 id="nodesTitle" class="mt-2 font-display font-extrabold text-3xl sm:text-5xl tracking-tight">Filterable node network.</h2>
+        </div>
+        <div class="flex gap-1 p-1 rounded-xl bg-slate-900/[0.04] border border-brand-border overflow-x-auto no-scrollbar self-start max-w-full" role="tablist" aria-label="Filter nodes">
+          <template x-for="f in filters" :key="f.id">
+            <button type="button" @click="filter = f.id" role="tab" :aria-selected="filter === f.id"
+                    class="shrink-0 flex items-center gap-2 px-3.5 py-2 rounded-lg text-[13px] font-medium whitespace-nowrap transition-all duration-300"
+                    :class="filter === f.id ? 'bg-brand-bento-hover text-brand-ink' : 'text-brand-text-secondary hover:text-brand-ink'">
+              <span class="w-1.5 h-1.5 rounded-full" :style="'background:' + f.color"></span>
+              <span x-text="f.label"></span>
+              <span class="font-mono text-[10px] px-1.5 rounded bg-slate-900/5" x-text="f.count"></span>
+            </button>
+          </template>
+        </div>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        <!-- ENV -->
+        <article x-show="filter === 'all' || filter === 'env'" x-transition.scale.95.duration.400ms class="bento spot p-5 flex flex-col min-h-[230px]" style="--spot: rgba(6,182,212,.2)">
+          <div class="flex items-center justify-between"><span class="font-mono text-[10px] text-cyan-600">ENV.01</span><span class="grid place-items-center w-9 h-9 rounded-xl bg-brand-cyan/10 text-cyan-600"><i data-lucide="brick-wall" class="w-4 h-4"></i></span></div>
+          <h3 class="mt-5 font-display font-bold text-lg">Soil Stabilizer Bricks (SSB)</h3>
+          <p class="mt-2 text-sm text-brand-text-secondary leading-relaxed">Kiln-free building blocks that cut deforestation and build durable shelters.</p>
+          <p class="mt-auto pt-4 font-mono text-[10px] text-brand-text-secondary flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>ENVIRONMENT PRESERVATION</p>
+        </article>
+        <article x-show="filter === 'all' || filter === 'env'" x-transition.scale.95.duration.400ms class="bento spot p-5 flex flex-col min-h-[230px]" style="--spot: rgba(6,182,212,.2)">
+          <div class="flex items-center justify-between"><span class="font-mono text-[10px] text-cyan-600">ENV.02</span><span class="grid place-items-center w-9 h-9 rounded-xl bg-brand-cyan/10 text-cyan-600"><i data-lucide="flame" class="w-4 h-4"></i></span></div>
+          <h3 class="mt-5 font-display font-bold text-lg">Fuel-Efficient Stoves</h3>
+          <p class="mt-2 text-sm text-brand-text-secondary leading-relaxed">Household stoves that reduce charcoal consumption and smoke exposure.</p>
+          <p class="mt-auto pt-4 font-mono text-[10px] text-brand-text-secondary flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>ENVIRONMENT PRESERVATION</p>
+        </article>
+        <article x-show="filter === 'all' || filter === 'env'" x-transition.scale.95.duration.400ms class="bento spot p-5 flex flex-col min-h-[230px]" style="--spot: rgba(6,182,212,.2)">
+          <div class="flex items-center justify-between"><span class="font-mono text-[10px] text-cyan-600">ENV.03</span><span class="grid place-items-center w-9 h-9 rounded-xl bg-brand-cyan/10 text-cyan-600"><i data-lucide="megaphone" class="w-4 h-4"></i></span></div>
+          <h3 class="mt-5 font-display font-bold text-lg">Environmental Advocacy</h3>
+          <p class="mt-2 text-sm text-brand-text-secondary leading-relaxed">Community campaigns against the over-consumption of charcoal and firewood.</p>
+          <p class="mt-auto pt-4 font-mono text-[10px] text-brand-text-secondary flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>ENVIRONMENT PRESERVATION</p>
+        </article>
+        <article x-show="filter === 'all' || filter === 'env'" x-transition.scale.95.duration.400ms class="bento spot p-5 flex flex-col min-h-[230px]" style="--spot: rgba(6,182,212,.2)">
+          <div class="flex items-center justify-between"><span class="font-mono text-[10px] text-cyan-600">ENV.04</span><span class="grid place-items-center w-9 h-9 rounded-xl bg-brand-cyan/10 text-cyan-600"><i data-lucide="sprout" class="w-4 h-4"></i></span></div>
+          <h3 class="mt-5 font-display font-bold text-lg">Green Livelihoods</h3>
+          <p class="mt-2 text-sm text-brand-text-secondary leading-relaxed">Brick-making and stove production as income streams for youth and women.</p>
+          <p class="mt-auto pt-4 font-mono text-[10px] text-brand-text-secondary flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>ENVIRONMENT PRESERVATION</p>
+        </article>
+
+        <!-- CHILD -->
+        <article x-show="filter === 'all' || filter === 'child'" x-transition.scale.95.duration.400ms class="bento spot p-5 flex flex-col min-h-[230px]" style="--spot: rgba(225,29,72,.2)">
+          <div class="flex items-center justify-between"><span class="font-mono text-[10px] text-brand-magenta">CP.01</span><span class="grid place-items-center w-9 h-9 rounded-xl bg-brand-magenta/10 text-brand-magenta"><i data-lucide="tent" class="w-4 h-4"></i></span></div>
+          <h3 class="mt-5 font-display font-bold text-lg">Child Friendly Spaces</h3>
+          <p class="mt-2 text-sm text-brand-text-secondary leading-relaxed">Activation and establishment of CFS where children play, learn and heal safely.</p>
+          <p class="mt-auto pt-4 font-mono text-[10px] text-brand-text-secondary flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>CHILD PROTECTION</p>
+        </article>
+        <article x-show="filter === 'all' || filter === 'child'" x-transition.scale.95.duration.400ms class="bento spot p-5 flex flex-col min-h-[230px]" style="--spot: rgba(225,29,72,.2)">
+          <div class="flex items-center justify-between"><span class="font-mono text-[10px] text-brand-magenta">CP.02</span><span class="grid place-items-center w-9 h-9 rounded-xl bg-brand-magenta/10 text-brand-magenta"><i data-lucide="route" class="w-4 h-4"></i></span></div>
+          <h3 class="mt-5 font-display font-bold text-lg">Family Tracing &amp; Reunification</h3>
+          <p class="mt-2 text-sm text-brand-text-secondary leading-relaxed">FTR case management reconnecting separated and unaccompanied children.</p>
+          <p class="mt-auto pt-4 font-mono text-[10px] text-brand-text-secondary flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>CHILD PROTECTION</p>
+        </article>
+        <article x-show="filter === 'all' || filter === 'child'" x-transition.scale.95.duration.400ms class="bento spot p-5 flex flex-col min-h-[230px]" style="--spot: rgba(225,29,72,.2)">
+          <div class="flex items-center justify-between"><span class="font-mono text-[10px] text-brand-magenta">CP.03</span><span class="grid place-items-center w-9 h-9 rounded-xl bg-brand-magenta/10 text-brand-magenta"><i data-lucide="hand-heart" class="w-4 h-4"></i></span></div>
+          <h3 class="mt-5 font-display font-bold text-lg">Duty-Bearer PSS Training</h3>
+          <p class="mt-2 text-sm text-brand-text-secondary leading-relaxed">Psychosocial support skills for parents, teachers and caregivers.</p>
+          <p class="mt-auto pt-4 font-mono text-[10px] text-brand-text-secondary flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>CHILD PROTECTION</p>
+        </article>
+        <article x-show="filter === 'all' || filter === 'child'" x-transition.scale.95.duration.400ms class="bento spot p-5 flex flex-col min-h-[230px]" style="--spot: rgba(225,29,72,.2)">
+          <div class="flex items-center justify-between"><span class="font-mono text-[10px] text-brand-magenta">CP.04</span><span class="grid place-items-center w-9 h-9 rounded-xl bg-brand-magenta/10 text-brand-magenta"><i data-lucide="ban" class="w-4 h-4"></i></span></div>
+          <h3 class="mt-5 font-display font-bold text-lg">End Corporal Punishment</h3>
+          <p class="mt-2 text-sm text-brand-text-secondary leading-relaxed">Advocacy with schools, families and authorities for positive discipline.</p>
+          <p class="mt-auto pt-4 font-mono text-[10px] text-brand-text-secondary flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>CHILD PROTECTION</p>
+        </article>
+
+        <!-- CIVILIAN -->
+        <article x-show="filter === 'all' || filter === 'civ'" x-transition.scale.95.duration.400ms class="bento spot p-5 flex flex-col min-h-[230px]" style="--spot: rgba(124,58,237,.22)">
+          <div class="flex items-center justify-between"><span class="font-mono text-[10px] text-brand-purple">CIV.01</span><span class="grid place-items-center w-9 h-9 rounded-xl bg-brand-purple/10 text-brand-purple"><i data-lucide="footprints" class="w-4 h-4"></i></span></div>
+          <h3 class="mt-5 font-display font-bold text-lg">Safe Collection Routes</h3>
+          <p class="mt-2 text-sm text-brand-text-secondary leading-relaxed">Shielding adolescent girls and women during firewood and water collection.</p>
+          <p class="mt-auto pt-4 font-mono text-[10px] text-brand-text-secondary flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>CIVILIAN PROTECTION &amp; GBV</p>
+        </article>
+        <article x-show="filter === 'all' || filter === 'civ'" x-transition.scale.95.duration.400ms class="bento spot p-5 flex flex-col min-h-[230px]" style="--spot: rgba(124,58,237,.22)">
+          <div class="flex items-center justify-between"><span class="font-mono text-[10px] text-brand-purple">CIV.02</span><span class="grid place-items-center w-9 h-9 rounded-xl bg-brand-purple/10 text-brand-purple"><i data-lucide="shield-alert" class="w-4 h-4"></i></span></div>
+          <h3 class="mt-5 font-display font-bold text-lg">GBV Prevention &amp; Response</h3>
+          <p class="mt-2 text-sm text-brand-text-secondary leading-relaxed">Safe spaces, case management and referrals for survivors of gender-based violence.</p>
+          <p class="mt-auto pt-4 font-mono text-[10px] text-brand-text-secondary flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>CIVILIAN PROTECTION &amp; GBV</p>
+        </article>
+        <article x-show="filter === 'all' || filter === 'civ'" x-transition.scale.95.duration.400ms class="bento spot p-5 flex flex-col min-h-[230px]" style="--spot: rgba(124,58,237,.22)">
+          <div class="flex items-center justify-between"><span class="font-mono text-[10px] text-brand-purple">CIV.03</span><span class="grid place-items-center w-9 h-9 rounded-xl bg-brand-purple/10 text-brand-purple"><i data-lucide="network" class="w-4 h-4"></i></span></div>
+          <h3 class="mt-5 font-display font-bold text-lg">PSEA Referral Mechanisms</h3>
+          <p class="mt-2 text-sm text-brand-text-secondary leading-relaxed">Confidential reporting and referral pathways against sexual exploitation and abuse.</p>
+          <p class="mt-auto pt-4 font-mono text-[10px] text-brand-text-secondary flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>CIVILIAN PROTECTION &amp; GBV</p>
+        </article>
+        <article x-show="filter === 'all' || filter === 'civ'" x-transition.scale.95.duration.400ms class="bento spot p-5 flex flex-col min-h-[230px]" style="--spot: rgba(124,58,237,.22)">
+          <div class="flex items-center justify-between"><span class="font-mono text-[10px] text-brand-purple">CIV.04</span><span class="grid place-items-center w-9 h-9 rounded-xl bg-brand-purple/10 text-brand-purple"><i data-lucide="messages-square" class="w-4 h-4"></i></span></div>
+          <h3 class="mt-5 font-display font-bold text-lg">Community Counselling</h3>
+          <p class="mt-2 text-sm text-brand-text-secondary leading-relaxed">Group and individual counselling for IDPs, returnees and host communities.</p>
+          <p class="mt-auto pt-4 font-mono text-[10px] text-brand-text-secondary flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>CIVILIAN PROTECTION &amp; GBV</p>
+        </article>
+
+        <!-- EDU -->
+        <article x-show="filter === 'all' || filter === 'edu'" x-transition.scale.95.duration.400ms class="bento spot p-5 flex flex-col min-h-[230px]" style="--spot: rgba(2,132,199,.22)">
+          <div class="flex items-center justify-between"><span class="font-mono text-[10px] text-sky-600">EIE.01</span><span class="grid place-items-center w-9 h-9 rounded-xl bg-brand-blue/15 text-sky-600"><i data-lucide="school" class="w-4 h-4"></i></span></div>
+          <h3 class="mt-5 font-display font-bold text-lg">Temporary Learning Spaces</h3>
+          <p class="mt-2 text-sm text-brand-text-secondary leading-relaxed">TLS set up within weeks of displacement so learning never stops.</p>
+          <p class="mt-auto pt-4 font-mono text-[10px] text-brand-text-secondary flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>EDUCATION IN EMERGENCIES</p>
+        </article>
+        <article x-show="filter === 'all' || filter === 'edu'" x-transition.scale.95.duration.400ms class="bento spot p-5 flex flex-col min-h-[230px]" style="--spot: rgba(2,132,199,.22)">
+          <div class="flex items-center justify-between"><span class="font-mono text-[10px] text-sky-600">EIE.02</span><span class="grid place-items-center w-9 h-9 rounded-xl bg-brand-blue/15 text-sky-600"><i data-lucide="backpack" class="w-4 h-4"></i></span></div>
+          <h3 class="mt-5 font-display font-bold text-lg">Quality Learning Kits</h3>
+          <p class="mt-2 text-sm text-brand-text-secondary leading-relaxed">Learner, teacher and recreation kits matched to local curricula.</p>
+          <p class="mt-auto pt-4 font-mono text-[10px] text-brand-text-secondary flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>EDUCATION IN EMERGENCIES</p>
+        </article>
+        <article x-show="filter === 'all' || filter === 'edu'" x-transition.scale.95.duration.400ms class="bento spot p-5 flex flex-col min-h-[230px]" style="--spot: rgba(2,132,199,.22)">
+          <div class="flex items-center justify-between"><span class="font-mono text-[10px] text-sky-600">EIE.03</span><span class="grid place-items-center w-9 h-9 rounded-xl bg-brand-blue/15 text-sky-600"><i data-lucide="users-round" class="w-4 h-4"></i></span></div>
+          <h3 class="mt-5 font-display font-bold text-lg">PTA Development</h3>
+          <p class="mt-2 text-sm text-brand-text-secondary leading-relaxed">Capacity building for Parent–Teacher Associations to sustain schools.</p>
+          <p class="mt-auto pt-4 font-mono text-[10px] text-brand-text-secondary flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>EDUCATION IN EMERGENCIES</p>
+        </article>
+        <article x-show="filter === 'all' || filter === 'edu'" x-transition.scale.95.duration.400ms class="bento spot p-5 flex flex-col min-h-[230px]" style="--spot: rgba(2,132,199,.22)">
+          <div class="flex items-center justify-between"><span class="font-mono text-[10px] text-sky-600">EIE.04</span><span class="grid place-items-center w-9 h-9 rounded-xl bg-brand-blue/15 text-sky-600"><i data-lucide="accessibility" class="w-4 h-4"></i></span></div>
+          <h3 class="mt-5 font-display font-bold text-lg">Inclusive Classrooms</h3>
+          <p class="mt-2 text-sm text-brand-text-secondary leading-relaxed">Accessible learning for children with special needs and nomadic learners.</p>
+          <p class="mt-auto pt-4 font-mono text-[10px] text-brand-text-secondary flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>EDUCATION IN EMERGENCIES</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- =========================== 4. MISSION & ANTI-CORRUPTION =========================== -->
+    <section id="policy" class="max-w-hub mx-auto pt-20 lg:pt-28 scroll-mt-24" aria-labelledby="policyTitle" x-data="{ group: 0 }">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6 reveal">
+        <div>
+          <p class="font-mono text-xs text-cyan-600">04 // ANTI_CORRUPTION_POLICY</p>
+          <h2 id="policyTitle" class="mt-2 font-display font-extrabold text-3xl sm:text-5xl tracking-tight">Our pledge, as a protocol.</h2>
+        </div>
+        <p class="max-w-sm text-sm text-brand-text-secondary">DAO exists to leave a deep, dignified trace on lives affected by conflict — with integrity built into every transaction.</p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-3">
+        <!-- Zero tolerance -->
+        <article class="bento spot reveal lg:col-span-5 lg:row-span-2 p-6 sm:p-8 flex flex-col" style="--spot: rgba(225,29,72,.2)">
+          <div class="flex items-center gap-3">
+            <span class="grid place-items-center w-12 h-12 rounded-2xl bg-gradient-to-br from-brand-magenta to-brand-magenta-deep text-white shadow-[0_0_30px_-5px_#E11D48]"><i data-lucide="shield-check" class="w-6 h-6"></i></span>
+            <span class="font-mono text-[11px] text-brand-text-secondary">PROTOCOL_00</span>
+          </div>
+          <h3 class="mt-6 font-display font-extrabold text-3xl leading-tight">Zero Tolerance for Corruption &amp; Transparency Guarantee</h3>
+          <p class="mt-3 text-brand-text-secondary leading-relaxed">Every allocation is traceable from donor to doorstep. Independent audits, open budgets and community feedback loops hold us accountable to the people we serve.</p>
+          <div class="mt-6 rounded-2xl border border-brand-border bg-slate-900/[0.04] overflow-hidden font-mono text-[11px]">
+            <div class="flex items-center justify-between px-4 py-2.5 border-b border-brand-border text-brand-text-secondary"><span>INTEGRITY_CHECKS</span><span class="text-emerald-600">ALL PASSING</span></div>
+            <ul class="divide-y divide-brand-border">
+              <li class="flex items-center justify-between px-4 py-2.5"><span class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600"></i>Independent annual audit</span><span class="text-brand-text-secondary">PUBLISHED</span></li>
+              <li class="flex items-center justify-between px-4 py-2.5"><span class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600"></i>Open programme budgets</span><span class="text-brand-text-secondary">PUBLIC</span></li>
+              <li class="flex items-center justify-between px-4 py-2.5"><span class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600"></i>Confidential whistleblower line</span><span class="text-brand-text-secondary">24/7</span></li>
+              <li class="flex items-center justify-between px-4 py-2.5"><span class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600"></i>Community feedback &amp; complaints</span><span class="text-brand-text-secondary">ACTIVE</span></li>
+            </ul>
+          </div>
+          <a href="#" class="mt-auto pt-6 inline-flex items-center gap-2 text-sm font-medium text-cyan-600 hover:text-brand-ink transition-colors duration-300">Read the transparency disclosure <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+        </article>
+
+        <!-- Inclusion -->
+        <article class="bento spot reveal lg:col-span-7 p-6 sm:p-8" style="--spot: rgba(124,58,237,.2)">
+          <div class="flex items-center justify-between">
+            <span class="flex items-center gap-2 font-mono text-[11px] text-brand-text-secondary"><span class="grid place-items-center w-8 h-8 rounded-lg bg-brand-purple/15 text-brand-purple"><i data-lucide="users" class="w-4 h-4"></i></span>PROTOCOL_01 · CROSS-CUTTING INCLUSION</span>
+          </div>
+          <h3 class="mt-4 font-display font-bold text-2xl">No one is designed out.</h3>
+          <div class="mt-5 flex flex-wrap gap-2" role="tablist" aria-label="Inclusion groups">
+            <template x-for="(g, i) in inclusion" :key="i">
+              <button type="button" @click="group = i" role="tab" :aria-selected="group === i" class="px-3.5 py-2 rounded-xl border text-sm transition-all duration-300"
+                      :class="group === i ? 'bg-brand-purple border-brand-purple text-white shadow-[0_0_20px_-4px_#7C3AED]' : 'border-brand-border bg-slate-900/[0.03] text-brand-text-secondary hover:text-brand-ink hover:bg-brand-bento-hover'" x-text="g.name"></button>
+            </template>
+          </div>
+          <div class="mt-4 rounded-2xl border border-brand-border bg-slate-900/[0.04] p-4 min-h-[88px]">
+            <template x-for="(g, i) in inclusion" :key="i">
+              <p x-show="group === i" x-transition.opacity.duration.400ms class="text-sm text-brand-text-secondary leading-relaxed"><span class="font-mono text-[11px] text-cyan-600 mr-2">&gt;</span><span x-text="g.desc"></span></p>
+            </template>
+          </div>
+        </article>
+
+        <!-- SDGs -->
+        <article class="bento spot reveal lg:col-span-7 p-6 sm:p-8" style="--spot: rgba(6,182,212,.18)" x-data="{ hover: null }">
+          <div class="flex items-center justify-between gap-4">
+            <span class="flex items-center gap-2 font-mono text-[11px] text-brand-text-secondary"><span class="grid place-items-center w-8 h-8 rounded-lg bg-brand-cyan/15 text-cyan-600"><i data-lucide="globe-2" class="w-4 h-4"></i></span>PROTOCOL_02 · SDG ALIGNMENT</span>
+            <span class="font-mono text-[11px] text-brand-ink truncate" x-text="hover ? hover : 'Hover a goal'"></span>
+          </div>
+          <div class="mt-5 grid grid-cols-5 sm:grid-cols-9 gap-2">
+            <template x-for="g in sdgs" :key="g[0]">
+              <button type="button" @mouseenter="hover = 'SDG ' + g[0] + ' — ' + g[1]" @focus="hover = 'SDG ' + g[0] + ' — ' + g[1]" @mouseleave="hover = null"
+                      class="aspect-square rounded-xl border border-brand-border bg-slate-900/[0.04] hover:bg-brand-bento-hover hover:-translate-y-1 hover:border-slate-900/20 transition-all duration-300 flex flex-col items-center justify-center" :aria-label="'SDG ' + g[0] + ': ' + g[1]">
+                <span class="font-mono font-bold text-lg" :style="'color:' + g[2]" x-text="String(g[0]).padStart(2, '0')"></span>
+              </button>
+            </template>
+          </div>
+          <p class="mt-4 text-sm text-brand-text-secondary">Building on our commitment to the Millennium Development Goals, every node maps to the Sustainable Development Goals agenda.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- =========================== 6. PARTNERS =========================== -->
+    <section id="partners" class="max-w-hub mx-auto pt-20 lg:pt-28 pb-20 scroll-mt-24" aria-labelledby="partnersTitle" x-data="{ sel: 0 }">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6 reveal">
+        <div>
+          <p class="font-mono text-xs text-cyan-600">05 // PARTNER_ECOSYSTEM</p>
+          <h2 id="partnersTitle" class="mt-2 font-display font-extrabold text-3xl sm:text-5xl tracking-tight">Donor &amp; partner ecosystem.</h2>
+        </div>
+        <p class="max-w-sm text-sm text-brand-text-secondary">A collaborative network committed to achieving the Millennium Development Goals — and the SDGs that carry them forward.</p>
+      </div>
+
+      <div class="grid lg:grid-cols-12 gap-3">
+        <div class="lg:col-span-8 grid grid-cols-2 sm:grid-cols-4 gap-3">
+          <template x-for="(p, i) in partners" :key="i">
+            <button type="button" @click="sel = i" @mouseenter="sel = i" class="bento spot aspect-[4/3] sm:aspect-square p-4 flex flex-col justify-between text-left"
+                    :class="sel === i && '!border-brand-cyan/50 !bg-brand-bento-hover'" :aria-pressed="sel === i">
+              <span class="font-mono text-[10px] text-brand-text-secondary" x-text="p.code"></span>
+              <span>
+                <span class="block font-display font-bold text-sm sm:text-base leading-tight" x-text="p.name"></span>
+                <span class="mt-1 block font-mono text-[10px]" :class="sel === i ? 'text-cyan-600' : 'text-slate-400'" x-text="'NODES: ' + p.nodes"></span>
+              </span>
+            </button>
+          </template>
+        </div>
+        <div class="bento lg:col-span-4 p-6 sm:p-8 flex flex-col min-h-[300px]">
+          <p class="font-mono text-[11px] text-brand-text-secondary">PARTNER_DETAIL</p>
+          <template x-for="(p, i) in partners" :key="i">
+            <div x-show="sel === i" x-transition:enter="transition duration-500" x-transition:enter-start="opacity-0 translate-y-3" x-transition:enter-end="opacity-100 translate-y-0">
+              <h3 class="mt-4 font-display font-extrabold text-2xl" x-text="p.name"></h3>
+              <p class="mt-3 text-sm text-brand-text-secondary leading-relaxed" x-text="p.desc"></p>
+            </div>
+          </template>
+          <button type="button" @click="openDrawer('partner')" class="mt-auto pt-6 self-start inline-flex items-center gap-2 rounded-xl bg-brand-ink text-white hover:bg-brand-blue font-semibold text-sm px-5 py-3 transition-all duration-300">Become a partner <i data-lucide="handshake" class="w-4 h-4"></i></button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- =========================== 7. FOOTER =========================== -->
+  <footer class="px-3 sm:px-5 pb-5">
+    <div class="max-w-hub mx-auto bento p-6 sm:p-10">
+      <div class="grid md:grid-cols-2 lg:grid-cols-12 gap-10">
+        <div class="lg:col-span-4">
+          <div class="flex items-center gap-3">
+            <svg class="w-12 h-12" aria-hidden="true"><use href="#dao-mark" /></svg>
+            <div>
+              <p class="font-arabic font-bold text-lg" dir="rtl" lang="ar">منظمة الأثر العميق</p>
+              <p class="text-sm text-brand-text-secondary">Depth Action Organization</p>
+            </div>
+          </div>
+          <p class="mt-5 text-sm text-brand-text-secondary leading-relaxed max-w-sm">Principled, accountable humanitarian and development action for conflict-affected communities.</p>
+          <div class="mt-6 rounded-xl border border-brand-border bg-slate-900/[0.04] p-4">
+            <div class="flex items-center justify-between font-mono text-[10px]"><span class="text-brand-text-secondary">FIELD_SYSTEMS · 90D</span><span class="text-emerald-600">99.9% UPTIME</span></div>
+            <div class="mt-3 flex gap-[2px] h-6 items-end" aria-hidden="true">
+              <template x-for="n in 60" :key="n"><span class="flex-1 rounded-[1px]" :class="n === 23 || n === 47 ? 'bg-amber-400 h-3/5' : 'bg-emerald-400/80 h-full'"></span></template>
+            </div>
+          </div>
+        </div>
+
+        <nav class="lg:col-span-2" aria-label="Footer">
+          <p class="font-mono text-[11px] text-brand-text-secondary">/ NAVIGATE</p>
+          <ul class="mt-4 space-y-2.5 text-sm">
+            <template x-for="t in tabs" :key="t.id"><li><a :href="'#' + t.id" class="hover:text-cyan-600 transition-colors duration-300" x-text="t.label"></a></li></template>
+          </ul>
+        </nav>
+
+        <div class="lg:col-span-2">
+          <p class="font-mono text-[11px] text-brand-text-secondary">/ TRANSPARENCY</p>
+          <ul class="mt-4 space-y-2.5 text-sm">
+            <li><a href="#" class="hover:text-cyan-600 transition-colors duration-300 inline-flex items-center gap-1.5">Disclosure report <i data-lucide="external-link" class="w-3 h-3"></i></a></li>
+            <li><a href="#" class="hover:text-cyan-600 transition-colors duration-300">Audited accounts</a></li>
+            <li><a href="#" class="hover:text-cyan-600 transition-colors duration-300">Safeguarding policy</a></li>
+            <li><a href="#" class="hover:text-cyan-600 transition-colors duration-300">Report a concern</a></li>
+          </ul>
+        </div>
+
+        <!-- Newsletter terminal -->
+        <div class="md:col-span-2 lg:col-span-4" x-data="terminal()">
+          <p class="font-mono text-[11px] text-brand-text-secondary">/ FIELD_DISPATCH</p>
+          <div class="mt-4 rounded-xl border border-brand-border bg-slate-50 overflow-hidden font-mono text-xs">
+            <div class="flex items-center gap-1.5 px-3 py-2 border-b border-brand-border bg-slate-900/[0.02]">
+              <span class="w-2.5 h-2.5 rounded-full bg-brand-magenta/70"></span><span class="w-2.5 h-2.5 rounded-full bg-amber-400/70"></span><span class="w-2.5 h-2.5 rounded-full bg-emerald-400/70"></span>
+              <span class="ml-2 text-[10px] text-brand-text-secondary">dao@hub:~/newsletter</span>
+            </div>
+            <div class="p-3 space-y-1 min-h-[96px] max-h-40 overflow-y-auto" aria-live="polite">
+              <template x-for="(l, i) in lines" :key="i"><p :class="l.c" x-text="l.t"></p></template>
+              <form @submit.prevent="submit()" class="flex items-center gap-2">
+                <label for="termEmail" class="text-cyan-600 shrink-0">$ subscribe --email</label>
+                <input id="termEmail" x-model="email" type="email" autocomplete="email" placeholder="you@org.net" class="flex-1 min-w-0 bg-transparent outline-none text-brand-ink placeholder:text-slate-400 caret-brand-cyan" />
+                <button type="submit" class="shrink-0 px-2 py-1 rounded bg-brand-cyan/15 text-cyan-600 hover:bg-brand-cyan hover:text-white transition-all duration-300" aria-label="Subscribe">↵</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-10 pt-6 border-t border-brand-border flex flex-col sm:flex-row justify-between gap-3 font-mono text-[11px] text-brand-text-secondary">
+        <p>© <span x-text="new Date().getFullYear()"></span> DEPTH ACTION ORGANIZATION · <span class="font-arabic" lang="ar">منظمة الأثر العميق</span></p>
+        <p>BUILD 5.0 · <a href="#overview" class="hover:text-brand-ink">RETURN_TO_TOP ↑</a></p>
+      </div>
+      <p class="mt-4 font-mono text-[10px] text-slate-500 leading-relaxed">Photography by Unsplash contributors under the <a href="https://unsplash.com/license" target="_blank" rel="noopener" class="underline">Unsplash License</a>. Images are illustrative and do not depict specific DAO beneficiaries.</p>
+    </div>
+  </footer>
+
+  <!-- =========================== ACTION DRAWER =========================== -->
+  <div x-cloak x-show="drawer" class="fixed inset-0 z-[100]" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+    <div x-show="drawer" x-transition.opacity.duration.300ms class="absolute inset-0 bg-black/60 backdrop-blur-sm" @click="drawer = false"></div>
+    <aside x-show="drawer"
+           x-transition:enter="transition ease-out duration-500" x-transition:enter-start="translate-x-full" x-transition:enter-end="translate-x-0"
+           x-transition:leave="transition ease-in duration-300" x-transition:leave-start="translate-x-0" x-transition:leave-end="translate-x-full"
+           class="absolute right-0 inset-y-0 w-full max-w-md bg-brand-bento border-l border-brand-border flex flex-col overflow-y-auto" @keydown.tab="trapFocus($event, $el)">
+      <div class="flex items-center justify-between p-5 border-b border-brand-border">
+        <div>
+          <p class="font-mono text-[10px] text-cyan-600">ACTION_CONSOLE</p>
+          <h2 id="drawerTitle" class="font-display font-extrabold text-xl">Deploy Support</h2>
+        </div>
+        <button type="button" @click="drawer = false" x-ref="closeBtn" class="grid place-items-center w-10 h-10 rounded-xl border border-brand-border hover:bg-brand-bento-hover transition-all duration-300" aria-label="Close"><i data-lucide="x" class="w-5 h-5"></i></button>
+      </div>
+
+      <figure class="relative h-36 mx-5 mt-5 rounded-2xl overflow-hidden border border-brand-border">
+        <img src="https://images.unsplash.com/photo-1666281269793-da06484657e8?auto=format&fit=crop&w=900&q=80" alt="Girls in blue headscarves holding their schoolbooks" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover" />
+        <div class="absolute inset-0 bg-gradient-to-r from-brand-bento via-brand-bento/50 to-transparent"></div>
+        <p class="absolute left-4 top-4 max-w-[60%] font-display font-bold leading-snug">Every dollar traced from donor to doorstep.</p>
+        <figcaption class="absolute left-4 bottom-2.5 font-mono text-[9px] text-slate-600">Photo: <a href="https://unsplash.com/@fatima_yusuf?utm_source=dao&amp;utm_medium=referral" target="_blank" rel="noopener" class="underline">FATIMA YUSUF</a> / <a href="https://unsplash.com/?utm_source=dao&amp;utm_medium=referral" target="_blank" rel="noopener" class="underline">Unsplash</a></figcaption>
+      </figure>
+
+      <div class="p-5">
+        <div class="grid grid-cols-2 gap-1 p-1 rounded-xl bg-slate-900/[0.04] border border-brand-border text-sm font-medium" role="tablist">
+          <button type="button" @click="dtab = 'donate'; done = false" role="tab" :aria-selected="dtab === 'donate'" class="py-2 rounded-lg transition-all duration-300" :class="dtab === 'donate' ? 'bg-brand-bento-hover text-brand-ink' : 'text-brand-text-secondary'">Donate</button>
+          <button type="button" @click="dtab = 'partner'; done = false" role="tab" :aria-selected="dtab === 'partner'" class="py-2 rounded-lg transition-all duration-300" :class="dtab === 'partner' ? 'bg-brand-bento-hover text-brand-ink' : 'text-brand-text-secondary'">Partner</button>
+        </div>
+
+        <!-- Donate -->
+        <form x-show="dtab === 'donate' && !done" @submit.prevent="submitDonate()" class="mt-6 space-y-6" novalidate>
+          <div>
+            <p class="font-mono text-[11px] text-brand-text-secondary">FREQUENCY</p>
+            <div class="mt-2 grid grid-cols-2 gap-2">
+              <button type="button" @click="freq = 'once'" class="py-2.5 rounded-xl border text-sm transition-all duration-300" :class="freq === 'once' ? 'border-brand-cyan bg-brand-cyan/10 text-brand-ink' : 'border-brand-border text-brand-text-secondary'" :aria-pressed="freq === 'once'">One-time</button>
+              <button type="button" @click="freq = 'monthly'" class="py-2.5 rounded-xl border text-sm transition-all duration-300" :class="freq === 'monthly' ? 'border-brand-cyan bg-brand-cyan/10 text-brand-ink' : 'border-brand-border text-brand-text-secondary'" :aria-pressed="freq === 'monthly'">Monthly</button>
+            </div>
+          </div>
+          <div>
+            <p class="font-mono text-[11px] text-brand-text-secondary">ALLOCATE TO NODE</p>
+            <select x-model="node" class="mt-2 w-full rounded-xl border border-brand-border bg-slate-900/[0.04] px-3 py-3 text-sm outline-none focus:border-brand-cyan" aria-label="Programme node">
+              <option class="bg-brand-bento" value="any">Where most needed</option>
+              <option class="bg-brand-bento" value="shelter">Shelter</option>
+              <option class="bg-brand-bento" value="child">Child Protection</option>
+              <option class="bg-brand-bento" value="civ">Civilian Protection &amp; GBV</option>
+              <option class="bg-brand-bento" value="env">Environment &amp; SSB</option>
+              <option class="bg-brand-bento" value="edu">Education in Emergencies</option>
+            </select>
+          </div>
+          <div>
+            <p class="font-mono text-[11px] text-brand-text-secondary">AMOUNT · USD</p>
+            <div class="mt-2 grid grid-cols-4 gap-2">
+              <template x-for="a in [25, 50, 100, 250]" :key="a">
+                <button type="button" @click="amount = a; custom = ''" class="py-3 rounded-xl border font-mono font-bold text-sm transition-all duration-300" :class="amount === a && !custom ? 'border-brand-magenta bg-brand-magenta/15 text-brand-ink' : 'border-brand-border text-brand-text-secondary hover:text-brand-ink'" x-text="'$' + a"></button>
+              </template>
+            </div>
+            <input type="number" min="1" x-model="custom" placeholder="Custom amount" aria-label="Custom amount" class="mt-2 w-full rounded-xl border border-brand-border bg-slate-900/[0.04] px-3 py-3 text-sm font-mono outline-none focus:border-brand-cyan placeholder:text-slate-400" />
+            <p class="mt-3 rounded-xl bg-brand-cyan/10 border border-brand-cyan/20 px-3 py-2.5 text-sm text-cyan-900"><span class="font-mono text-cyan-600 mr-1">&gt;</span><span x-text="impactText()"></span></p>
+          </div>
+          <div>
+            <label for="dEmail" class="font-mono text-[11px] text-brand-text-secondary">RECEIPT EMAIL</label>
+            <input id="dEmail" type="email" x-model="email" placeholder="you@example.com" class="mt-2 w-full rounded-xl border bg-slate-900/[0.04] px-3 py-3 text-sm outline-none focus:border-brand-cyan placeholder:text-slate-400" :class="emailErr ? 'border-brand-magenta' : 'border-brand-border'" />
+            <p x-show="emailErr" class="mt-1 text-xs text-rose-600">Please enter a valid email.</p>
+          </div>
+          <button type="submit" class="relative w-full group">
+            <span class="absolute -inset-0.5 rounded-xl bg-gradient-to-r from-brand-magenta to-brand-purple blur opacity-60 group-hover:opacity-100 transition-all duration-300"></span>
+            <span class="relative flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-brand-magenta to-brand-purple py-3.5 font-semibold text-white">Deploy <span class="font-mono" x-text="'$' + finalAmount()"></span><i data-lucide="lock" class="w-4 h-4"></i></span>
+          </button>
+        </form>
+
+        <!-- Partner -->
+        <form x-show="dtab === 'partner' && !done" @submit.prevent="submitPartner()" class="mt-6 space-y-4" novalidate>
+          <div>
+            <label for="pOrg" class="font-mono text-[11px] text-brand-text-secondary">ORGANIZATION</label>
+            <input id="pOrg" type="text" x-model="org" class="mt-2 w-full rounded-xl border bg-slate-900/[0.04] px-3 py-3 text-sm outline-none focus:border-brand-cyan" :class="orgErr ? 'border-brand-magenta' : 'border-brand-border'" />
+          </div>
+          <div>
+            <label for="pEmail" class="font-mono text-[11px] text-brand-text-secondary">WORK EMAIL</label>
+            <input id="pEmail" type="email" x-model="email" class="mt-2 w-full rounded-xl border bg-slate-900/[0.04] px-3 py-3 text-sm outline-none focus:border-brand-cyan" :class="emailErr ? 'border-brand-magenta' : 'border-brand-border'" />
+          </div>
+          <div>
+            <p class="font-mono text-[11px] text-brand-text-secondary">PARTNERSHIP TYPE</p>
+            <div class="mt-2 grid grid-cols-2 gap-2 text-sm">
+              <template x-for="pt in ['Funding', 'Technical', 'In-kind', 'Advocacy']" :key="pt">
+                <button type="button" @click="ptype = pt" class="py-2.5 rounded-xl border transition-all duration-300" :class="ptype === pt ? 'border-brand-cyan bg-brand-cyan/10 text-brand-ink' : 'border-brand-border text-brand-text-secondary'" x-text="pt"></button>
+              </template>
+            </div>
+          </div>
+          <div>
+            <label for="pMsg" class="font-mono text-[11px] text-brand-text-secondary">MESSAGE</label>
+            <textarea id="pMsg" rows="3" class="mt-2 w-full rounded-xl border border-brand-border bg-slate-900/[0.04] px-3 py-3 text-sm outline-none focus:border-brand-cyan resize-none"></textarea>
+          </div>
+          <button type="submit" class="w-full rounded-xl bg-brand-ink text-white hover:bg-brand-blue font-semibold py-3.5 transition-all duration-300">Transmit enquiry</button>
+        </form>
+
+        <!-- Success -->
+        <div x-show="done" x-transition class="mt-10 text-center">
+          <div class="mx-auto w-16 h-16 rounded-2xl grid place-items-center bg-gradient-to-br from-brand-magenta to-brand-purple text-white shadow-[0_0_40px_-6px_#E11D48]"><i data-lucide="heart-handshake" class="w-8 h-8"></i></div>
+          <p class="mt-5 font-mono text-[11px] text-emerald-600">STATUS: RECEIVED</p>
+          <p class="mt-2 font-display font-extrabold text-2xl">Thank you.</p>
+          <p class="mt-2 text-sm text-brand-text-secondary" x-text="doneMsg"></p>
+          <button type="button" @click="drawer = false" class="mt-8 rounded-xl border border-brand-border hover:bg-brand-bento-hover px-6 py-3 text-sm transition-all duration-300">Close console</button>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <script>
+    lucide.createIcons();
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const validEmail = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v || '');
+
+    /* ---------- Root app ---------- */
+    function hub() {
+      return {
+        tabs: [
+          { id: 'overview', n: '01', label: 'Overview' },
+          { id: 'impact', n: '02', label: 'Impact Stack' },
+          { id: 'nodes', n: '03', label: 'Operational Nodes' },
+          { id: 'policy', n: '04', label: 'Anti-Corruption Policy' },
+          { id: 'partners', n: '05', label: 'Partners' },
+        ],
+        section: 'overview', menu: false,
+        supporters: 2481, regions: 14, ledger: 99.2, teams: 63,
+        drawer: false, dtab: 'donate', done: false, doneMsg: '',
+        freq: 'once', node: 'any', amount: 50, custom: '', email: '', emailErr: false,
+        org: '', orgErr: false, ptype: 'Funding', lastFocus: null,
+        inclusion: [
+          { name: 'Nomadic groups', desc: 'Mobile service delivery and seasonal-route planning so pastoralist families keep access to protection, health and learning.' },
+          { name: 'Returnees', desc: 'Reintegration packages, shelter and documentation support for families returning home.' },
+          { name: 'Host communities', desc: 'Shared services that strengthen — not strain — the communities who open their doors to displaced people.' },
+          { name: 'Women', desc: 'Women-led committees, GBV-safe programming and livelihoods that put decision-making power in women’s hands.' },
+          { name: 'Youth', desc: 'Skills training, civic leadership and green-livelihood opportunities for adolescents and young adults.' },
+          { name: 'People with special needs', desc: 'Accessible shelters, inclusive classrooms and disability-aware outreach in every node.' },
+        ],
+        sdgs: [[1, 'No Poverty', '#E11D48'], [2, 'Zero Hunger', '#F59E0B'], [3, 'Good Health', '#22C55E'], [4, 'Quality Education', '#E11D48'], [5, 'Gender Equality', '#F97316'], [6, 'Clean Water', '#06B6D4'], [11, 'Sustainable Communities', '#F59E0B'], [13, 'Climate Action', '#22C55E'], [16, 'Peace & Justice', '#0284C7']],
+        filters: [
+          { id: 'all', label: 'All Nodes', color: '#0B1220', count: 16 },
+          { id: 'child', label: 'Child Protection', color: '#E11D48', count: 4 },
+          { id: 'civ', label: 'Civilian Shielding', color: '#7C3AED', count: 4 },
+          { id: 'env', label: 'Environment', color: '#06B6D4', count: 4 },
+          { id: 'edu', label: 'Education', color: '#0284C7', count: 4 },
+        ],
+        partners: [
+          { code: 'UN_AGENCIES', name: 'UN Agencies', nodes: 5, desc: 'Cluster coordination and pooled-fund partnerships across shelter, protection and education responses.' },
+          { code: 'INGO_NET', name: 'INGO Consortia', nodes: 4, desc: 'Joint programming with international NGOs for scale, technical quality and shared learning.' },
+          { code: 'GOV_LINE', name: 'Line Ministries', nodes: 3, desc: 'Alignment with national education, social welfare and environment ministries for lasting systems.' },
+          { code: 'INST_DONOR', name: 'Institutional Donors', nodes: 5, desc: 'Multi-year grants governed by our zero-tolerance anti-corruption and open-budget policies.' },
+          { code: 'PRIVATE', name: 'Private Sector', nodes: 2, desc: 'Innovation partnerships on SSB technology, clean cooking and supply chains.' },
+          { code: 'CBO_LOCAL', name: 'Local CBOs', nodes: 4, desc: 'Community-based organizations that anchor every intervention in local leadership.' },
+          { code: 'ACADEMIA', name: 'Research & Academia', nodes: 2, desc: 'Independent evaluation, data collection and evidence on what works.' },
+          { code: 'COMMUNITY', name: 'Community Committees', nodes: 5, desc: 'Women, youth and elder committees that co-design and monitor programmes.' },
+        ],
+
+        init() {
+          // Active section tracking
+          const io = new IntersectionObserver((entries) => {
+            entries.forEach((e) => { if (e.isIntersecting) this.section = e.target.id; });
+          }, { rootMargin: '-45% 0px -50% 0px' });
+          this.tabs.forEach((t) => { const el = document.getElementById(t.id); if (el) io.observe(el); });
+
+          // Telemetry jitter (demo values)
+          if (!reduceMotion) setInterval(() => {
+            this.supporters += Math.floor(Math.random() * 3);
+            this.ledger = Math.min(99.9, Math.max(98.6, this.ledger + (Math.random() - 0.45) * 0.3));
+            this.teams = 60 + Math.floor(Math.random() * 6);
+            if (Math.random() > 0.85) this.regions = 13 + Math.floor(Math.random() * 3);
+          }, 2200);
+
+          // Reveal + spotlight
+          this.$nextTick(() => {
+            const rv = new IntersectionObserver((entries) => {
+              entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('is-in'); rv.unobserve(e.target); } });
+            }, { threshold: 0.15 });
+            document.querySelectorAll('.reveal, .bento').forEach((el) => rv.observe(el));
+            document.querySelectorAll('.spot').forEach((el) => {
+              el.addEventListener('pointermove', (ev) => {
+                const r = el.getBoundingClientRect();
+                el.style.setProperty('--mx', ev.clientX - r.left + 'px');
+                el.style.setProperty('--my', ev.clientY - r.top + 'px');
+              });
+            });
+          });
+        },
+
+        openDrawer(tab) {
+          this.lastFocus = document.activeElement;
+          this.dtab = tab; this.done = false; this.emailErr = false; this.orgErr = false;
+          this.drawer = true; this.menu = false;
+          this.$nextTick(() => setTimeout(() => this.$refs.closeBtn && this.$refs.closeBtn.focus(), 60));
+        },
+        trapFocus(e, root) {
+          const f = [...root.querySelectorAll('button, input, select, textarea, a[href]')].filter((el) => el.offsetParent !== null);
+          if (!f.length) return;
+          if (e.shiftKey && document.activeElement === f[0]) { e.preventDefault(); f[f.length - 1].focus(); }
+          else if (!e.shiftKey && document.activeElement === f[f.length - 1]) { e.preventDefault(); f[0].focus(); }
+        },
+        finalAmount() { const c = Math.floor(+this.custom); return c > 0 ? c : this.amount; },
+        impactText() {
+          const v = this.finalAmount();
+          if (v >= 250) return `$${v} produces ~500 Soil Stabilizer Bricks for a family shelter.`;
+          if (v >= 100) return `$${v} equips a Temporary Learning Space with a full kit.`;
+          if (v >= 50) return `$${v} provides fuel-efficient stoves for two households.`;
+          if (v >= 25) return `$${v} delivers a hygiene kit to a family of five.`;
+          return `$${v} helps sustain DAO field teams.`;
+        },
+        submitDonate() {
+          this.emailErr = !validEmail(this.email);
+          if (this.emailErr) return;
+          this.doneMsg = `Your ${this.freq === 'monthly' ? 'monthly ' : ''}contribution of $${this.finalAmount()} is queued for secure checkout. A receipt will be sent to ${this.email}.`;
+          this.done = true;
+        },
+        submitPartner() {
+          this.orgErr = this.org.trim().length < 2;
+          this.emailErr = !validEmail(this.email);
+          if (this.orgErr || this.emailErr) return;
+          this.doneMsg = `${this.org.trim()} — your ${this.ptype.toLowerCase()} partnership enquiry has been transmitted. Our team replies within two working days.`;
+          this.done = true;
+        },
+      };
+    }
+
+    /* ---------- Spatial deck ---------- */
+    function deck() {
+      return {
+        slides: [
+          {
+            node: 'NODE_01 // SHELTER_GRID', short: 'SHELTER_GRID', tag: '› SAFE HAVEN & SHELTER GRID', color: '#0284C7',
+            stat: '1.2M Safe Shelters', title: 'delivered to conflict-affected communities.',
+            desc: 'Dignified, weather-resistant shelter solutions for displaced families — built with communities, not just for them.',
+            metrics: [['Units', '1.2M'], ['Regions', '14'], ['On-time', '96%']],
+            img: 'https://images.unsplash.com/photo-1721751326640-f74b4d663e7b?auto=format&fit=crop&w=1200&q=80', credit: 'Salah Darwish', user: 'salahdarwish', alt: 'Families among tents in a displacement camp shaded by trees',
+          },
+          {
+            node: 'NODE_02 // CHILD_SPACE', short: 'CHILD_SPACE', tag: '› CHILD PROTECTION SPACE NODE', color: '#E11D48',
+            stat: 'Child Friendly Spaces', title: 'PSS training & a ban on corporal punishment.',
+            desc: 'Safe places to play, learn and heal — with trained caregivers and Family Tracing & Reunification for separated children.',
+            metrics: [['CFS active', '312'], ['Caregivers', '9.4K'], ['Reunified', '2.1K']],
+            img: 'https://images.unsplash.com/photo-1724349619176-ff55a7bbaad2?auto=format&fit=crop&w=1200&q=80', credit: 'Salah Darwish', user: 'salahdarwish', alt: 'Children playing together outside tents',
+          },
+          {
+            node: 'NODE_03 // SHIELD_MATRIX', short: 'SHIELD_MATRIX', tag: '› CIVILIAN SHIELDING MATRIX', color: '#7C3AED',
+            stat: 'Safeguarding IDPs', title: 'host communities & nomads from GBV and exploitation.',
+            desc: 'Protected firewood and water routes, PSEA referral mechanisms and community counselling — on every road.',
+            metrics: [['Routes', '86'], ['Referrals', '4.7K'], ['Response', '<24h']],
+            img: 'https://images.unsplash.com/photo-1750382273455-88f9e07b3f59?auto=format&fit=crop&w=1200&q=80', credit: 'Wietse Jongsma', user: 'wietsej', alt: 'Women walking along a dry path carrying water pots on their heads',
+          },
+          {
+            node: 'NODE_04 // ECO_SSB', short: 'ECO_SSB', tag: '› ECO-PRESERVATION & SSB INNOVATION', color: '#06B6D4',
+            stat: 'Soil Stabilizer Bricks', title: '& charcoal-reducing efficient stoves.',
+            desc: 'Kiln-free construction and clean cooking that protect forests while creating green livelihoods.',
+            metrics: [['Bricks', '3.6M'], ['Stoves', '41K'], ['Trees saved', '210K']],
+            img: 'https://images.unsplash.com/photo-1741940365831-1a1fdc2e33ff?auto=format&fit=crop&w=1200&q=80', credit: 'Lisa Marie Theck', user: 'lisa_marie_theck', alt: 'A woman and child preparing food over cooking pots outdoors',
+          },
+        ],
+        active: 0, flying: null, dir: 1, busy: false, paused: false, progress: 0, sx: null, sy: 0,
+        DURATION: 5500,
+
+        start() {
+          let last = performance.now(), elapsed = 0;
+          const loop = (now) => {
+            const dt = now - last; last = now;
+            if (!this.paused && !document.hidden && !reduceMotion && !this.drawer) {
+              elapsed += dt;
+              if (elapsed >= this.DURATION) { elapsed = 0; this.next(true); }
+            }
+            if (this._reset) { elapsed = 0; this._reset = false; }
+            this.progress = Math.min(elapsed / this.DURATION, 1);
+            requestAnimationFrame(loop);
+          };
+          requestAnimationFrame(loop);
+          window.addEventListener('keydown', (e) => {
+            if (this.drawer || /INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)) return;
+            const r = this.$root.getBoundingClientRect();
+            if (r.bottom < 0 || r.top > innerHeight) return;
+            if (e.key === 'ArrowRight') this.next();
+            if (e.key === 'ArrowLeft') this.prev();
+          });
+        },
+        depth(i) { return (i - this.active + this.slides.length) % this.slides.length; },
+        cardStyle(i) {
+          const d = this.depth(i);
+          const t = `translate3d(0, ${d * -22}px, ${d * -90}px) scale(${1 - d * 0.05})`;
+          return `--t: ${t}; z-index: ${30 - d * 10}; opacity: ${d === 0 ? 1 : Math.max(0.25, 0.85 - d * 0.22)}; filter: ${d === 0 ? 'none' : 'brightness(' + (1 - d * 0.18) + ')'}; pointer-events: ${d === 0 ? 'auto' : 'none'}`;
+        },
+        rotate(dir, target) {
+          if (this.busy) return;
+          this.busy = true; this.dir = dir; this._reset = true;
+          if (dir === 1) { this.flying = this.active; this.active = target; }
+          else { this.active = target; this.flying = this.active; }
+          setTimeout(() => { this.flying = null; this.busy = false; }, reduceMotion ? 0 : 820);
+        },
+        next() { this.rotate(1, (this.active + 1) % this.slides.length); },
+        prev() { this.rotate(-1, (this.active - 1 + this.slides.length) % this.slides.length); },
+        goTo(i) { if (i === this.active) return; i > this.active ? this.rotate(1, i) : this.rotate(-1, i); },
+        dragStart(e) { this.sx = e.clientX; this.sy = e.clientY; },
+        dragEnd(e) {
+          if (this.sx === null) return;
+          const dx = e.clientX - this.sx, dy = e.clientY - this.sy;
+          this.sx = null;
+          if (Math.max(Math.abs(dx), Math.abs(dy)) < 45) return;
+          if (Math.abs(dx) >= Math.abs(dy) ? dx < 0 : dy < 0) this.next(); else this.prev();
+        },
+      };
+    }
+
+    /* ---------- Counter ---------- */
+    function counter(target, decimals) {
+      return {
+        display: (0).toFixed(decimals),
+        observe(el) {
+          const io = new IntersectionObserver(([e]) => {
+            if (!e.isIntersecting) return;
+            io.disconnect();
+            if (reduceMotion) { this.display = target.toFixed(decimals); return; }
+            const t0 = performance.now(), dur = 2000;
+            const step = (now) => {
+              const p = Math.min((now - t0) / dur, 1), eased = 1 - Math.pow(1 - p, 4);
+              this.display = (target * eased).toFixed(decimals);
+              if (p < 1) requestAnimationFrame(step);
+            };
+            requestAnimationFrame(step);
+          }, { threshold: 0.4 });
+          io.observe(el);
+        },
+      };
+    }
+
+    /* ---------- Newsletter terminal ---------- */
+    function terminal() {
+      return {
+        email: '',
+        lines: [
+          { t: '# Monthly field dispatch. No noise.', c: 'text-slate-500' },
+          { t: '# Enter your email and press ↵', c: 'text-slate-500' },
+        ],
+        submit() {
+          const v = this.email.trim();
+          this.lines.push({ t: `$ subscribe --email ${v || '""'}`, c: 'text-brand-text-secondary' });
+          if (validEmail(v)) {
+            this.lines.push({ t: '✓ OK — subscribed. Welcome to the dispatch.', c: 'text-emerald-600' });
+            this.email = '';
+          } else {
+            this.lines.push({ t: '✗ ERR — invalid email address.', c: 'text-rose-600' });
+          }
+          if (this.lines.length > 8) this.lines.splice(2, this.lines.length - 8);
+        },
+      };
+    }
+  </script>
+</body>
+</html>

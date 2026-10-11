@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Depth Action Organization — منظمة الأثر العميق</title>
+  <meta name="description" content="Depth Action Organization (DAO) delivers emergency shelter, child protection, civilian protection, education in emergencies and environmental preservation for conflict-affected communities." />
+
+  <link rel="preconnect" href="https://images.unsplash.com" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700;800&family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@500;600;700&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              canvas: '#F8FAFC',
+              surface: '#FFFFFF',
+              navy: { DEFAULT: '#00457C', light: '#E0F2FE', deep: '#062C4F' },
+              magenta: '#D91B5C',
+              purple: '#5C2D91',
+              slate: '#0F172A',
+              muted: '#64748B',
+              grid: '#E2E8F0',
+            },
+          },
+          fontFamily: {
+            display: ['"DejaVu Sans"', 'Verdana', 'system-ui', 'sans-serif'],
+            sans: ['"DejaVu Sans"', 'Verdana', 'system-ui', 'sans-serif'],
+            arabic: ['"IBM Plex Sans Arabic"', 'Tahoma', 'sans-serif'],
+          },
+          letterSpacing: { tightest: '-0.045em' },
+          maxWidth: { frame: '1440px' },
+          boxShadow: {
+            frame: '0 1px 0 #E2E8F0, 0 30px 60px -30px rgba(15, 23, 42, 0.18)',
+          },
+        },
+      },
+    };
+  </script>
+  <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
+
+  <style>
+    /* DejaVu Sans (local install first, CDN fallback) */
+    @font-face { font-family: 'DejaVu Sans'; src: local('DejaVu Sans'), local('DejaVuSans'), url('https://cdn.jsdelivr.net/npm/dejavu-fonts-ttf@2.37.3/ttf/DejaVuSans.ttf') format('truetype'); font-weight: 100 500; font-style: normal; font-display: swap; }
+    @font-face { font-family: 'DejaVu Sans'; src: local('DejaVu Sans Bold'), local('DejaVuSans-Bold'), url('https://cdn.jsdelivr.net/npm/dejavu-fonts-ttf@2.37.3/ttf/DejaVuSans-Bold.ttf') format('truetype'); font-weight: 600 900; font-style: normal; font-display: swap; }
+    @font-face { font-family: 'DejaVu Sans'; src: local('DejaVu Sans Oblique'), local('DejaVuSans-Oblique'), url('https://cdn.jsdelivr.net/npm/dejavu-fonts-ttf@2.37.3/ttf/DejaVuSans-Oblique.ttf') format('truetype'); font-weight: 100 500; font-style: italic; font-display: swap; }
+    @font-face { font-family: 'DejaVu Sans'; src: local('DejaVu Sans Bold Oblique'), local('DejaVuSans-BoldOblique'), url('https://cdn.jsdelivr.net/npm/dejavu-fonts-ttf@2.37.3/ttf/DejaVuSans-BoldOblique.ttf') format('truetype'); font-weight: 600 900; font-style: italic; font-display: swap; }
+    :root { --ease-arch: cubic-bezier(0.77, 0, 0.175, 1); --ease-out: cubic-bezier(0.16, 1, 0.3, 1); }
+    html { -webkit-font-smoothing: antialiased; }
+    body { background: #F8FAFC; color: #0F172A; }
+    ::selection { background: #D91B5C; color: #fff; }
+
+    /* Blueprint grid backdrop */
+    .blueprint {
+      background-image:
+        linear-gradient(to right, rgba(226, 232, 240, 0.7) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(226, 232, 240, 0.7) 1px, transparent 1px);
+      background-size: 64px 64px;
+    }
+    .crosshair { position: absolute; width: 11px; height: 11px; pointer-events: none; }
+    .crosshair::before, .crosshair::after { content: ''; position: absolute; background: #94A3B8; }
+    .crosshair::before { left: 5px; top: 0; width: 1px; height: 11px; }
+    .crosshair::after { top: 5px; left: 0; height: 1px; width: 11px; }
+
+    /* Scroll reveal */
+    [data-reveal] { opacity: 0; transform: translateY(28px); transition: opacity 0.9s var(--ease-out), transform 0.9s var(--ease-out); }
+    [data-reveal].is-in { opacity: 1; transform: none; }
+    [data-reveal-delay="1"] { transition-delay: 0.08s; }
+    [data-reveal-delay="2"] { transition-delay: 0.16s; }
+    [data-reveal-delay="3"] { transition-delay: 0.24s; }
+
+    /* Kinetic headline */
+    .word-mask { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.06em; margin-bottom: -0.06em; }
+    .word { display: inline-block; transform: translateY(105%); transition: transform 0.8s var(--ease-out); }
+    .word.in { transform: translateY(0); }
+    .word.out { transform: translateY(-105%); transition: transform 0.45s var(--ease-arch); transition-delay: 0s !important; }
+    .fade-swap { transition: opacity 0.4s ease, transform 0.5s var(--ease-out); }
+    .fade-swap.swapping { opacity: 0; transform: translateY(8px); }
+
+    /* Hero visual slides + curtain */
+    .slide { position: absolute; inset: 0; opacity: 0; visibility: hidden; }
+    .slide.active { opacity: 1; visibility: visible; z-index: 2; }
+    .slide .slide-art { object-fit: cover; transform: scale(1.14); transition: transform 1.6s var(--ease-out); }
+    .slide.active .slide-art { transform: scale(1); }
+    .slide .slide-caption { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease 0.35s, transform 0.9s var(--ease-out) 0.35s; }
+    .slide.active .slide-caption { opacity: 1; transform: none; }
+    .curtain { position: absolute; inset: 0; z-index: 20; transform: translateY(101%); pointer-events: none; }
+    .curtain.run-up { animation: curtainUp 1s var(--ease-arch) forwards; }
+    .curtain.run-down { animation: curtainDown 1s var(--ease-arch) forwards; }
+    @keyframes curtainUp { 0% { transform: translateY(101%); } 50% { transform: translateY(0); } 100% { transform: translateY(-101%); } }
+    @keyframes curtainDown { 0% { transform: translateY(-101%); } 50% { transform: translateY(0); } 100% { transform: translateY(101%); } }
+
+    /* Metric hover line */
+    .metric::before { content: ''; position: absolute; left: -1px; top: 0; width: 2px; height: 100%; background: #D91B5C; transform: scaleY(0); transform-origin: top; transition: transform 0.5s var(--ease-out); }
+    .metric:hover::before, .metric:focus-within::before { transform: scaleY(1); }
+
+    /* Pillar accordion */
+    .pillar { transition: flex-grow 0.7s var(--ease-arch), background-color 0.5s ease, color 0.5s ease; }
+    .pillar .pillar-body { opacity: 0; transform: translateY(16px); transition: opacity 0.35s ease, transform 0.5s var(--ease-out); pointer-events: none; }
+    .pillar.open .pillar-body { opacity: 1; transform: none; transition-delay: 0.3s; pointer-events: auto; }
+    @media (min-width: 1024px) {
+      .pillar { flex: 1 1 0%; min-width: 0; }
+      .pillar.open { flex-grow: 4.2; }
+      .pillar .pillar-vtitle { writing-mode: vertical-rl; transform: rotate(180deg); transition: opacity 0.3s ease; }
+      .pillar.open .pillar-vtitle { opacity: 0; }
+      .pillar:not(.open) .pillar-body { position: absolute; }
+    }
+    @media (max-width: 1023px) {
+      .pillar > .pillar-body-wrap { position: relative; }
+      .pillar .pillar-body-wrap { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.6s var(--ease-arch); }
+      .pillar.open .pillar-body-wrap { grid-template-rows: 1fr; }
+      .pillar .pillar-body-wrap > div { overflow: hidden; }
+      .pillar .pillar-vtitle { display: none; }
+    }
+
+    .pillar-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; filter: grayscale(1) contrast(1.1); mix-blend-mode: luminosity; transition: opacity .8s ease; pointer-events: none; }
+    .pillar.open .pillar-photo { opacity: .38; }
+    .pillar > .pillar-toggle { position: relative; z-index: 1; }
+    .pillar > .pillar-body-wrap { z-index: 1; }
+    .pillar-credit a { text-decoration: underline; text-underline-offset: 2px; }
+
+    /* Marquee */
+    .marquee-track { animation: marquee 38s linear infinite; }
+    .marquee:hover .marquee-track { animation-play-state: paused; }
+    @keyframes marquee { to { transform: translateX(-50%); } }
+
+    /* Seal rotation */
+    .seal-ring { animation: spin 26s linear infinite; transform-origin: 60px 60px; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Modal */
+    #modal { transition: opacity 0.35s ease, visibility 0.35s; }
+    #modal[aria-hidden="true"] { opacity: 0; visibility: hidden; }
+    #modal .modal-panel { transition: transform 0.6s var(--ease-out); }
+    #modal[aria-hidden="true"] .modal-panel { transform: translateY(40px) scale(0.98); }
+
+    .line-input { background: transparent; border: 0; border-bottom: 1px solid #CBD5E1; border-radius: 0; padding: 0.75rem 0; width: 100%; outline: none; transition: border-color 0.3s; }
+    .line-input:focus { border-color: #D91B5C; }
+    .line-input::placeholder { color: #94A3B8; }
+
+    :focus-visible { outline: 2px solid #D91B5C; outline-offset: 3px; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; transition-delay: 0s !important; }
+      [data-reveal] { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+
+<body class="font-sans antialiased overflow-x-hidden">
+
+  <!-- Hidden SVG symbols -->
+  <svg width="0" height="0" class="absolute" aria-hidden="true">
+    <defs>
+      <symbol id="dao-mark" viewBox="0 0 48 48">
+        <rect width="48" height="48" rx="12" fill="#00457C" />
+        <path d="M24 37.5c-.5 0-1-.2-1.4-.5C14.2 30.3 10 25.6 10 19.9 10 15.5 13.4 12 17.6 12c2.7 0 4.9 1.3 6.4 3.4V37.5Z" fill="#D91B5C" />
+        <path d="M24 37.5c.5 0 1-.2 1.4-.5C33.8 30.3 38 25.6 38 19.9 38 15.5 34.6 12 30.4 12c-2.7 0-4.9 1.3-6.4 3.4V37.5Z" fill="#5C2D91" />
+        <path d="M17 24.5h4l2-4 3 8 2-4h3" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+      </symbol>
+    </defs>
+  </svg>
+
+  <!-- =========================== 1. HEADER =========================== -->
+  <header id="top" class="sticky top-0 z-50 bg-brand-canvas/85 backdrop-blur-xl border-b border-brand-grid">
+    <div class="max-w-frame mx-auto flex items-stretch h-[72px]">
+      <a href="#top" class="flex items-center gap-3 px-4 sm:px-6 lg:border-r border-brand-grid shrink-0" aria-label="Depth Action Organization home">
+        <svg class="w-10 h-10 shrink-0" aria-hidden="true"><use href="#dao-mark" /></svg>
+        <span class="flex flex-col leading-tight">
+          <span class="font-arabic font-semibold text-[15px] text-brand-navy" dir="rtl" lang="ar">منظمة الأثر العميق</span>
+          <span class="font-display font-semibold text-[11px] uppercase tracking-[0.18em] text-brand-slate">Depth Action Organization</span>
+        </span>
+      </a>
+
+      <nav class="hidden lg:flex flex-1 items-center justify-center" aria-label="Primary">
+        <ul class="flex items-center gap-1 xl:gap-3">
+          <li><a href="#mission" class="nav-link group px-3 py-2 text-sm text-brand-slate flex items-baseline gap-1.5"><span class="font-display text-[11px] text-brand-magenta">01.</span><span class="relative">Mission<span class="absolute left-0 -bottom-1 h-px w-full bg-brand-slate scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300"></span></span></a></li>
+          <li><a href="#impact" class="nav-link group px-3 py-2 text-sm text-brand-slate flex items-baseline gap-1.5"><span class="font-display text-[11px] text-brand-magenta">02.</span><span class="relative">Impact<span class="absolute left-0 -bottom-1 h-px w-full bg-brand-slate scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300"></span></span></a></li>
+          <li><a href="#pillars" class="nav-link group px-3 py-2 text-sm text-brand-slate flex items-baseline gap-1.5"><span class="font-display text-[11px] text-brand-magenta">03.</span><span class="relative">Pillars<span class="absolute left-0 -bottom-1 h-px w-full bg-brand-slate scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300"></span></span></a></li>
+          <li><a href="#partners" class="nav-link group px-3 py-2 text-sm text-brand-slate flex items-baseline gap-1.5"><span class="font-display text-[11px] text-brand-magenta">04.</span><span class="relative">Partners<span class="absolute left-0 -bottom-1 h-px w-full bg-brand-slate scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300"></span></span></a></li>
+        </ul>
+      </nav>
+
+      <div class="flex items-center gap-2 ml-auto lg:ml-0 px-4 sm:px-6 lg:border-l border-brand-grid">
+        <span class="hidden xl:inline-flex items-center gap-2 text-xs text-brand-muted mr-3">
+          <span class="relative flex h-2 w-2"><span class="absolute inline-flex h-full w-full rounded-full bg-brand-magenta opacity-60 animate-ping"></span><span class="relative inline-flex h-2 w-2 rounded-full bg-brand-magenta"></span></span>
+          Field operations active
+        </span>
+        <button type="button" data-open-modal="donate" class="group inline-flex items-center gap-2 rounded-full bg-brand-navy hover:bg-brand-magenta text-white text-sm font-medium pl-5 pr-2 py-2 transition-all duration-300">
+          Take Action
+          <span class="grid place-items-center w-7 h-7 rounded-full bg-white/15 group-hover:bg-white/25 transition-all duration-300 group-hover:rotate-45"><i data-lucide="arrow-up-right" class="w-4 h-4"></i></span>
+        </button>
+        <button type="button" id="menuBtn" class="lg:hidden grid place-items-center w-10 h-10 rounded-full border border-brand-grid" aria-expanded="false" aria-controls="mobileNav" aria-label="Open menu">
+          <i data-lucide="menu" class="w-5 h-5"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile nav -->
+    <div id="mobileNav" class="lg:hidden hidden border-t border-brand-grid bg-brand-surface">
+      <ul class="divide-y divide-brand-grid">
+        <li><a href="#mission" class="mobile-link flex items-baseline gap-3 px-6 py-4 font-display text-xl"><span class="text-xs text-brand-magenta">01.</span>Mission</a></li>
+        <li><a href="#impact" class="mobile-link flex items-baseline gap-3 px-6 py-4 font-display text-xl"><span class="text-xs text-brand-magenta">02.</span>Impact</a></li>
+        <li><a href="#pillars" class="mobile-link flex items-baseline gap-3 px-6 py-4 font-display text-xl"><span class="text-xs text-brand-magenta">03.</span>Pillars</a></li>
+        <li><a href="#partners" class="mobile-link flex items-baseline gap-3 px-6 py-4 font-display text-xl"><span class="text-xs text-brand-magenta">04.</span>Partners</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <!-- =========================== 2. HERO =========================== -->
+    <section id="hero" class="relative blueprint" aria-roledescription="carousel" aria-label="DAO programmes">
+      <div class="max-w-frame mx-auto px-4 sm:px-6 py-8 lg:py-12">
+        <div class="relative border border-brand-grid bg-brand-surface shadow-frame grid lg:grid-cols-12">
+          <span class="crosshair -left-[6px] -top-[6px]"></span>
+          <span class="crosshair -right-[6px] -top-[6px]"></span>
+          <span class="crosshair -left-[6px] -bottom-[6px]"></span>
+          <span class="crosshair -right-[6px] -bottom-[6px]"></span>
+
+          <!-- Left canvas -->
+          <div class="lg:col-span-5 flex flex-col justify-between p-6 sm:p-10 xl:p-14 border-b lg:border-b-0 lg:border-r border-brand-grid order-2 lg:order-1">
+            <div>
+              <div class="flex items-center justify-between gap-4">
+                <p class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand-muted">
+                  <span class="w-6 h-px bg-brand-magenta"></span>
+                  <span id="heroKicker" class="fade-swap">Emergency Shelter Defense</span>
+                </p>
+                <p class="font-display text-sm text-brand-muted tabular-nums" aria-live="polite">
+                  <span id="heroIndex" class="text-brand-slate font-bold">01</span> / <span id="heroTotal">04</span>
+                </p>
+              </div>
+
+              <h1 id="heroHeadline" class="mt-8 lg:mt-12 font-display font-bold text-[2.6rem] leading-[1.02] sm:text-6xl xl:text-[5.2rem] tracking-tightest text-brand-slate min-h-[3.1em] sm:min-h-[3.1em]">
+                Shelter that stands when nothing else does.
+              </h1>
+
+              <p id="heroLede" class="fade-swap mt-6 max-w-md text-base sm:text-lg leading-relaxed text-brand-muted">
+                1.2M safe havens constructed in conflict zones — dignified, weather-proof shelter for families displaced by war.
+              </p>
+            </div>
+
+            <div class="mt-10">
+              <div class="flex flex-wrap items-center gap-3">
+                <button type="button" data-open-modal="donate" class="group inline-flex items-center gap-3 rounded-full bg-brand-magenta hover:bg-brand-navy text-white font-medium px-6 py-3.5 transition-all duration-300">
+                  Support this programme
+                  <i data-lucide="arrow-right" class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"></i>
+                </button>
+                <a href="#pillars" class="inline-flex items-center gap-2 rounded-full border border-brand-grid hover:border-brand-slate px-6 py-3.5 text-sm font-medium transition-all duration-300">
+                  Explore pillars
+                </a>
+              </div>
+
+              <!-- Progress + controls -->
+              <div class="mt-10 pt-6 border-t border-brand-grid">
+                <div class="h-[2px] w-full bg-brand-grid overflow-hidden" aria-hidden="true">
+                  <div id="heroProgress" class="h-full w-0 bg-brand-navy"></div>
+                </div>
+                <div class="mt-5 flex items-center justify-between">
+                  <div id="heroDots" class="flex items-center gap-2" role="tablist" aria-label="Choose slide"></div>
+                  <div class="flex items-center gap-2">
+                    <button type="button" id="heroPrev" class="grid place-items-center w-11 h-11 rounded-full border border-brand-grid hover:border-brand-navy hover:bg-brand-navy hover:text-white transition-all duration-300" aria-label="Previous slide"><i data-lucide="arrow-left" class="w-4 h-4"></i></button>
+                    <button type="button" id="heroNext" class="grid place-items-center w-11 h-11 rounded-full border border-brand-grid hover:border-brand-navy hover:bg-brand-navy hover:text-white transition-all duration-300" aria-label="Next slide"><i data-lucide="arrow-right" class="w-4 h-4"></i></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right canvas -->
+          <div class="lg:col-span-7 p-3 sm:p-4 order-1 lg:order-2">
+            <div id="heroFrame" class="relative overflow-hidden h-[380px] sm:h-[480px] lg:h-full lg:min-h-[640px] cursor-grab active:cursor-grabbing select-none touch-pan-y bg-brand-navy" tabindex="0" aria-label="Programme visuals. Use arrow keys or drag to change slides.">
+
+              <!-- Slide 1: Shelter -->
+              <article class="slide active" data-index="0" aria-roledescription="slide" aria-label="1 of 4">
+                <img class="slide-art absolute inset-0 w-full h-full" src="https://images.unsplash.com/photo-1724349620843-99aba60eab8d?auto=format&fit=crop&w=1600&q=80" alt="A dirt road lined with tents and shelters in a displacement camp" loading="eager" decoding="async" draggable="false" />
+                <div class="absolute inset-0 bg-gradient-to-b from-black/35 via-transparent to-black/25 pointer-events-none"></div>
+                <p class="absolute top-4 left-4 z-10 text-[10px] text-white/90 bg-black/35 backdrop-blur px-2 py-1 rounded-full">Photo: <a href="https://unsplash.com/@salahdarwish?utm_source=dao&amp;utm_medium=referral" target="_blank" rel="noopener" class="underline">Salah Darwish</a> / <a href="https://unsplash.com/?utm_source=dao&amp;utm_medium=referral" target="_blank" rel="noopener" class="underline">Unsplash</a></p>
+                <div class="slide-caption absolute left-4 right-4 bottom-4 sm:left-6 sm:bottom-6 sm:right-auto sm:max-w-sm bg-white/95 backdrop-blur p-5 sm:p-6 border border-white">
+                  <p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-brand-magenta">Programme 01 · Shelter</p>
+                  <p class="mt-2 font-display font-bold text-4xl sm:text-5xl tracking-tightest text-brand-navy">1.2M</p>
+                  <p class="mt-1 text-sm text-brand-slate">Safe havens constructed in conflict zones.</p>
+                </div>
+              </article>
+
+              <!-- Slide 2: Child protection -->
+              <article class="slide" data-index="1" aria-roledescription="slide" aria-label="2 of 4">
+                <img class="slide-art absolute inset-0 w-full h-full" src="https://images.unsplash.com/photo-1658129850537-ea7517a9682f?auto=format&fit=crop&w=1600&q=80" alt="A group of young girls in colourful dresses sitting together on the ground" loading="lazy" decoding="async" draggable="false" />
+                <div class="absolute inset-0 bg-gradient-to-b from-black/35 via-transparent to-black/25 pointer-events-none"></div>
+                <p class="absolute top-4 left-4 z-10 text-[10px] text-white/90 bg-black/35 backdrop-blur px-2 py-1 rounded-full">Photo: <a href="https://unsplash.com/@ediop?utm_source=dao&amp;utm_medium=referral" target="_blank" rel="noopener" class="underline">E. Diop</a> / <a href="https://unsplash.com/?utm_source=dao&amp;utm_medium=referral" target="_blank" rel="noopener" class="underline">Unsplash</a></p>
+                <div class="slide-caption absolute left-4 right-4 bottom-4 sm:left-6 sm:bottom-6 sm:right-auto sm:max-w-sm bg-white/95 backdrop-blur p-5 sm:p-6 border border-white">
+                  <p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-brand-magenta">Programme 02 · Child Protection &amp; PSS</p>
+                  <p class="mt-2 font-display font-bold text-2xl sm:text-3xl leading-tight tracking-tight text-brand-navy">Safe Spaces &amp; Trauma Care</p>
+                  <p class="mt-1 text-sm text-brand-slate">Child-friendly spaces, psychosocial support and a ban on corporal punishment.</p>
+                </div>
+              </article>
+
+              <!-- Slide 3: Civilian shielding -->
+              <article class="slide" data-index="2" aria-roledescription="slide" aria-label="3 of 4">
+                <img class="slide-art absolute inset-0 w-full h-full" src="https://images.unsplash.com/photo-1553775927-a071d5a6a39a?auto=format&fit=crop&w=1600&q=80" alt="Three women carrying basins while walking barefoot" loading="lazy" decoding="async" draggable="false" />
+                <div class="absolute inset-0 bg-gradient-to-b from-black/35 via-transparent to-black/25 pointer-events-none"></div>
+                <p class="absolute top-4 left-4 z-10 text-[10px] text-white/90 bg-black/35 backdrop-blur px-2 py-1 rounded-full">Photo: <a href="https://unsplash.com/@ninnojackjr?utm_source=dao&amp;utm_medium=referral" target="_blank" rel="noopener" class="underline">Ninno JackJr</a> / <a href="https://unsplash.com/?utm_source=dao&amp;utm_medium=referral" target="_blank" rel="noopener" class="underline">Unsplash</a></p>
+                <div class="slide-caption absolute left-4 right-4 bottom-4 sm:left-6 sm:bottom-6 sm:right-auto sm:max-w-sm bg-white/95 backdrop-blur p-5 sm:p-6 border border-white">
+                  <p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-brand-magenta">Programme 03 · Civilian Shielding &amp; GBV</p>
+                  <p class="mt-2 font-display font-bold text-2xl sm:text-3xl leading-tight tracking-tight text-brand-navy">Empowerment for All</p>
+                  <p class="mt-1 text-sm text-brand-slate">For IDPs, host communities and nomadic groups — on every route to water and firewood.</p>
+                </div>
+              </article>
+
+              <!-- Slide 4: Eco / SSB -->
+              <article class="slide" data-index="3" aria-roledescription="slide" aria-label="4 of 4">
+                <img class="slide-art absolute inset-0 w-full h-full" src="https://images.unsplash.com/photo-1706715201231-b703e7df3395?auto=format&fit=crop&w=1600&q=80" alt="Workers stacking hand-made bricks at a production site" loading="lazy" decoding="async" draggable="false" />
+                <div class="absolute inset-0 bg-gradient-to-b from-black/35 via-transparent to-black/25 pointer-events-none"></div>
+                <p class="absolute top-4 left-4 z-10 text-[10px] text-white/90 bg-black/35 backdrop-blur px-2 py-1 rounded-full">Photo: <a href="https://unsplash.com/@swastikarora?utm_source=dao&amp;utm_medium=referral" target="_blank" rel="noopener" class="underline">Swastik Arora</a> / <a href="https://unsplash.com/?utm_source=dao&amp;utm_medium=referral" target="_blank" rel="noopener" class="underline">Unsplash</a></p>
+                <div class="slide-caption absolute left-4 right-4 bottom-4 sm:left-6 sm:bottom-6 sm:right-auto sm:max-w-sm bg-white/95 backdrop-blur p-5 sm:p-6 border border-brand-grid">
+                  <p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-brand-magenta">Programme 04 · Eco-Preservation</p>
+                  <p class="mt-2 font-display font-bold text-2xl sm:text-3xl leading-tight tracking-tight text-brand-navy">Soil Stabilizer Bricks</p>
+                  <p class="mt-1 text-sm text-brand-slate">Kiln-free SSB construction, fuel-efficient stoves and sustainable livelihoods.</p>
+                </div>
+              </article>
+
+              <div id="heroCurtain" class="curtain bg-brand-magenta"></div>
+
+              <div class="absolute top-4 right-4 z-10 hidden sm:flex items-center gap-2 bg-white/90 backdrop-blur rounded-full px-3 py-1.5 text-[11px] font-medium text-brand-slate">
+                <i data-lucide="move-horizontal" class="w-3.5 h-3.5"></i> Drag or use <kbd class="inline-grid place-items-center w-5 h-5 rounded border border-brand-grid"><i data-lucide="arrow-left" class="w-3 h-3"></i></kbd><kbd class="inline-grid place-items-center w-5 h-5 rounded border border-brand-grid"><i data-lucide="arrow-right" class="w-3 h-3"></i></kbd>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================== 3. IMPACT METRICS =========================== -->
+    <section id="impact" class="bg-brand-surface border-y border-brand-grid scroll-mt-20" aria-labelledby="impactTitle">
+      <div class="max-w-frame mx-auto">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 px-4 sm:px-6 lg:px-10 pt-14 pb-10 border-b border-brand-grid">
+          <div data-reveal>
+            <p class="text-[11px] font-semibold uppercase tracking-[0.22em] text-brand-magenta">02 — Impact</p>
+            <h2 id="impactTitle" class="mt-3 font-display font-bold text-3xl sm:text-4xl tracking-tight">Measured in lives, not line items.</h2>
+          </div>
+          <p class="max-w-sm text-sm text-brand-muted" data-reveal data-reveal-delay="1">Cumulative people reached across our programme portfolio. Figures independently verified through community feedback and third-party monitoring.</p>
+        </div>
+        <dl class="grid grid-cols-2 lg:grid-cols-4">
+          <div class="metric group relative p-6 sm:p-10 border-b lg:border-b-0 border-r border-brand-grid hover:bg-brand-canvas transition-all duration-300" data-reveal>
+            <dt class="flex items-center justify-between text-brand-muted"><span class="font-display text-xs">/01</span><i data-lucide="home" class="w-5 h-5 group-hover:text-brand-magenta transition-colors duration-300"></i></dt>
+            <dd class="mt-10 font-display font-bold text-5xl sm:text-6xl xl:text-7xl tracking-tightest text-brand-navy tabular-nums"><span class="counter" data-target="1.2" data-decimals="1">0</span><span class="text-brand-magenta">M</span></dd>
+            <dd class="mt-3 text-sm sm:text-base font-medium text-brand-slate">Safe &amp; Secure Shelter</dd>
+          </div>
+          <div class="metric group relative p-6 sm:p-10 border-b lg:border-b-0 lg:border-r border-brand-grid hover:bg-brand-canvas transition-all duration-300" data-reveal data-reveal-delay="1">
+            <dt class="flex items-center justify-between text-brand-muted"><span class="font-display text-xs">/02</span><i data-lucide="wheat" class="w-5 h-5 group-hover:text-brand-magenta transition-colors duration-300"></i></dt>
+            <dd class="mt-10 font-display font-bold text-5xl sm:text-6xl xl:text-7xl tracking-tightest text-brand-navy tabular-nums"><span class="counter" data-target="1.0" data-decimals="1">0</span><span class="text-brand-magenta">M</span></dd>
+            <dd class="mt-3 text-sm sm:text-base font-medium text-brand-slate">Food Security &amp; Livelihoods</dd>
+          </div>
+          <div class="metric group relative p-6 sm:p-10 border-r border-brand-grid hover:bg-brand-canvas transition-all duration-300" data-reveal data-reveal-delay="2">
+            <dt class="flex items-center justify-between text-brand-muted"><span class="font-display text-xs">/03</span><i data-lucide="heart-pulse" class="w-5 h-5 group-hover:text-brand-magenta transition-colors duration-300"></i></dt>
+            <dd class="mt-10 font-display font-bold text-5xl sm:text-6xl xl:text-7xl tracking-tightest text-brand-navy tabular-nums"><span class="counter" data-target="800" data-decimals="0">0</span><span class="text-brand-magenta">K</span></dd>
+            <dd class="mt-3 text-sm sm:text-base font-medium text-brand-slate">Healthcare &amp; Hygiene Services</dd>
+          </div>
+          <div class="metric group relative p-6 sm:p-10 hover:bg-brand-canvas transition-all duration-300" data-reveal data-reveal-delay="3">
+            <dt class="flex items-center justify-between text-brand-muted"><span class="font-display text-xs">/04</span><i data-lucide="graduation-cap" class="w-5 h-5 group-hover:text-brand-magenta transition-colors duration-300"></i></dt>
+            <dd class="mt-10 font-display font-bold text-5xl sm:text-6xl xl:text-7xl tracking-tightest text-brand-navy tabular-nums"><span class="counter" data-target="500" data-decimals="0">0</span><span class="text-brand-magenta">K</span></dd>
+            <dd class="mt-3 text-sm sm:text-base font-medium text-brand-slate">Empowered Through Education</dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- =========================== 4. MISSION / VISION / VALUES =========================== -->
+    <section id="mission" class="relative scroll-mt-20 py-20 lg:py-32" aria-labelledby="missionTitle">
+      <div class="max-w-frame mx-auto px-4 sm:px-6 lg:px-10">
+        <div class="grid lg:grid-cols-12 gap-10 lg:gap-16">
+          <div class="lg:col-span-5 lg:sticky lg:top-28 self-start" data-reveal>
+            <p class="text-[11px] font-semibold uppercase tracking-[0.22em] text-brand-magenta">01 — Mission</p>
+            <h2 id="missionTitle" class="mt-4 font-display font-bold text-4xl sm:text-5xl xl:text-6xl leading-[1.02] tracking-tightest">
+              Deep action.<br /><span class="text-brand-navy">Lasting</span> <span class="italic font-medium text-brand-magenta">trace.</span>
+            </h2>
+            <p class="mt-6 text-lg text-brand-muted leading-relaxed max-w-md">
+              We exist to leave a deep and dignified mark on the lives of people affected by conflict and climate shocks — working alongside communities, never above them.
+            </p>
+            <div class="mt-10 flex items-center gap-4 p-5 border border-brand-grid bg-brand-surface">
+              <span class="grid place-items-center w-12 h-12 rounded-full bg-brand-magenta/10 text-brand-magenta shrink-0"><i data-lucide="shield-check" class="w-6 h-6"></i></span>
+              <p class="text-sm"><strong class="block font-display text-base">Zero tolerance for corruption.</strong><span class="text-brand-muted">Every allocation is traceable from donor to doorstep.</span></p>
+            </div>
+          </div>
+
+          <div class="lg:col-span-7 grid sm:grid-cols-2 border-t border-l border-brand-grid">
+            <article class="group sm:col-span-2 p-8 sm:p-10 border-r border-b border-brand-grid bg-brand-surface hover:shadow-xl hover:-translate-y-1 transition-all duration-300" data-reveal>
+              <div class="flex items-center justify-between"><span class="font-display text-xs text-brand-muted">A.</span><i data-lucide="target" class="w-5 h-5 text-brand-navy"></i></div>
+              <h3 class="mt-8 font-display font-bold text-2xl">Our Mission</h3>
+              <p class="mt-3 text-brand-muted leading-relaxed">To deliver principled, accountable humanitarian and development action — shelter, protection, education, health and environmental resilience — to displaced people, returnees and the communities who host them.</p>
+            </article>
+            <article class="group p-8 sm:p-10 border-r border-b border-brand-grid bg-brand-surface hover:shadow-xl hover:-translate-y-1 transition-all duration-300" data-reveal data-reveal-delay="1">
+              <div class="flex items-center justify-between"><span class="font-display text-xs text-brand-muted">B.</span><i data-lucide="eye" class="w-5 h-5 text-brand-purple"></i></div>
+              <h3 class="mt-8 font-display font-bold text-2xl">Our Vision</h3>
+              <p class="mt-3 text-brand-muted leading-relaxed">Safe, self-reliant communities where every person — regardless of origin, status or ability — lives with dignity and opportunity.</p>
+            </article>
+            <article class="group p-8 sm:p-10 border-r border-b border-brand-grid bg-brand-navy text-white hover:shadow-xl hover:-translate-y-1 transition-all duration-300" data-reveal data-reveal-delay="2">
+              <div class="flex items-center justify-between"><span class="font-display text-xs text-white/60">C.</span><i data-lucide="gem" class="w-5 h-5 text-brand-navy-light"></i></div>
+              <h3 class="mt-8 font-display font-bold text-2xl">Our Values</h3>
+              <ul class="mt-4 space-y-2.5 text-sm">
+                <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-brand-magenta"></span>Zero tolerance for corruption</li>
+                <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-brand-magenta"></span>Radical transparency</li>
+                <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-brand-magenta"></span>Equality &amp; non-discrimination</li>
+                <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-brand-magenta"></span>Inclusion by design</li>
+              </ul>
+            </article>
+            <article class="sm:col-span-2 p-8 sm:p-10 border-r border-b border-brand-grid bg-brand-surface hover:shadow-xl transition-all duration-300" data-reveal>
+              <div class="flex items-center justify-between"><span class="font-display text-xs text-brand-muted">D.</span><i data-lucide="users" class="w-5 h-5 text-brand-magenta"></i></div>
+              <h3 class="mt-8 font-display font-bold text-2xl">Who we stand with</h3>
+              <p class="mt-3 text-brand-muted leading-relaxed max-w-xl">Equal access for every group — designed in, never bolted on.</p>
+              <ul class="mt-6 flex flex-wrap gap-2">
+                <li class="px-4 py-2 rounded-full border border-brand-grid text-sm hover:border-brand-navy hover:bg-brand-navy hover:text-white transition-all duration-300">Returnees</li>
+                <li class="px-4 py-2 rounded-full border border-brand-grid text-sm hover:border-brand-navy hover:bg-brand-navy hover:text-white transition-all duration-300">Host communities</li>
+                <li class="px-4 py-2 rounded-full border border-brand-grid text-sm hover:border-brand-navy hover:bg-brand-navy hover:text-white transition-all duration-300">Internally displaced people</li>
+                <li class="px-4 py-2 rounded-full border border-brand-grid text-sm hover:border-brand-navy hover:bg-brand-navy hover:text-white transition-all duration-300">Refugees</li>
+                <li class="px-4 py-2 rounded-full border border-brand-grid text-sm hover:border-brand-navy hover:bg-brand-navy hover:text-white transition-all duration-300">Nomadic groups</li>
+                <li class="px-4 py-2 rounded-full border border-brand-grid text-sm hover:border-brand-navy hover:bg-brand-navy hover:text-white transition-all duration-300">People with special needs</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================== 5. OPERATIONAL PILLARS =========================== -->
+    <section id="pillars" class="scroll-mt-20 py-20 lg:py-28 bg-brand-surface border-y border-brand-grid" aria-labelledby="pillarsTitle">
+      <div class="max-w-frame mx-auto px-4 sm:px-6 lg:px-10">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+          <div data-reveal>
+            <p class="text-[11px] font-semibold uppercase tracking-[0.22em] text-brand-magenta">03 — Operational Pillars</p>
+            <h2 id="pillarsTitle" class="mt-3 font-display font-bold text-4xl sm:text-5xl tracking-tightest max-w-2xl">Four pillars. One continuum of care.</h2>
+          </div>
+          <p class="max-w-sm text-brand-muted" data-reveal data-reveal-delay="1">Select a pillar to expand its field interventions.</p>
+        </div>
+
+        <div id="pillarRow" class="flex flex-col lg:flex-row lg:h-[540px] border border-brand-grid" data-reveal>
+          <!-- Pillar 1 -->
+          <div class="pillar open relative flex flex-col overflow-hidden border-b lg:border-b-0 lg:border-r border-brand-grid bg-brand-navy text-white" data-color="navy">
+            <img class="pillar-photo" src="https://images.unsplash.com/photo-1741940365831-1a1fdc2e33ff?auto=format&fit=crop&w=1400&q=80" alt="" loading="lazy" decoding="async" />
+            <button type="button" class="pillar-toggle w-full text-left flex lg:flex-col items-center lg:items-start justify-between gap-4 p-6 lg:p-8 lg:h-full" aria-expanded="true">
+              <span class="flex items-center gap-4 lg:w-full lg:justify-between">
+                <span class="font-display text-sm opacity-70">01</span>
+                <span class="grid place-items-center w-11 h-11 rounded-full border border-current/30 pillar-icon"><i data-lucide="leaf" class="w-5 h-5"></i></span>
+              </span>
+              <span class="pillar-vtitle hidden lg:block font-display font-bold text-2xl whitespace-nowrap">Environmental Preservation</span>
+              <span class="lg:hidden font-display font-bold text-xl flex-1">Environmental Preservation</span>
+              <i data-lucide="plus" class="lg:hidden w-5 h-5 pillar-plus transition-transform duration-300"></i>
+            </button>
+            <div class="pillar-body-wrap lg:absolute lg:inset-0 lg:pointer-events-none">
+              <div>
+                <div class="pillar-body px-6 pb-8 lg:p-10 lg:pt-28 lg:h-full lg:flex lg:flex-col lg:justify-end">
+                  <h3 class="hidden lg:block font-display font-bold text-4xl xl:text-5xl tracking-tightest">Environmental<br />Preservation</h3>
+                  <ul class="mt-6 grid sm:grid-cols-2 gap-x-8 gap-y-4 text-sm max-w-2xl">
+                    <li class="flex gap-3 border-t border-white/20 pt-4"><i data-lucide="brick-wall" class="w-4 h-4 mt-0.5 shrink-0 text-brand-magenta"></i>Soil Stabilizer Bricks (SSB) — kiln-free construction that saves forests.</li>
+                    <li class="flex gap-3 border-t border-white/20 pt-4"><i data-lucide="flame" class="w-4 h-4 mt-0.5 shrink-0 text-brand-magenta"></i>Fuel-efficient stoves to discourage over-consumption of charcoal.</li>
+                    <li class="flex gap-3 border-t border-white/20 pt-4"><i data-lucide="megaphone" class="w-4 h-4 mt-0.5 shrink-0 text-brand-magenta"></i>Community environmental awareness campaigns.</li>
+                    <li class="flex gap-3 border-t border-white/20 pt-4"><i data-lucide="sprout" class="w-4 h-4 mt-0.5 shrink-0 text-brand-magenta"></i>Green livelihoods linked to restoration.</li>
+                  </ul>
+                  <p class="pillar-credit mt-6 text-[10px] opacity-70">Photo: <a href="https://unsplash.com/@lisa_marie_theck?utm_source=dao&amp;utm_medium=referral" target="_blank" rel="noopener" class="">Lisa Marie Theck</a> / <a href="https://unsplash.com/?utm_source=dao&amp;utm_medium=referral" target="_blank" rel="noopener" class="">Unsplash</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pillar 2 -->
+          <div class="pillar relative flex flex-col overflow-hidden border-b lg:border-b-0 lg:border-r border-brand-grid bg-brand-surface text-brand-slate" data-color="magenta">
+            <img class="pillar-photo" src="https://images.unsplash.com/photo-1724349619176-ff55a7bbaad2?auto=format&fit=crop&w=1400&q=80" alt="" loading="lazy" decoding="async" />
+            <button type="button" class="pillar-toggle w-full text-left flex lg:flex-col items-center lg:items-start justify-between gap-4 p-6 lg:p-8 lg:h-full" aria-expanded="false">
+              <span class="flex items-center gap-4 lg:w-full lg:justify-between">
+                <span class="font-display text-sm opacity-70">02</span>
+                <span class="grid place-items-center w-11 h-11 rounded-full border border-current/30 pillar-icon"><i data-lucide="baby" class="w-5 h-5"></i></span>
+              </span>
+              <span class="pillar-vtitle hidden lg:block font-display font-bold text-2xl whitespace-nowrap">Child Protection</span>
+              <span class="lg:hidden font-display font-bold text-xl flex-1">Child Protection</span>
+              <i data-lucide="plus" class="lg:hidden w-5 h-5 pillar-plus transition-transform duration-300"></i>
+            </button>
+            <div class="pillar-body-wrap lg:absolute lg:inset-0 lg:pointer-events-none">
+              <div>
+                <div class="pillar-body px-6 pb-8 lg:p-10 lg:pt-28 lg:h-full lg:flex lg:flex-col lg:justify-end">
+                  <h3 class="hidden lg:block font-display font-bold text-4xl xl:text-5xl tracking-tightest">Child<br />Protection</h3>
+                  <ul class="mt-6 grid sm:grid-cols-2 gap-x-8 gap-y-4 text-sm max-w-2xl">
+                    <li class="flex gap-3 border-t border-white/25 pt-4"><i data-lucide="tent" class="w-4 h-4 mt-0.5 shrink-0"></i>Child Friendly Spaces (CFS) in camps and host communities.</li>
+                    <li class="flex gap-3 border-t border-white/25 pt-4"><i data-lucide="hand-heart" class="w-4 h-4 mt-0.5 shrink-0"></i>Psychosocial support (PSS) training for parents and teachers.</li>
+                    <li class="flex gap-3 border-t border-white/25 pt-4"><i data-lucide="ban" class="w-4 h-4 mt-0.5 shrink-0"></i>Advocacy to ban corporal punishment in schools and homes.</li>
+                    <li class="flex gap-3 border-t border-white/25 pt-4"><i data-lucide="route" class="w-4 h-4 mt-0.5 shrink-0"></i>Family Tracing &amp; Reunification (FTR) for separated children.</li>
+                  </ul>
+                  <p class="pillar-credit mt-6 text-[10px] opacity-70">Photo: <a href="https://unsplash.com/@salahdarwish?utm_source=dao&amp;utm_medium=referral" target="_blank" rel="noopener" class="">Salah Darwish</a> / <a href="https://unsplash.com/?utm_source=dao&amp;utm_medium=referral" target="_blank" rel="noopener" class="">Unsplash</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pillar 3 -->
+          <div class="pillar relative flex flex-col overflow-hidden border-b lg:border-b-0 lg:border-r border-brand-grid bg-brand-surface text-brand-slate" data-color="purple">
+            <img class="pillar-photo" src="https://images.unsplash.com/photo-1721713809583-0f9f6cfba998?auto=format&fit=crop&w=1400&q=80" alt="" loading="lazy" decoding="async" />
+            <button type="button" class="pillar-toggle w-full text-left flex lg:flex-col items-center lg:items-start justify-between gap-4 p-6 lg:p-8 lg:h-full" aria-expanded="false">
+              <span class="flex items-center gap-4 lg:w-full lg:justify-between">
+                <span class="font-display text-sm opacity-70">03</span>
+                <span class="grid place-items-center w-11 h-11 rounded-full border border-current/30 pillar-icon"><i data-lucide="shield" class="w-5 h-5"></i></span>
+              </span>
+              <span class="pillar-vtitle hidden lg:block font-display font-bold text-2xl whitespace-nowrap">Civilian Protection</span>
+              <span class="lg:hidden font-display font-bold text-xl flex-1">Civilian Protection</span>
+              <i data-lucide="plus" class="lg:hidden w-5 h-5 pillar-plus transition-transform duration-300"></i>
+            </button>
+            <div class="pillar-body-wrap lg:absolute lg:inset-0 lg:pointer-events-none">
+              <div>
+                <div class="pillar-body px-6 pb-8 lg:p-10 lg:pt-28 lg:h-full lg:flex lg:flex-col lg:justify-end">
+                  <h3 class="hidden lg:block font-display font-bold text-4xl xl:text-5xl tracking-tightest">Civilian<br />Protection</h3>
+                  <ul class="mt-6 grid sm:grid-cols-2 gap-x-8 gap-y-4 text-sm max-w-2xl">
+                    <li class="flex gap-3 border-t border-white/25 pt-4"><i data-lucide="footprints" class="w-4 h-4 mt-0.5 shrink-0 text-brand-magenta"></i>Shielding refugees, IDPs and adolescent girls during firewood and water collection.</li>
+                    <li class="flex gap-3 border-t border-white/25 pt-4"><i data-lucide="shield-alert" class="w-4 h-4 mt-0.5 shrink-0 text-brand-magenta"></i>Gender-based violence (GBV) prevention and response.</li>
+                    <li class="flex gap-3 border-t border-white/25 pt-4"><i data-lucide="network" class="w-4 h-4 mt-0.5 shrink-0 text-brand-magenta"></i>PSEA referral networks with confidential reporting.</li>
+                    <li class="flex gap-3 border-t border-white/25 pt-4"><i data-lucide="messages-square" class="w-4 h-4 mt-0.5 shrink-0 text-brand-magenta"></i>Group counselling for survivors and families.</li>
+                  </ul>
+                  <p class="pillar-credit mt-6 text-[10px] opacity-70">Photo: <a href="https://unsplash.com/@peacetoolmedia?utm_source=dao&amp;utm_medium=referral" target="_blank" rel="noopener" class="">Ayano Tosin</a> / <a href="https://unsplash.com/?utm_source=dao&amp;utm_medium=referral" target="_blank" rel="noopener" class="">Unsplash</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pillar 4 -->
+          <div class="pillar relative flex flex-col overflow-hidden bg-brand-surface text-brand-slate" data-color="slate">
+            <img class="pillar-photo" src="https://images.unsplash.com/photo-1632215861513-130b66fe97f4?auto=format&fit=crop&w=1400&q=80" alt="" loading="lazy" decoding="async" />
+            <button type="button" class="pillar-toggle w-full text-left flex lg:flex-col items-center lg:items-start justify-between gap-4 p-6 lg:p-8 lg:h-full" aria-expanded="false">
+              <span class="flex items-center gap-4 lg:w-full lg:justify-between">
+                <span class="font-display text-sm opacity-70">04</span>
+                <span class="grid place-items-center w-11 h-11 rounded-full border border-current/30 pillar-icon"><i data-lucide="book-open" class="w-5 h-5"></i></span>
+              </span>
+              <span class="pillar-vtitle hidden lg:block font-display font-bold text-2xl whitespace-nowrap">Education in Emergencies</span>
+              <span class="lg:hidden font-display font-bold text-xl flex-1">Education in Emergencies</span>
+              <i data-lucide="plus" class="lg:hidden w-5 h-5 pillar-plus transition-transform duration-300"></i>
+            </button>
+            <div class="pillar-body-wrap lg:absolute lg:inset-0 lg:pointer-events-none">
+              <div>
+                <div class="pillar-body px-6 pb-8 lg:p-10 lg:pt-28 lg:h-full lg:flex lg:flex-col lg:justify-end">
+                  <h3 class="hidden lg:block font-display font-bold text-4xl xl:text-5xl tracking-tightest">Education in<br />Emergencies</h3>
+                  <ul class="mt-6 grid sm:grid-cols-2 gap-x-8 gap-y-4 text-sm max-w-2xl">
+                    <li class="flex gap-3 border-t border-white/25 pt-4"><i data-lucide="school" class="w-4 h-4 mt-0.5 shrink-0 text-brand-magenta"></i>Temporary Learning Spaces (TLS) built within weeks of displacement.</li>
+                    <li class="flex gap-3 border-t border-white/25 pt-4"><i data-lucide="users-round" class="w-4 h-4 mt-0.5 shrink-0 text-brand-magenta"></i>Parent–Teacher Association (PTA) capacity building.</li>
+                    <li class="flex gap-3 border-t border-white/25 pt-4"><i data-lucide="pencil-ruler" class="w-4 h-4 mt-0.5 shrink-0 text-brand-magenta"></i>Quality learning and teaching supplies.</li>
+                    <li class="flex gap-3 border-t border-white/25 pt-4"><i data-lucide="accessibility" class="w-4 h-4 mt-0.5 shrink-0 text-brand-magenta"></i>Inclusive classrooms for learners with special needs.</li>
+                  </ul>
+                  <p class="pillar-credit mt-6 text-[10px] opacity-70">Photo: <a href="https://unsplash.com/@emmages?utm_source=dao&amp;utm_medium=referral" target="_blank" rel="noopener" class="">Emmanuel Ikwuegbu</a> / <a href="https://unsplash.com/?utm_source=dao&amp;utm_medium=referral" target="_blank" rel="noopener" class="">Unsplash</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================== 6. PARTNERS =========================== -->
+    <section id="partners" class="scroll-mt-20 py-20 lg:py-28" aria-labelledby="partnersTitle">
+      <div class="max-w-frame mx-auto px-4 sm:px-6 lg:px-10">
+        <div class="grid lg:grid-cols-12 gap-10 mb-12">
+          <div class="lg:col-span-6" data-reveal>
+            <p class="text-[11px] font-semibold uppercase tracking-[0.22em] text-brand-magenta">04 — Partners</p>
+            <h2 id="partnersTitle" class="mt-3 font-display font-bold text-4xl sm:text-5xl tracking-tightest">A collaboration matrix built on trust.</h2>
+          </div>
+          <div class="lg:col-span-5 lg:col-start-8 self-end" data-reveal data-reveal-delay="1">
+            <p class="text-brand-muted leading-relaxed">We work hand in hand with UN agencies, international and national NGOs, government line ministries and community structures — united in a collaborative commitment toward achieving the <strong class="text-brand-slate">Millennium Development Goals</strong> and their successor Sustainable Development Goals.</p>
+          </div>
+        </div>
+
+        <div class="bg-brand-surface border border-brand-grid grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6" data-reveal>
+          <div class="group aspect-[4/3] lg:aspect-square flex flex-col items-center justify-center gap-3 p-4 border-r border-b lg:border-b-0 border-brand-grid hover:bg-brand-navy-light/50 transition-all duration-300">
+            <i data-lucide="globe-2" class="w-8 h-8 text-brand-muted group-hover:text-brand-navy transition-colors duration-300"></i>
+            <span class="font-display font-semibold text-sm text-center">UN Agencies</span>
+          </div>
+          <div class="group aspect-[4/3] lg:aspect-square flex flex-col items-center justify-center gap-3 p-4 border-b md:border-r lg:border-b-0 border-brand-grid hover:bg-brand-navy-light/50 transition-all duration-300">
+            <i data-lucide="handshake" class="w-8 h-8 text-brand-muted group-hover:text-brand-navy transition-colors duration-300"></i>
+            <span class="font-display font-semibold text-sm text-center">INGO Consortia</span>
+          </div>
+          <div class="group aspect-[4/3] lg:aspect-square flex flex-col items-center justify-center gap-3 p-4 border-r md:border-r-0 lg:border-r border-b lg:border-b-0 border-brand-grid hover:bg-brand-navy-light/50 transition-all duration-300">
+            <i data-lucide="landmark" class="w-8 h-8 text-brand-muted group-hover:text-brand-navy transition-colors duration-300"></i>
+            <span class="font-display font-semibold text-sm text-center">Line Ministries</span>
+          </div>
+          <div class="group aspect-[4/3] lg:aspect-square flex flex-col items-center justify-center gap-3 p-4 border-b md:border-b-0 md:border-r border-brand-grid hover:bg-brand-navy-light/50 transition-all duration-300">
+            <i data-lucide="building-2" class="w-8 h-8 text-brand-muted group-hover:text-brand-navy transition-colors duration-300"></i>
+            <span class="font-display font-semibold text-sm text-center">Institutional Donors</span>
+          </div>
+          <div class="group aspect-[4/3] lg:aspect-square flex flex-col items-center justify-center gap-3 p-4 border-r border-brand-grid hover:bg-brand-navy-light/50 transition-all duration-300">
+            <i data-lucide="briefcase" class="w-8 h-8 text-brand-muted group-hover:text-brand-navy transition-colors duration-300"></i>
+            <span class="font-display font-semibold text-sm text-center">Private Sector</span>
+          </div>
+          <div class="group aspect-[4/3] lg:aspect-square flex flex-col items-center justify-center gap-3 p-4 hover:bg-brand-navy-light/50 transition-all duration-300">
+            <i data-lucide="tent-tree" class="w-8 h-8 text-brand-muted group-hover:text-brand-navy transition-colors duration-300"></i>
+            <span class="font-display font-semibold text-sm text-center">Community Committees</span>
+          </div>
+        </div>
+
+        <!-- Marquee of commitments -->
+        <div class="marquee mt-6 overflow-hidden border-y border-brand-grid py-5" aria-hidden="true">
+          <div class="marquee-track flex w-max gap-12 font-display font-semibold text-2xl sm:text-3xl text-brand-slate/80 whitespace-nowrap">
+            <span>No Poverty</span><span class="text-brand-magenta">✦</span><span>Quality Education</span><span class="text-brand-magenta">✦</span><span>Gender Equality</span><span class="text-brand-magenta">✦</span><span>Clean Water</span><span class="text-brand-magenta">✦</span><span>Climate Action</span><span class="text-brand-magenta">✦</span><span>Peace &amp; Justice</span><span class="text-brand-magenta">✦</span><span>Partnerships for the Goals</span><span class="text-brand-magenta">✦</span>
+            <span>No Poverty</span><span class="text-brand-magenta">✦</span><span>Quality Education</span><span class="text-brand-magenta">✦</span><span>Gender Equality</span><span class="text-brand-magenta">✦</span><span>Clean Water</span><span class="text-brand-magenta">✦</span><span>Climate Action</span><span class="text-brand-magenta">✦</span><span>Peace &amp; Justice</span><span class="text-brand-magenta">✦</span><span>Partnerships for the Goals</span><span class="text-brand-magenta">✦</span>
+          </div>
+        </div>
+
+        <!-- CTA band -->
+        <div class="mt-16 relative overflow-hidden bg-brand-navy text-white p-8 sm:p-12 lg:p-16 grid lg:grid-cols-12 gap-8 items-end" data-reveal>
+          <img src="https://images.unsplash.com/photo-1721751326640-f74b4d663e7b?auto=format&fit=crop&w=1600&q=80" alt="" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover opacity-30 mix-blend-luminosity" />
+          <div class="absolute inset-0 bg-gradient-to-r from-brand-navy via-brand-navy/85 to-brand-navy/40"></div>
+          <svg class="absolute -right-20 -top-20 w-[420px] h-[420px] opacity-20" viewBox="0 0 200 200" aria-hidden="true"><g fill="none" stroke="#fff"><circle cx="100" cy="100" r="40" /><circle cx="100" cy="100" r="60" /><circle cx="100" cy="100" r="80" /><circle cx="100" cy="100" r="99" /></g></svg>
+          <div class="lg:col-span-8 relative">
+            <p class="text-[11px] font-semibold uppercase tracking-[0.22em] text-brand-navy-light">Become a partner</p>
+            <h3 class="mt-3 font-display font-bold text-3xl sm:text-5xl tracking-tightest leading-[1.05]">Your resources. Our reach.<br /><span class="text-brand-magenta">Shared accountability.</span></h3>
+          </div>
+          <div class="lg:col-span-4 relative flex flex-wrap gap-3 lg:justify-end">
+            <button type="button" data-open-modal="partner" class="inline-flex items-center gap-2 rounded-full bg-white text-brand-navy hover:bg-brand-magenta hover:text-white font-medium px-6 py-3.5 transition-all duration-300">Partner with DAO <i data-lucide="arrow-up-right" class="w-4 h-4"></i></button>
+            <button type="button" data-open-modal="donate" class="inline-flex items-center gap-2 rounded-full border border-white/40 hover:border-white font-medium px-6 py-3.5 transition-all duration-300">Donate</button>
+          </div>
+          <p class="relative lg:col-span-12 text-[10px] text-white/60">Photo: <a href="https://unsplash.com/@salahdarwish?utm_source=dao&amp;utm_medium=referral" target="_blank" rel="noopener" class="underline">Salah Darwish</a> / <a href="https://unsplash.com/?utm_source=dao&amp;utm_medium=referral" target="_blank" rel="noopener" class="underline">Unsplash</a></p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- =========================== 7. FOOTER =========================== -->
+  <footer class="bg-brand-surface border-t border-brand-grid">
+    <div class="max-w-frame mx-auto grid sm:grid-cols-2 lg:grid-cols-4">
+      <div class="p-8 lg:p-10 border-b lg:border-b-0 sm:border-r border-brand-grid">
+        <div class="flex items-center gap-3">
+          <svg class="w-12 h-12" aria-hidden="true"><use href="#dao-mark" /></svg>
+          <div>
+            <p class="font-arabic font-semibold text-lg text-brand-navy" dir="rtl" lang="ar">منظمة الأثر العميق</p>
+            <p class="font-display font-semibold text-[11px] uppercase tracking-[0.18em]">Depth Action Organization</p>
+          </div>
+        </div>
+        <p class="mt-6 text-sm text-brand-muted leading-relaxed">A national humanitarian and development organization committed to principled, accountable action for conflict-affected communities.</p>
+        <div class="mt-6 flex gap-2">
+          <a href="#" class="grid place-items-center w-10 h-10 rounded-full border border-brand-grid hover:bg-brand-navy hover:text-white hover:border-brand-navy transition-all duration-300" aria-label="Email"><i data-lucide="mail" class="w-4 h-4"></i></a>
+          <a href="#" class="grid place-items-center w-10 h-10 rounded-full border border-brand-grid hover:bg-brand-navy hover:text-white hover:border-brand-navy transition-all duration-300" aria-label="Phone"><i data-lucide="phone" class="w-4 h-4"></i></a>
+          <a href="#" class="grid place-items-center w-10 h-10 rounded-full border border-brand-grid hover:bg-brand-navy hover:text-white hover:border-brand-navy transition-all duration-300" aria-label="Location"><i data-lucide="map-pin" class="w-4 h-4"></i></a>
+        </div>
+      </div>
+
+      <nav class="p-8 lg:p-10 border-b lg:border-b-0 lg:border-r border-brand-grid" aria-label="Footer">
+        <p class="font-display text-xs uppercase tracking-[0.2em] text-brand-muted">Index</p>
+        <ul class="mt-6 space-y-3">
+          <li><a href="#mission" class="group flex items-baseline gap-3 hover:text-brand-magenta transition-colors duration-300"><span class="font-display text-xs text-brand-muted">01</span>Mission &amp; Values</a></li>
+          <li><a href="#impact" class="group flex items-baseline gap-3 hover:text-brand-magenta transition-colors duration-300"><span class="font-display text-xs text-brand-muted">02</span>Impact</a></li>
+          <li><a href="#pillars" class="group flex items-baseline gap-3 hover:text-brand-magenta transition-colors duration-300"><span class="font-display text-xs text-brand-muted">03</span>Operational Pillars</a></li>
+          <li><a href="#partners" class="group flex items-baseline gap-3 hover:text-brand-magenta transition-colors duration-300"><span class="font-display text-xs text-brand-muted">04</span>Partners</a></li>
+          <li><button type="button" data-open-modal="donate" class="group flex items-baseline gap-3 hover:text-brand-magenta transition-colors duration-300"><span class="font-display text-xs text-brand-muted">05</span>Donate</button></li>
+        </ul>
+      </nav>
+
+      <div class="p-8 lg:p-10 border-b sm:border-b-0 sm:border-r border-brand-grid">
+        <p class="font-display text-xs uppercase tracking-[0.2em] text-brand-muted">Donor Transparency</p>
+        <div class="mt-6 flex items-center gap-5">
+          <svg class="w-28 h-28 shrink-0" viewBox="0 0 120 120" role="img" aria-label="Transparency seal">
+            <defs><path id="sealPath" d="M60 60 m-46 0 a46 46 0 1 1 92 0 a46 46 0 1 1 -92 0" /></defs>
+            <circle cx="60" cy="60" r="58" fill="none" stroke="#E2E8F0" />
+            <g class="seal-ring"><text font-family="DejaVu Sans" font-size="9.2" font-weight="700" letter-spacing="2.4" fill="#00457C"><textPath href="#sealPath">ZERO CORRUPTION • FULL TRANSPARENCY • </textPath></text></g>
+            <circle cx="60" cy="60" r="32" fill="#00457C" />
+            <path d="M47 61l9 9 18-19" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+          <p class="text-sm text-brand-muted leading-relaxed">Annual audited accounts, open budgets and community feedback reports — published for every donor.</p>
+        </div>
+      </div>
+
+      <div class="p-8 lg:p-10">
+        <p class="font-display text-xs uppercase tracking-[0.2em] text-brand-muted">Field Dispatch</p>
+        <p class="mt-6 font-display font-bold text-xl leading-snug">Monthly notes from the field. No noise.</p>
+        <form id="newsletter" class="mt-5" novalidate>
+          <label for="nlEmail" class="sr-only">Email address</label>
+          <div class="flex items-end gap-3">
+            <input id="nlEmail" type="email" required placeholder="your@email.org" class="line-input text-sm" />
+            <button type="submit" class="grid place-items-center w-11 h-11 shrink-0 rounded-full bg-brand-navy hover:bg-brand-magenta text-white transition-all duration-300" aria-label="Subscribe"><i data-lucide="arrow-right" class="w-4 h-4"></i></button>
+          </div>
+          <p id="nlMsg" class="mt-3 text-xs text-brand-muted" aria-live="polite">Unsubscribe any time.</p>
+        </form>
+      </div>
+    </div>
+
+    <div class="border-t border-brand-grid">
+      <div class="max-w-frame mx-auto px-8 lg:px-10 py-6 flex flex-col sm:flex-row gap-3 justify-between text-xs text-brand-muted">
+        <p>Photography by Unsplash contributors under the <a href="https://unsplash.com/license" target="_blank" rel="noopener" class="underline">Unsplash License</a>. Images are illustrative and do not depict specific DAO beneficiaries.<br class="hidden sm:block" /> © <span id="year">2026</span> Depth Action Organization · <span class="font-arabic" lang="ar">منظمة الأثر العميق</span>. All rights reserved.</p>
+        <p class="flex gap-5"><a href="#" class="hover:text-brand-slate">Privacy</a><a href="#" class="hover:text-brand-slate">Safeguarding Policy</a><a href="#top" class="hover:text-brand-slate inline-flex items-center gap-1">Back to top <i data-lucide="arrow-up" class="w-3 h-3"></i></a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =========================== MODAL =========================== -->
+  <div id="modal" class="fixed inset-0 z-[100] flex items-end sm:items-center justify-center p-0 sm:p-6" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="absolute inset-0 bg-brand-slate/50 backdrop-blur-sm" data-close-modal></div>
+    <div class="modal-panel relative w-full sm:max-w-2xl max-h-[92vh] overflow-y-auto bg-brand-surface border border-brand-grid grid md:grid-cols-5">
+      <div class="hidden md:flex md:col-span-2 flex-col justify-between bg-brand-navy text-white p-8 relative overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1666281269793-da06484657e8?auto=format&fit=crop&w=800&q=80" alt="Girls in blue headscarves holding their schoolbooks" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover" />
+        <div class="absolute inset-0 bg-gradient-to-t from-brand-navy via-brand-navy/60 to-brand-navy/20"></div>
+        <svg class="w-12 h-12 relative" aria-hidden="true"><use href="#dao-mark" /></svg>
+        <div class="relative">
+          <p class="font-display font-bold text-2xl leading-tight">Every contribution is tracked to impact.</p>
+          <p class="mt-3 text-sm text-white/70">92% of funds go directly to field programmes.</p>
+          <p class="mt-4 text-[10px] text-white/70">Photo: <a href="https://unsplash.com/@fatima_yusuf?utm_source=dao&amp;utm_medium=referral" target="_blank" rel="noopener" class="underline">Fatima Yusuf</a> / <a href="https://unsplash.com/?utm_source=dao&amp;utm_medium=referral" target="_blank" rel="noopener" class="underline">Unsplash</a></p>
+        </div>
+      </div>
+      <div class="md:col-span-3 p-6 sm:p-8">
+        <div class="flex items-start justify-between">
+          <h2 id="modalTitle" class="font-display font-bold text-2xl">Take Action</h2>
+          <button type="button" data-close-modal class="grid place-items-center w-9 h-9 rounded-full border border-brand-grid hover:bg-brand-slate hover:text-white transition-all duration-300" aria-label="Close"><i data-lucide="x" class="w-4 h-4"></i></button>
+        </div>
+
+        <div class="mt-6 grid grid-cols-2 p-1 bg-brand-canvas border border-brand-grid rounded-full text-sm font-medium" role="tablist">
+          <button type="button" class="modal-tab rounded-full py-2 transition-all duration-300" data-tab="donate" role="tab">Donate</button>
+          <button type="button" class="modal-tab rounded-full py-2 transition-all duration-300" data-tab="partner" role="tab">Partner</button>
+        </div>
+
+        <!-- Donate pane -->
+        <form id="donateForm" class="modal-pane mt-6" data-pane="donate" novalidate>
+          <fieldset>
+            <legend class="text-xs font-semibold uppercase tracking-[0.18em] text-brand-muted">Frequency</legend>
+            <div class="mt-3 flex gap-2 text-sm">
+              <label class="flex-1"><input type="radio" name="freq" value="once" class="peer sr-only" checked /><span class="block text-center py-2.5 border border-brand-grid peer-checked:border-brand-navy peer-checked:bg-brand-navy peer-checked:text-white cursor-pointer transition-all duration-300">One-time</span></label>
+              <label class="flex-1"><input type="radio" name="freq" value="monthly" class="peer sr-only" /><span class="block text-center py-2.5 border border-brand-grid peer-checked:border-brand-navy peer-checked:bg-brand-navy peer-checked:text-white cursor-pointer transition-all duration-300">Monthly</span></label>
+            </div>
+          </fieldset>
+          <fieldset class="mt-6">
+            <legend class="text-xs font-semibold uppercase tracking-[0.18em] text-brand-muted">Amount (USD)</legend>
+            <div class="mt-3 grid grid-cols-4 gap-2 text-sm font-display font-semibold" id="amounts">
+              <button type="button" class="amount py-3 border border-brand-grid transition-all duration-300" data-amount="25">$25</button>
+              <button type="button" class="amount py-3 border border-brand-grid transition-all duration-300" data-amount="50">$50</button>
+              <button type="button" class="amount py-3 border border-brand-grid transition-all duration-300" data-amount="100">$100</button>
+              <button type="button" class="amount py-3 border border-brand-grid transition-all duration-300" data-amount="250">$250</button>
+            </div>
+            <label for="customAmount" class="sr-only">Custom amount</label>
+            <input id="customAmount" type="number" min="1" placeholder="Other amount" class="line-input mt-3 text-sm" />
+            <p id="amountImpact" class="mt-3 text-sm text-brand-navy bg-brand-navy-light px-3 py-2">$50 provides fuel-efficient stoves for two families.</p>
+          </fieldset>
+          <label for="donorEmail" class="sr-only">Email</label>
+          <input id="donorEmail" type="email" required placeholder="Email for your receipt" class="line-input mt-4 text-sm" />
+          <button type="submit" class="mt-6 w-full inline-flex items-center justify-center gap-2 rounded-full bg-brand-magenta hover:bg-brand-navy text-white font-medium py-3.5 transition-all duration-300">Continue to secure payment <i data-lucide="lock" class="w-4 h-4"></i></button>
+        </form>
+
+        <!-- Partner pane -->
+        <form id="partnerForm" class="modal-pane mt-6 hidden" data-pane="partner" novalidate>
+          <label for="pOrg" class="sr-only">Organization</label>
+          <input id="pOrg" type="text" required placeholder="Organization name" class="line-input text-sm" />
+          <label for="pEmail" class="sr-only">Work email</label>
+          <input id="pEmail" type="email" required placeholder="Work email" class="line-input mt-2 text-sm" />
+          <label for="pArea" class="sr-only">Area of interest</label>
+          <select id="pArea" class="line-input mt-2 text-sm text-brand-slate">
+            <option>Environmental Preservation</option>
+            <option>Child Protection</option>
+            <option>Civilian Protection</option>
+            <option>Education in Emergencies</option>
+            <option>Multi-sector</option>
+          </select>
+          <label for="pMsg" class="sr-only">Message</label>
+          <textarea id="pMsg" rows="3" placeholder="Tell us about the collaboration you have in mind" class="line-input mt-2 text-sm resize-none"></textarea>
+          <button type="submit" class="mt-6 w-full inline-flex items-center justify-center gap-2 rounded-full bg-brand-navy hover:bg-brand-magenta text-white font-medium py-3.5 transition-all duration-300">Send partnership enquiry <i data-lucide="send" class="w-4 h-4"></i></button>
+        </form>
+
+        <!-- Success -->
+        <div id="modalSuccess" class="hidden mt-10 text-center">
+          <span class="mx-auto grid place-items-center w-16 h-16 rounded-full bg-brand-magenta/10 text-brand-magenta"><i data-lucide="heart-handshake" class="w-8 h-8"></i></span>
+          <p class="mt-5 font-display font-bold text-2xl">Thank you.</p>
+          <p id="successText" class="mt-2 text-brand-muted">Your action leaves a deep trace.</p>
+          <button type="button" data-close-modal class="mt-8 rounded-full border border-brand-grid hover:border-brand-slate px-6 py-3 text-sm font-medium transition-all duration-300">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  (function () {
+    'use strict';
+    lucide.createIcons();
+    document.getElementById('year').textContent = new Date().getFullYear();
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    /* ---------------- Mobile nav ---------------- */
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileNav = document.getElementById('mobileNav');
+    const toggleMenu = (open) => {
+      mobileNav.classList.toggle('hidden', !open);
+      menuBtn.setAttribute('aria-expanded', String(open));
+    };
+    menuBtn.addEventListener('click', () => toggleMenu(mobileNav.classList.contains('hidden')));
+    mobileNav.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => toggleMenu(false)));
+
+    /* ---------------- Hero carousel ---------------- */
+    const slidesData = [
+      { kicker: 'Emergency Shelter Defense', headline: 'Shelter that stands when nothing else does.', lede: '1.2M safe havens constructed in conflict zones — dignified, weather-proof shelter for families displaced by war.', curtain: '#D91B5C' },
+      { kicker: 'Child Protection & PSS', headline: 'Childhood, protected and restored.', lede: 'Safe spaces, trauma care and an end to corporal punishment — so children can heal, learn and play again.', curtain: '#5C2D91' },
+      { kicker: 'Civilian Shielding & GBV Support', headline: 'Shielding every civilian on every road.', lede: 'Empowerment and protection for IDPs, host communities and nomads — especially women and girls.', curtain: '#00457C' },
+      { kicker: 'Eco-Preservation & SSB Bricks', headline: 'Building tomorrow from the soil up.', lede: 'Soil Stabilizer Bricks and fuel-efficient stoves that protect forests and create sustainable livelihoods.', curtain: '#D91B5C' },
+    ];
+    const DURATION = 6500;
+    const frame = document.getElementById('heroFrame');
+    const slides = frame.querySelectorAll('.slide');
+    const curtain = document.getElementById('heroCurtain');
+    const headline = document.getElementById('heroHeadline');
+    const kicker = document.getElementById('heroKicker');
+    const lede = document.getElementById('heroLede');
+    const idxEl = document.getElementById('heroIndex');
+    const progress = document.getElementById('heroProgress');
+    const dotsWrap = document.getElementById('heroDots');
+    const pad = (n) => String(n).padStart(2, '0');
+    document.getElementById('heroTotal').textContent = pad(slidesData.length);
+
+    let current = 0, elapsed = 0, last = performance.now(), paused = false, animating = false;
+
+    slidesData.forEach((s, i) => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.setAttribute('role', 'tab');
+      b.setAttribute('aria-label', `Slide ${i + 1}: ${s.kicker}`);
+      b.className = 'dot h-2 rounded-full transition-all duration-500 bg-brand-grid hover:bg-brand-muted';
+      b.addEventListener('click', () => goTo(i));
+      dotsWrap.appendChild(b);
+    });
+    const dots = dotsWrap.querySelectorAll('.dot');
+
+    function renderHeadline(text, animate) {
+      headline.innerHTML = text.split(' ').map((w, i) =>
+        `<span class="word-mask"><span class="word${animate ? '' : ' in'}" style="transition-delay:${i * 55}ms">${w}</span></span>`
+      ).join(' ');
+      if (animate) requestAnimationFrame(() => requestAnimationFrame(() => headline.querySelectorAll('.word').forEach((w) => w.classList.add('in'))));
+    }
+
+    function updateDots() {
+      dots.forEach((d, i) => {
+        const on = i === current;
+        d.classList.toggle('w-8', on); d.classList.toggle('bg-brand-magenta', on);
+        d.classList.toggle('w-2', !on); d.classList.toggle('bg-brand-grid', !on);
+        d.setAttribute('aria-selected', String(on));
+      });
+    }
+
+    function goTo(next, dir) {
+      next = (next + slidesData.length) % slidesData.length;
+      if (next === current || animating) return;
+      dir = dir || (next > current ? 1 : -1);
+      animating = true;
+      const data = slidesData[next];
+
+      // Text out
+      headline.querySelectorAll('.word').forEach((w) => w.classList.add('out'));
+      kicker.classList.add('swapping'); lede.classList.add('swapping');
+
+      // Curtain sweep
+      curtain.style.background = data.curtain;
+      curtain.classList.remove('run-up', 'run-down'); void curtain.offsetWidth;
+      curtain.classList.add(dir > 0 ? 'run-up' : 'run-down');
+
+      const half = reduceMotion ? 0 : 480;
+      setTimeout(() => {
+        slides[current].classList.remove('active');
+        slides[next].classList.add('active');
+        current = next;
+        idxEl.textContent = pad(current + 1);
+        kicker.textContent = data.kicker; lede.textContent = data.lede;
+        kicker.classList.remove('swapping'); lede.classList.remove('swapping');
+        renderHeadline(data.headline, !reduceMotion);
+        updateDots();
+      }, half);
+      setTimeout(() => { animating = false; }, reduceMotion ? 0 : 1000);
+      elapsed = 0;
+    }
+    const next = () => goTo(current + 1, 1);
+    const prev = () => goTo(current - 1, -1);
+
+    document.getElementById('heroNext').addEventListener('click', next);
+    document.getElementById('heroPrev').addEventListener('click', prev);
+
+    // Autoplay loop
+    function tick(now) {
+      const dt = now - last; last = now;
+      const modalOpen = document.getElementById('modal').getAttribute('aria-hidden') === 'false';
+      if (!paused && !modalOpen && !document.hidden && !reduceMotion) {
+        elapsed += dt;
+        if (elapsed >= DURATION) next();
+      }
+      progress.style.width = Math.min(elapsed / DURATION, 1) * 100 + '%';
+      requestAnimationFrame(tick);
+    }
+    frame.addEventListener('mouseenter', () => { paused = true; });
+    frame.addEventListener('mouseleave', () => { paused = false; });
+
+    // Drag / swipe
+    let startX = null, startY = 0;
+    frame.addEventListener('pointerdown', (e) => { startX = e.clientX; startY = e.clientY; });
+    window.addEventListener('pointerup', (e) => {
+      if (startX === null) return;
+      const dx = e.clientX - startX, dy = e.clientY - startY;
+      startX = null;
+      if (Math.max(Math.abs(dx), Math.abs(dy)) < 50) return;
+      if (Math.abs(dx) >= Math.abs(dy)) (dx < 0 ? next : prev)();
+      else (dy < 0 ? next : prev)();
+    });
+    frame.addEventListener('dragstart', (e) => e.preventDefault());
+
+    // Keyboard
+    document.addEventListener('keydown', (e) => {
+      if (document.getElementById('modal').getAttribute('aria-hidden') === 'false') return;
+      if (/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)) return;
+      const heroRect = document.getElementById('hero').getBoundingClientRect();
+      if (heroRect.bottom < 0 || heroRect.top > window.innerHeight) return;
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown' && document.activeElement === frame) { e.preventDefault(); next(); }
+      if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' && document.activeElement === frame) { e.preventDefault(); prev(); }
+    });
+
+    renderHeadline(slidesData[0].headline, !reduceMotion);
+    updateDots();
+    requestAnimationFrame(tick);
+
+    /* ---------------- Scroll reveal ---------------- */
+    const revealObs = new IntersectionObserver((entries) => {
+      entries.forEach((en) => { if (en.isIntersecting) { en.target.classList.add('is-in'); revealObs.unobserve(en.target); } });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('[data-reveal]').forEach((el) => revealObs.observe(el));
+
+    /* ---------------- Counters ---------------- */
+    const counterObs = new IntersectionObserver((entries) => {
+      entries.forEach((en) => {
+        if (!en.isIntersecting) return;
+        const el = en.target, target = parseFloat(el.dataset.target), dec = +el.dataset.decimals;
+        counterObs.unobserve(el);
+        if (reduceMotion) { el.textContent = target.toFixed(dec); return; }
+        const t0 = performance.now(), dur = 2000;
+        const step = (now) => {
+          const p = Math.min((now - t0) / dur, 1), eased = 1 - Math.pow(1 - p, 4);
+          el.textContent = (target * eased).toFixed(dec);
+          if (p < 1) requestAnimationFrame(step);
+        };
+        requestAnimationFrame(step);
+      });
+    }, { threshold: 0.5 });
+    document.querySelectorAll('.counter').forEach((el) => counterObs.observe(el));
+
+    /* ---------------- Pillar accordion ---------------- */
+    const pillarThemes = {
+      navy: ['bg-brand-navy', 'text-white'],
+      magenta: ['bg-brand-magenta', 'text-white'],
+      purple: ['bg-brand-purple', 'text-white'],
+      slate: ['bg-brand-slate', 'text-white'],
+    };
+    const pillars = document.querySelectorAll('.pillar');
+    function openPillar(target, force) {
+      const isDesktop = window.matchMedia('(min-width: 1024px)').matches;
+      pillars.forEach((p) => {
+        const theme = pillarThemes[p.dataset.color];
+        let on = p === target;
+        if (!force && !isDesktop && p === target && p.classList.contains('open')) on = false; // allow collapse on mobile
+        p.classList.toggle('open', on);
+        p.classList.remove(...Object.values(pillarThemes).flat(), 'bg-brand-surface', 'text-brand-slate');
+        p.classList.add(...(on ? theme : ['bg-brand-surface', 'text-brand-slate']));
+        p.querySelector('.pillar-toggle').setAttribute('aria-expanded', String(on));
+        const plus = p.querySelector('.pillar-plus'); if (plus) plus.style.transform = on ? 'rotate(45deg)' : '';
+      });
+    }
+    pillars.forEach((p) => {
+      p.querySelector('.pillar-toggle').addEventListener('click', () => openPillar(p));
+      p.addEventListener('mouseenter', () => { if (window.matchMedia('(min-width: 1024px) and (hover: hover)').matches && !p.classList.contains('open')) openPillar(p); });
+    });
+    openPillar(pillars[0], true);
+
+    /* ---------------- Modal ---------------- */
+    const modal = document.getElementById('modal');
+    const success = document.getElementById('modalSuccess');
+    let lastFocus = null;
+    function setTab(name) {
+      document.querySelectorAll('.modal-tab').forEach((t) => {
+        const on = t.dataset.tab === name;
+        t.classList.toggle('bg-brand-navy', on); t.classList.toggle('text-white', on);
+        t.classList.toggle('text-brand-muted', !on);
+        t.setAttribute('aria-selected', String(on));
+      });
+      document.querySelectorAll('.modal-pane').forEach((p) => p.classList.toggle('hidden', p.dataset.pane !== name));
+      success.classList.add('hidden');
+    }
+    function openModal(tab) {
+      lastFocus = document.activeElement;
+      setTab(tab || 'donate');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      setTimeout(() => modal.querySelector('.modal-tab[aria-selected="true"]').focus(), 50);
+    }
+    function closeModal() {
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      if (lastFocus) lastFocus.focus();
+    }
+    document.querySelectorAll('[data-open-modal]').forEach((b) => b.addEventListener('click', () => openModal(b.dataset.openModal)));
+    modal.querySelectorAll('[data-close-modal]').forEach((b) => b.addEventListener('click', closeModal));
+    document.querySelectorAll('.modal-tab').forEach((t) => t.addEventListener('click', () => setTab(t.dataset.tab)));
+    document.addEventListener('keydown', (e) => {
+      if (modal.getAttribute('aria-hidden') === 'true') return;
+      if (e.key === 'Escape') closeModal();
+      if (e.key === 'Tab') {
+        const f = [...modal.querySelectorAll('button, input, select, textarea, a[href]')].filter((el) => el.offsetParent !== null);
+        if (!f.length) return;
+        if (e.shiftKey && document.activeElement === f[0]) { e.preventDefault(); f[f.length - 1].focus(); }
+        else if (!e.shiftKey && document.activeElement === f[f.length - 1]) { e.preventDefault(); f[0].focus(); }
+      }
+    });
+
+    // Amount selection
+    const impacts = { 25: 'provides a hygiene kit for a family of five.', 50: 'provides fuel-efficient stoves for two families.', 100: 'equips a Temporary Learning Space with supplies.', 250: 'produces 500 Soil Stabilizer Bricks for a shelter.' };
+    const amountBtns = document.querySelectorAll('.amount');
+    const amountImpact = document.getElementById('amountImpact');
+    const customAmount = document.getElementById('customAmount');
+    let amount = 50;
+    function selectAmount(v) {
+      amount = v;
+      amountBtns.forEach((b) => {
+        const on = +b.dataset.amount === v;
+        b.classList.toggle('bg-brand-navy', on); b.classList.toggle('text-white', on); b.classList.toggle('border-brand-navy', on);
+      });
+      const keys = Object.keys(impacts).map(Number).filter((k) => k <= v);
+      const k = keys.length ? Math.max(...keys) : null;
+      amountImpact.textContent = k ? `$${v} ${impacts[k]}` : `$${v} helps sustain our field teams.`;
+    }
+    amountBtns.forEach((b) => b.addEventListener('click', () => { customAmount.value = ''; selectAmount(+b.dataset.amount); }));
+    customAmount.addEventListener('input', () => { const v = Math.floor(+customAmount.value); if (v > 0) selectAmount(v); });
+    selectAmount(50);
+
+    const validEmail = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+    function flag(el, ok) { el.style.borderColor = ok ? '' : '#D91B5C'; return ok; }
+    function showSuccess(msg) {
+      document.querySelectorAll('.modal-pane').forEach((p) => p.classList.add('hidden'));
+      document.getElementById('successText').textContent = msg;
+      success.classList.remove('hidden');
+    }
+    document.getElementById('donateForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const email = document.getElementById('donorEmail');
+      if (!flag(email, validEmail(email.value))) return email.focus();
+      const freq = e.target.querySelector('input[name="freq"]:checked').value;
+      showSuccess(`Your ${freq === 'monthly' ? 'monthly ' : ''}gift of $${amount} is ready for secure checkout. A receipt will follow by email.`);
+      e.target.reset(); selectAmount(50);
+    });
+    document.getElementById('partnerForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const org = document.getElementById('pOrg'), email = document.getElementById('pEmail');
+      const ok = flag(org, org.value.trim().length > 1) & flag(email, validEmail(email.value));
+      if (!ok) return;
+      showSuccess(`Thank you, ${org.value.trim()}. Our partnerships team will be in touch within two working days.`);
+      e.target.reset();
+    });
+
+    /* ---------------- Newsletter ---------------- */
+    document.getElementById('newsletter').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const input = document.getElementById('nlEmail'), msg = document.getElementById('nlMsg');
+      if (validEmail(input.value)) {
+        msg.textContent = 'Subscribed — welcome to the dispatch.'; msg.className = 'mt-3 text-xs text-brand-navy font-medium';
+        input.value = '';
+      } else {
+        msg.textContent = 'Please enter a valid email address.'; msg.className = 'mt-3 text-xs text-brand-magenta font-medium';
+      }
+    });
+  })();
+  </script>
+</body>
+</html>

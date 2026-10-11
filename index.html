@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DAO Website Themes — Choose a design</title>
+  <meta name="description" content="Three complete homepage designs for Depth Action Organization (DAO). Preview each one live, compare them, and pick your favourite." />
+  <meta property="og:title" content="DAO Website Themes — Choose a design" />
+  <meta property="og:description" content="Three complete homepage designs for Depth Action Organization. Preview, compare and select." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='12' fill='%2300457C'/%3E%3Cpath d='M24 37c-.5 0-1-.2-1.4-.5C14.2 30 10 25.4 10 19.8 10 15.4 13.400 12 17.600 12c2.600 0 4.900 1.300 6.400 3.400 1.500-2.100 3.800-3.400 6.400-3.400 4.200 0 7.600 3.400 7.600 7.800 0 5.600-4.200 10.200-12.600 16.700-.4.300-.9.500-1.400.5Z' fill='%23D91B5C'/%3E%3C/svg%3E" />
+
+  <style>
+    :root {
+      --navy: #00457C; --navy-deep: #062C4F; --magenta: #D91B5C; --purple: #5C2D91;
+      --ink: #0F172A; --muted: #5B6475; --line: #E2E8F0; --bg: #F5F7FB; --card: #FFFFFF;
+      --radius: 22px; --ease: cubic-bezier(.16, 1, .3, 1);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+    body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, "DejaVu Sans", Verdana, sans-serif; padding-bottom: 96px; }
+    body.locked { overflow: hidden; }
+    a { color: inherit; }
+    img { max-width: 100%; display: block; }
+    button { font: inherit; color: inherit; cursor: pointer; }
+    :focus-visible { outline: 3px solid var(--magenta); outline-offset: 3px; border-radius: 8px; }
+    .wrap { max-width: 1180px; margin: 0 auto; padding: 0 22px; }
+    .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+    /* ---------- Header ---------- */
+    .top { position: sticky; top: 0; z-index: 20; background: rgba(245, 247, 251, .85); backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); }
+    .top .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; gap: 16px; }
+    .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; font-weight: 700; letter-spacing: -.01em; }
+    .brand small { display: block; font-weight: 500; color: var(--muted); font-size: 12px; letter-spacing: 0; line-height: 1.2; }
+    .brand svg { width: 36px; height: 36px; flex: none; }
+    .top nav { display: flex; gap: 6px; font-size: 14px; }
+    .top nav a { padding: 8px 12px; border-radius: 999px; text-decoration: none; color: var(--muted); transition: background .3s, color .3s; }
+    .top nav a:hover { background: #E9EEF6; color: var(--ink); }
+
+    /* ---------- Hero ---------- */
+    .hero { padding: 64px 0 36px; position: relative; overflow: hidden; }
+    .hero::before { content: ""; position: absolute; inset: -20% -10% auto -10%; height: 520px; z-index: -1;
+      background: radial-gradient(520px 260px at 15% 30%, rgba(0, 69, 124, .13), transparent 70%), radial-gradient(480px 260px at 85% 20%, rgba(217, 27, 92, .11), transparent 70%), radial-gradient(420px 240px at 55% 80%, rgba(92, 45, 145, .09), transparent 70%); }
+    .eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--magenta); }
+    .eyebrow::before { content: ""; width: 28px; height: 2px; background: var(--magenta); }
+    h1 { font-size: clamp(2.2rem, 5.2vw, 4rem); line-height: 1.04; letter-spacing: -.035em; margin: 16px 0 18px; max-width: 16ch; }
+    h1 em { font-style: normal; color: var(--navy); }
+    .lede { font-size: 1.15rem; color: var(--muted); max-width: 58ch; margin: 0; }
+    .steps { list-style: none; display: flex; flex-wrap: wrap; gap: 10px; padding: 0; margin: 28px 0 0; }
+    .steps li { display: flex; align-items: center; gap: 10px; background: var(--card); border: 1px solid var(--line); border-radius: 999px; padding: 8px 16px 8px 8px; font-size: 14px; font-weight: 600; }
+    .steps b { display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: var(--navy); color: #fff; font-size: 13px; }
+
+    /* ---------- Theme cards ---------- */
+    .themes { display: grid; gap: 28px; padding: 20px 0 20px; }
+    .card { display: grid; grid-template-columns: 1.35fr 1fr; gap: 0; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; box-shadow: 0 1px 2px rgba(15, 23, 42, .04), 0 24px 48px -32px rgba(15, 23, 42, .25); transition: box-shadow .5s var(--ease), border-color .4s, transform .5s var(--ease); }
+    .card:nth-child(even) { grid-template-columns: 1fr 1.35fr; }
+    .card:nth-child(even) .shot { order: 2; }
+    .card:hover { box-shadow: 0 1px 2px rgba(15, 23, 42, .04), 0 32px 60px -30px rgba(15, 23, 42, .35); transform: translateY(-3px); }
+    .card.is-selected { border-color: var(--magenta); box-shadow: 0 0 0 3px rgba(217, 27, 92, .16), 0 32px 60px -30px rgba(217, 27, 92, .35); }
+
+    .shot { padding: 26px; background: linear-gradient(160deg, #EAF0F8, #F6F1EC); display: flex; align-items: center; }
+    .browser { width: 100%; border-radius: 14px; overflow: hidden; background: #fff; border: 1px solid rgba(15, 23, 42, .1); box-shadow: 0 24px 50px -24px rgba(15, 23, 42, .5); }
+    .chrome { display: flex; align-items: center; gap: 7px; padding: 9px 12px; background: #F1F4F9; border-bottom: 1px solid var(--line); }
+    .chrome i { width: 10px; height: 10px; border-radius: 50%; background: #CBD5E1; }
+    .chrome i:nth-child(1) { background: #F0A3B6; } .chrome i:nth-child(2) { background: #F5D488; } .chrome i:nth-child(3) { background: #9FD9B8; }
+    .chrome span { margin-left: 10px; flex: 1; background: #fff; border: 1px solid var(--line); border-radius: 999px; font-size: 11px; color: var(--muted); padding: 3px 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .peek { position: relative; display: block; width: 100%; border: 0; padding: 0; background: #fff; text-align: left; }
+    .peek img { width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; object-position: top; transition: transform 1.2s var(--ease); }
+    .peek:hover img { transform: scale(1.03); }
+    .peek-cta { position: absolute; inset: 0; display: grid; place-items: center; background: linear-gradient(to top, rgba(6, 44, 79, .55), rgba(6, 44, 79, 0) 55%); opacity: 0; transition: opacity .4s; }
+    .peek:hover .peek-cta, .peek:focus-visible .peek-cta { opacity: 1; }
+    .peek-cta span { display: inline-flex; align-items: center; gap: 8px; background: #fff; color: var(--ink); font-weight: 700; font-size: 14px; border-radius: 999px; padding: 11px 20px; box-shadow: 0 10px 30px rgba(0, 0, 0, .25); transform: translateY(8px); transition: transform .5s var(--ease); }
+    .peek:hover .peek-cta span { transform: none; }
+
+    .info { padding: 34px 34px 30px; display: flex; flex-direction: column; }
+    .num { font-size: 13px; font-weight: 700; letter-spacing: .16em; color: var(--magenta); }
+    .info h2 { font-size: clamp(1.6rem, 2.6vw, 2.1rem); letter-spacing: -.025em; line-height: 1.1; margin: 8px 0 6px; }
+    .tagline { margin: 0 0 14px; color: var(--navy); font-weight: 600; }
+    .info > p { margin: 0 0 18px; color: var(--muted); }
+    .swatches { display: flex; align-items: center; gap: 8px; margin-bottom: 18px; }
+    .swatches i { width: 26px; height: 26px; border-radius: 50%; border: 2px solid #fff; box-shadow: 0 0 0 1px rgba(15, 23, 42, .15); }
+    .swatches span { font-size: 12px; color: var(--muted); margin-left: 6px; }
+    .feats { list-style: none; padding: 0; margin: 0 0 22px; display: grid; gap: 9px; font-size: 14.5px; }
+    .feats li { display: flex; gap: 10px; align-items: flex-start; }
+    .feats li::before { content: ""; flex: none; width: 18px; height: 18px; margin-top: 3px; border-radius: 50%; background: rgba(217, 27, 92, .1) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23D91B5C' stroke-width='3.500' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.500l4.500 4.500L19 7.500'/%3E%3C/svg%3E") center / 11px no-repeat; }
+    .actions { margin-top: auto; display: flex; flex-wrap: wrap; gap: 10px; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; border-radius: 999px; padding: 12px 20px; font-weight: 700; font-size: 14.5px; text-decoration: none; border: 1.5px solid var(--line); background: #fff; transition: background .3s, color .3s, border-color .3s, transform .3s var(--ease); }
+    .btn:hover { border-color: var(--ink); transform: translateY(-1px); }
+    .btn.primary { background: var(--navy); color: #fff; border-color: var(--navy); }
+    .btn.primary:hover { background: var(--magenta); border-color: var(--magenta); }
+    .btn.pick { background: var(--ink); color: #fff; border-color: var(--ink); }
+    .btn.pick:hover { background: var(--magenta); border-color: var(--magenta); }
+    .card.is-selected .btn.pick { background: var(--magenta); border-color: var(--magenta); }
+    .btn svg { width: 16px; height: 16px; }
+
+    /* ---------- Compare ---------- */
+    section.block { padding: 56px 0 8px; }
+    h3.sec { font-size: clamp(1.5rem, 3vw, 2.1rem); letter-spacing: -.025em; margin: 10px 0 6px; line-height: 1.1; }
+    .sub { color: var(--muted); margin: 0 0 24px; max-width: 60ch; }
+    .tbl-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius); background: var(--card); }
+    table { width: 100%; border-collapse: collapse; min-width: 720px; font-size: 14.5px; }
+    th, td { text-align: left; padding: 14px 18px; border-bottom: 1px solid var(--line); vertical-align: top; }
+    tr:last-child td, tr:last-child th { border-bottom: 0; }
+    thead th { background: #F1F5FA; font-size: 13px; letter-spacing: .04em; }
+    tbody th { width: 17%; color: var(--muted); font-weight: 600; font-size: 13.5px; background: #FAFBFD; }
+    .tag { display: inline-block; padding: 2px 10px; border-radius: 999px; background: #EEF3FA; font-size: 12.5px; font-weight: 600; color: var(--navy); }
+
+    .notes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 8px; }
+    .note { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 20px 22px; }
+    .note b { display: block; margin-bottom: 4px; }
+    .note p { margin: 0; color: var(--muted); font-size: 14.5px; }
+
+    footer { margin-top: 56px; border-top: 1px solid var(--line); padding: 28px 0 8px; color: var(--muted); font-size: 13.5px; }
+    footer .wrap { display: flex; flex-wrap: wrap; gap: 10px 28px; justify-content: space-between; }
+    footer a { text-decoration: underline; text-underline-offset: 3px; }
+
+    /* ---------- Selection dock ---------- */
+    .dock { position: fixed; left: 50%; bottom: 18px; z-index: 30; width: min(720px, calc(100% - 28px)); transform: translate(-50%, 140%); transition: transform .6s var(--ease); background: var(--ink); color: #fff; border-radius: 20px; padding: 12px 12px 12px 22px; display: flex; align-items: center; gap: 14px; box-shadow: 0 24px 60px -12px rgba(15, 23, 42, .6); }
+    .dock.show { transform: translate(-50%, 0); }
+    .dock .what { flex: 1; min-width: 0; line-height: 1.3; }
+    .dock small { display: block; color: #94A3B8; font-size: 12px; }
+    .dock strong { display: block; font-size: 15.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .dock .btn { border-color: rgba(255, 255, 255, .2); background: transparent; color: #fff; padding: 10px 16px; }
+    .dock .btn:hover { border-color: #fff; }
+    .dock .btn.go { background: var(--magenta); border-color: var(--magenta); }
+    .dock .x { width: 38px; height: 38px; padding: 0; border-radius: 50%; border: 0; background: rgba(255, 255, 255, .1); display: grid; place-items: center; }
+    .dock .x:hover { background: rgba(255, 255, 255, .22); }
+
+    /* ---------- Live preview viewer ---------- */
+    .viewer { position: fixed; inset: 0; z-index: 50; display: none; flex-direction: column; background: #0B1220; }
+    .viewer:not([hidden]) { display: flex; animation: fade .35s ease both; }
+    @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+    .viewer-bar { display: flex; align-items: center; gap: 14px; padding: 10px 14px; background: #121B2E; color: #fff; flex-wrap: wrap; border-bottom: 1px solid rgba(255, 255, 255, .08); }
+    .v-title { display: flex; align-items: baseline; gap: 10px; min-width: 0; }
+    .v-title strong { font-size: 15px; white-space: nowrap; }
+    .v-title span { color: #94A3B8; font-size: 12.5px; }
+    .v-devices { display: flex; gap: 4px; padding: 4px; border-radius: 999px; background: rgba(255, 255, 255, .07); margin: 0 auto; }
+    .v-devices button { border: 0; background: transparent; color: #CBD5E1; padding: 7px 14px; border-radius: 999px; font-size: 13px; font-weight: 600; display: inline-flex; gap: 7px; align-items: center; transition: background .3s, color .3s; }
+    .v-devices button[aria-pressed="true"] { background: #fff; color: var(--ink); }
+    .v-actions { display: flex; align-items: center; gap: 8px; }
+    .v-actions .btn { padding: 8px 14px; font-size: 13.5px; background: transparent; color: #fff; border-color: rgba(255, 255, 255, .22); }
+    .v-actions .btn:hover { border-color: #fff; }
+    .v-actions .btn.go { background: var(--magenta); border-color: var(--magenta); }
+    .v-actions .ic { width: 38px; height: 38px; padding: 0; }
+    .viewer-stage { flex: 1; min-height: 0; display: flex; justify-content: center; align-items: stretch; padding: 14px; background: radial-gradient(900px 400px at 50% 0, rgba(2, 132, 199, .18), transparent 70%), #0B1220; }
+    .frame-wrap { width: 100%; max-width: 100%; height: 100%; background: #fff; border-radius: 12px; overflow: hidden; transition: width .6s var(--ease); position: relative; box-shadow: 0 30px 80px rgba(0, 0, 0, .55); }
+    .frame-wrap::before { content: "Loading preview…"; position: absolute; inset: 0; display: grid; place-items: center; color: #64748B; font-size: 14px; }
+    .frame-wrap iframe { position: relative; width: 100%; height: 100%; border: 0; background: #fff; }
+
+    @media (max-width: 900px) {
+      .card, .card:nth-child(even) { grid-template-columns: 1fr; }
+      .card:nth-child(even) .shot { order: 0; }
+      .info { padding: 26px 22px 24px; }
+      .shot { padding: 16px; }
+      .notes { grid-template-columns: 1fr; }
+      .top nav { display: none; }
+      .v-devices { display: none; }
+      .viewer-bar { gap: 8px; }
+      .v-actions .hide-sm { display: none; }
+      .v-actions { margin-left: auto; }
+    }
+    @media (max-width: 520px) {
+      .hero { padding-top: 40px; }
+      .dock { padding-left: 16px; gap: 8px; }
+      .dock .btn.copy span.lbl { display: none; }
+      .viewer-stage { padding: 0; }
+      .frame-wrap { border-radius: 0; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .001ms !important; transition-duration: .001ms !important; }
+      html { scroll-behavior: auto; }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="top">
+    <div class="wrap">
+      <a class="brand" href="#top" aria-label="DAO Website Themes">
+        <svg viewBox="0 0 48 48" aria-hidden="true"><rect width="48" height="48" rx="12" fill="#00457C"/><path d="M24 37c-.5 0-1-.2-1.4-.5C14.2 30 10 25.400 10 19.800 10 15.400 13.400 12 17.600 12c2.600 0 4.900 1.300 6.400 3.400 1.500-2.100 3.800-3.400 6.400-3.400 4.200 0 7.600 3.400 7.600 7.800 0 5.600-4.200 10.200-12.600 16.700-.4.300-.9.500-1.400.5Z" fill="#D91B5C"/><path d="M15.500 24h4.500l2-4 3 8 2-4h5.500" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span>DAO Website Themes<small>Depth Action Organization · منظمة الأثر العميق</small></span>
+      </a>
+      <nav aria-label="Page sections">
+        <a href="#themes">Themes</a>
+        <a href="#compare">Compare</a>
+        <a href="#about">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap">
+        <p class="eyebrow">Design options</p>
+        <h1>Choose the look of the <em>new DAO website.</em></h1>
+        <p class="lede">Three complete homepage designs for Depth Action Organization. Each one is fully working, so you can open it, scroll it, click through it, and see how it feels on a phone before deciding.</p>
+        <ol class="steps" aria-label="How it works">
+          <li><b>1</b> Browse the three themes</li>
+          <li><b>2</b> Open a live preview</li>
+          <li><b>3</b> Select your favourite</li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="themes" class="wrap themes" aria-label="Themes">
+
+      <!-- ===== Theme 1 ===== -->
+      <article class="card" data-theme="theme1" data-name="Architectural Light">
+        <div class="shot">
+          <div class="browser">
+            <div class="chrome"><i></i><i></i><i></i><span>dao-themes / theme1</span></div>
+            <button type="button" class="peek" data-open="theme1" aria-label="Open live preview of Architectural Light">
+              <img src="assets/previews/theme1.jpg" width="1200" height="750" alt="Architectural Light theme: a bright page with a large bold headline beside a framed photograph of a shelter camp" />
+              <span class="peek-cta"><span>▶ Live preview</span></span>
+            </button>
+          </div>
+        </div>
+        <div class="info">
+          <span class="num">THEME 01</span>
+          <h2>Architectural Light</h2>
+          <p class="tagline">Clean, bold and confident</p>
+          <p>A crisp light design built on fine grid lines, generous white space and oversized typography. Calm and trustworthy, with a strong modern identity.</p>
+          <div class="swatches" aria-label="Colour palette"><i style="background:#F8FAFC"></i><i style="background:#00457C"></i><i style="background:#D91B5C"></i><i style="background:#5C2D91"></i><span>Navy · Crimson · Violet</span></div>
+          <ul class="feats">
+            <li>Split hero: animated headline with photo slides that wipe in</li>
+            <li>Animated impact numbers in a clean four-column grid</li>
+            <li>Four programme pillars that expand like an accordion</li>
+            <li>Donate and partner pop-up</li>
+          </ul>
+          <div class="actions">
+            <button type="button" class="btn primary" data-open="theme1">▶ Live preview</button>
+            <a class="btn" href="theme1/" target="_blank" rel="noopener">Open full page ↗</a>
+            <button type="button" class="btn pick" data-pick="theme1" aria-pressed="false"><span class="pick-lbl">Select this theme</span></button>
+          </div>
+        </div>
+      </article>
+
+      <!-- ===== Theme 2 ===== -->
+      <article class="card" data-theme="theme2" data-name="Bento Dashboard">
+        <div class="shot">
+          <div class="browser">
+            <div class="chrome"><i></i><i></i><i></i><span>dao-themes / theme2</span></div>
+            <button type="button" class="peek" data-open="theme2" aria-label="Open live preview of Bento Dashboard">
+              <img src="assets/previews/theme2.jpg" width="1200" height="750" alt="Bento Dashboard theme: a light dashboard-style page with a stack of photo cards and floating live statistics" loading="lazy" />
+              <span class="peek-cta"><span>▶ Live preview</span></span>
+            </button>
+          </div>
+        </div>
+        <div class="info">
+          <span class="num">THEME 02</span>
+          <h2>Bento Dashboard</h2>
+          <p class="tagline">Modern, data-driven and interactive</p>
+          <p>A command-centre feel with modular tiles, live-looking statistics and soft glowing colour. It puts DAO's results and programmes front and centre.</p>
+          <div class="swatches" aria-label="Colour palette"><i style="background:#F4F6FB"></i><i style="background:#0284C7"></i><i style="background:#E11D48"></i><i style="background:#7C3AED"></i><i style="background:#06B6D4"></i><span>Blue · Crimson · Violet · Cyan</span></div>
+          <ul class="feats">
+            <li>3D card-stack hero with floating live statistics</li>
+            <li>Tile layout with charts and a light that follows the mouse</li>
+            <li>Filter programmes by Child Protection, Civilian Shielding, Environment or Education</li>
+            <li>Slide-in action panel, SDG explorer and terminal-style newsletter box</li>
+          </ul>
+          <div class="actions">
+            <button type="button" class="btn primary" data-open="theme2">▶ Live preview</button>
+            <a class="btn" href="theme2/" target="_blank" rel="noopener">Open full page ↗</a>
+            <button type="button" class="btn pick" data-pick="theme2" aria-pressed="false"><span class="pick-lbl">Select this theme</span></button>
+          </div>
+        </div>
+      </article>
+
+      <!-- ===== Theme 3 ===== -->
+      <article class="card" data-theme="theme3" data-name="Field Stories">
+        <div class="shot">
+          <div class="browser">
+            <div class="chrome"><i></i><i></i><i></i><span>dao-themes / theme3</span></div>
+            <button type="button" class="peek" data-open="theme3" aria-label="Open live preview of Field Stories">
+              <img src="assets/previews/theme3.jpg" width="1200" height="750" alt="Field Stories theme: a warm paper-toned magazine layout with a large headline, a quote and a tall photograph of a camp" loading="lazy" />
+              <span class="peek-cta"><span>▶ Live preview</span></span>
+            </button>
+          </div>
+        </div>
+        <div class="info">
+          <span class="num">THEME 03</span>
+          <h2>Field Stories</h2>
+          <p class="tagline">Warm, human and editorial</p>
+          <p>A magazine-style design that leads with people and their stories. Warm paper tones, elegant headlines and big photography, in the spirit of major humanitarian publications.</p>
+          <div class="swatches" aria-label="Colour palette"><i style="background:#FDFBF7"></i><i style="background:#00457C"></i><i style="background:#D91B5C"></i><i style="background:#5C2D91"></i><span>Paper · Navy · Crimson</span></div>
+          <ul class="feats">
+            <li>Story-led hero: headline, beneficiary quote and photos that wipe vertically</li>
+            <li>Annual-report style impact strip with count-up numbers</li>
+            <li>Mission article with a large first letter and a full-width pull quote</li>
+            <li>Tabbed sector stories with photos, plus a support pop-up</li>
+          </ul>
+          <div class="actions">
+            <button type="button" class="btn primary" data-open="theme3">▶ Live preview</button>
+            <a class="btn" href="theme3/" target="_blank" rel="noopener">Open full page ↗</a>
+            <button type="button" class="btn pick" data-pick="theme3" aria-pressed="false"><span class="pick-lbl">Select this theme</span></button>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section id="compare" class="block wrap" aria-labelledby="cmp">
+      <p class="eyebrow">At a glance</p>
+      <h3 class="sec" id="cmp">Compare the three</h3>
+      <p class="sub">Not sure which fits best? Here is how they differ.</p>
+      <div class="tbl-wrap" role="region" aria-label="Theme comparison table" tabindex="0">
+        <table>
+          <thead><tr><th></th><th>01 · Architectural Light</th><th>02 · Bento Dashboard</th><th>03 · Field Stories</th></tr></thead>
+          <tbody>
+            <tr><th>Mood</th><td>Calm, modern, confident</td><td>Tech-forward, energetic</td><td>Warm, emotional, human</td></tr>
+            <tr><th>Background</th><td><span class="tag">Light</span> cool white</td><td><span class="tag">Light</span> soft grey-blue</td><td><span class="tag">Light</span> warm paper</td></tr>
+            <tr><th>Hero style</th><td>Split screen with sliding photos</td><td>3D stack of photo cards</td><td>Story with quote and vertical photo slides</td></tr>
+            <tr><th>Headings</th><td>Heavy, oversized sans-serif</td><td>Heavy sans-serif with monospace accents</td><td>Regular weight with italic highlights</td></tr>
+            <tr><th>Interactivity</th><td>Medium</td><td>High</td><td>Medium</td></tr>
+            <tr><th>Best for</th><td>A clean, minimal NGO identity</td><td>Showing numbers and results to donors</td><td>Storytelling and fundraising</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="about" class="block wrap" aria-labelledby="abt">
+      <p class="eyebrow">Good to know</p>
+      <h3 class="sec" id="abt">What you are looking at</h3>
+      <div class="notes">
+        <div class="note"><b>Homepage designs</b><p>Each theme is the full homepage: navigation, hero, impact numbers, mission, programmes, partners and footer.</p></div>
+        <div class="note"><b>Sample content</b><p>Numbers, quotes and partner names are placeholders. Final text comes from DAO, in English and Arabic.</p></div>
+        <div class="note"><b>Stock photos</b><p>Photos are free-licence stock images used for illustration only. They will be replaced with DAO's own field photography.</p></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <span>Design previews for Depth Action Organization · <span lang="ar">منظمة الأثر العميق</span></span>
+      <span>Photography via <a href="https://unsplash.com/?utm_source=dao&amp;utm_medium=referral" target="_blank" rel="noopener">Unsplash</a> under the <a href="https://unsplash.com/license" target="_blank" rel="noopener">Unsplash License</a></span>
+    </div>
+  </footer>
+
+  <!-- Selection dock -->
+  <div class="dock" id="dock" role="region" aria-label="Your selection" aria-live="polite">
+    <div class="what"><small>Your selection</small><strong id="dockName">—</strong></div>
+    <button type="button" class="btn copy go" id="copyBtn"><span class="lbl" id="copyLbl">Copy my choice</span><span aria-hidden="true">⧉</span></button>
+    <button type="button" class="x" id="clearBtn" aria-label="Clear selection">✕</button>
+  </div>
+
+  <!-- Live preview viewer -->
+  <div class="viewer" id="viewer" hidden role="dialog" aria-modal="true" aria-labelledby="vTitle">
+    <div class="viewer-bar">
+      <div class="v-title"><strong id="vTitle">Theme</strong><span id="vCount"></span></div>
+      <div class="v-devices" role="group" aria-label="Preview size">
+        <button type="button" data-w="100%" aria-pressed="true">🖥 Desktop</button>
+        <button type="button" data-w="820px" aria-pressed="false">▭ Tablet</button>
+        <button type="button" data-w="390px" aria-pressed="false">▯ Phone</button>
+      </div>
+      <div class="v-actions">
+        <button type="button" class="btn ic" id="vPrev" aria-label="Previous theme">←</button>
+        <button type="button" class="btn ic" id="vNext" aria-label="Next theme">→</button>
+        <a class="btn hide-sm" id="vOpen" href="#" target="_blank" rel="noopener">Open full page ↗</a>
+        <button type="button" class="btn go" id="vPick" aria-pressed="false">Select this theme</button>
+        <button type="button" class="btn ic" id="vClose" aria-label="Close preview">✕</button>
+      </div>
+    </div>
+    <div class="viewer-stage"><div class="frame-wrap" id="frameWrap"></div></div>
+  </div>
+
+  <script>
+    (function () {
+      'use strict';
+      var cards = [].slice.call(document.querySelectorAll('.card'));
+      var order = cards.map(function (c) { return c.dataset.theme; });
+      var names = {};
+      cards.forEach(function (c) { names[c.dataset.theme] = c.dataset.name; });
+      var selected = null, current = null, lastFocus = null;
+
+      function store(v) { try { v ? localStorage.setItem('dao-theme-pick', v) : localStorage.removeItem('dao-theme-pick'); } catch (e) {} }
+      function read() { try { return localStorage.getItem('dao-theme-pick'); } catch (e) { return null; } }
+
+      // ---------- Selection ----------
+      var dock = document.getElementById('dock'), dockName = document.getElementById('dockName');
+      function label(id) { return (order.indexOf(id) + 1 < 10 ? '0' : '') + (order.indexOf(id) + 1) + ' · ' + names[id]; }
+      function select(id, skipStore) {
+        selected = id;
+        cards.forEach(function (c) {
+          var on = c.dataset.theme === id;
+          c.classList.toggle('is-selected', on);
+          var b = c.querySelector('.btn.pick');
+          b.setAttribute('aria-pressed', on);
+          b.querySelector('.pick-lbl').textContent = on ? '✓ Selected' : 'Select this theme';
+        });
+        dock.classList.toggle('show', !!id);
+        dockName.textContent = id ? label(id) : '—';
+        syncViewerPick();
+        if (!skipStore) {
+          store(id);
+          history.replaceState(null, '', id ? '#pick=' + id : location.pathname + location.search);
+        }
+      }
+      cards.forEach(function (c) {
+        c.querySelector('.btn.pick').addEventListener('click', function () { select(selected === c.dataset.theme ? null : c.dataset.theme); });
+      });
+      document.getElementById('clearBtn').addEventListener('click', function () { select(null); });
+
+      var copyLbl = document.getElementById('copyLbl');
+      document.getElementById('copyBtn').addEventListener('click', function () {
+        if (!selected) return;
+        var url = new URL(selected + '/', location.href.split('#')[0]).href;
+        var text = 'I choose theme ' + label(selected) + ' — ' + url;
+        function done() { copyLbl.textContent = 'Copied ✓'; setTimeout(function () { copyLbl.textContent = 'Copy my choice'; }, 1800); }
+        if (navigator.clipboard && window.isSecureContext) { navigator.clipboard.writeText(text).then(done, fallback); } else { fallback(); }
+        function fallback() {
+          var t = document.createElement('textarea'); t.value = text; t.style.position = 'fixed'; t.style.opacity = '0';
+          document.body.appendChild(t); t.select();
+          try { document.execCommand('copy'); done(); } catch (e) { window.prompt('Copy this:', text); }
+          document.body.removeChild(t);
+        }
+      });
+
+      // ---------- Viewer ----------
+      var viewer = document.getElementById('viewer'), wrap = document.getElementById('frameWrap');
+      var vTitle = document.getElementById('vTitle'), vCount = document.getElementById('vCount');
+      var vOpen = document.getElementById('vOpen'), vPick = document.getElementById('vPick');
+      var devBtns = [].slice.call(viewer.querySelectorAll('.v-devices button'));
+
+      function setWidth(w) {
+        wrap.style.width = w;
+        devBtns.forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.w === w); });
+      }
+      function syncViewerPick() {
+        var on = current && current === selected;
+        vPick.setAttribute('aria-pressed', !!on);
+        vPick.textContent = on ? '✓ Selected' : 'Select this theme';
+      }
+      function load(id) {
+        current = id;
+        vTitle.textContent = names[id];
+        vCount.textContent = (order.indexOf(id) + 1) + ' of ' + order.length;
+        vOpen.href = id + '/';
+        wrap.innerHTML = '';
+        var f = document.createElement('iframe');
+        f.title = 'Live preview: ' + names[id];
+        f.src = id + '/';
+        f.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox');
+        wrap.appendChild(f);
+        syncViewerPick();
+      }
+      function openViewer(id) {
+        lastFocus = document.activeElement;
+        setWidth('100%');
+        load(id);
+        viewer.hidden = false;
+        document.body.classList.add('locked');
+        document.getElementById('vClose').focus();
+      }
+      function closeViewer() {
+        viewer.hidden = true;
+        wrap.innerHTML = '';
+        document.body.classList.remove('locked');
+        current = null;
+        if (lastFocus) lastFocus.focus();
+      }
+      function step(d) { load(order[(order.indexOf(current) + d + order.length) % order.length]); }
+
+      [].slice.call(document.querySelectorAll('[data-open]')).forEach(function (b) { b.addEventListener('click', function () { openViewer(b.dataset.open); }); });
+      document.getElementById('vClose').addEventListener('click', closeViewer);
+      document.getElementById('vPrev').addEventListener('click', function () { step(-1); });
+      document.getElementById('vNext').addEventListener('click', function () { step(1); });
+      vPick.addEventListener('click', function () { select(selected === current ? null : current); });
+      devBtns.forEach(function (b) { b.addEventListener('click', function () { setWidth(b.dataset.w); }); });
+
+      document.addEventListener('keydown', function (e) {
+        if (viewer.hidden) return;
+        if (e.key === 'Escape') closeViewer();
+        else if (e.key === 'ArrowLeft' && e.altKey) step(-1);
+        else if (e.key === 'ArrowRight' && e.altKey) step(1);
+        else if (e.key === 'Tab') {
+          var f = [].slice.call(viewer.querySelectorAll('button, a[href], iframe')).filter(function (el) { return el.offsetParent !== null; });
+          if (!f.length) return;
+          var first = f[0], last = f[f.length - 1];
+          if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+          else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+        }
+      });
+
+      // ---------- Initial state: URL hash wins, then saved choice ----------
+      var m = location.hash.match(/pick=(theme\d+)/);
+      var start = (m && names[m[1]]) ? m[1] : read();
+      if (start && names[start]) select(start, true);
+    })();
+  </script>
+</body>
+</html>
